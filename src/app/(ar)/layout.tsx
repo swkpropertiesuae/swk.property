@@ -8,9 +8,9 @@ import { AR_UI } from '@/data/ar';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: 'بيترواي للتمويل العقاري — قارن 24 بنكاً في الإمارات', template: '%s | بيترواي للتمويل العقاري' },
-  description: 'استشارات تمويل عقاري في النصر بلازا، عود ميثاء، دبي. نقارن 24 بنكاً إماراتياً دون أي رسوم وساطة على العميل.',
+  description: 'استشارات تمويل عقاري في النصر بلازا، عود ميثاء، دبي. قارن خيارات التمويل وافهم التكاليف قبل التقديم.',
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: '/favicon.ico' }], apple: '/apple-touch-icon.png' },
-  openGraph: { locale: 'ar_AE', images: ['/og-hero.png'] },
+  openGraph: { locale: 'ar_AE', images: ['/images/dubai-waterfront-1280.webp'] },
 };
 export const viewport: Viewport = { themeColor: '#007D78' };
 
@@ -23,7 +23,7 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
         <div className="bg-navy text-[13px] text-white/80">
           <div className="wrap flex h-9 items-center justify-between gap-4 whitespace-nowrap">
             <p className="hidden truncate md:block">{AR_UI.fee} · {AR_UI.address}</p>
-            <p className="num ms-auto" dir="ltr">3M EIBOR <b className="text-white">{BENCH.eibor3m}%</b> | Fixed from <b className="text-mint">{BENCH.lowestFixed}%*</b></p>
+            <p className="ms-auto">أسعار وأرقام إرشادية · الشروط يحددها البنك</p>
           </div>
         </div>
         <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">

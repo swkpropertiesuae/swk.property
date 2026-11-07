@@ -8,13 +8,13 @@ import { TOOLS, AR_CALCS } from '@/data/tools';
 import { BANKS } from '@/data/banks';
 import { COMMUNITIES, AR_COMMUNITIES } from '@/data/communities';
 
-export const metadata: Metadata = { title: 'قارن 24 بنكاً بطلب واحد — أسعار ثابتة تبدأ من 3.75%', alternates: { canonical: '/ar', languages: { 'en-AE': '/' } } };
+export const metadata: Metadata = { title: 'وسيط تمويل عقاري في دبي والإمارات', alternates: { canonical: '/ar', languages: { 'en-AE': '/' } } };
 
 export default function Page() {
   return (
     <>
-      <ArHero crumbs={[]} eyebrow="استشارات تمويل عقاري مسجلة · دون رسوم على العميل" title="قارن 24 بنكاً إماراتياً بطلب واحد، بأسعار ثابتة تبدأ من 3.75%*"
-        capsule="سواء كنت تشتري مسكنك الأول في دبي، أو تموّل تسليم عقار على الخارطة، أو تنقل تمويلك لخفض القسط، يقارن فريق الاكتتاب براتب ثابت في النصر بلازا جميع العروض جنباً إلى جنب، دون أي رسوم وساطة عليك." en="/" />
+      <ArHero crumbs={[]} eyebrow="التمويل العقاري في دبي والإمارات" title="منزلك. تمويلك. طريق أوضح."
+        capsule="قارن خيارات التمويل العقاري، وافهم القسط والتكاليف المقدمة، واستعد لخطوات طلبك من الاستفسار الأول إلى استلام المفاتيح." en="/" />
       <ArSection id="mortgages" title={AR_UI.mortgages}>
         <ArLinks links={Object.keys(AR_PRODUCTS).map((s) => ({ title: PRODUCTS.find((p) => p.slug === s)!.ar, body: AR_PRODUCTS[s].points[0], href: `/ar/mortgages/${s}` }))} />
       </ArSection>

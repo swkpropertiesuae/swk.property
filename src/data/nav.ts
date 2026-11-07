@@ -30,14 +30,14 @@ export const NAV: NavItem[] = [
         { label: 'Plot & construction', href: '/mortgages/land-plot-construction' },
       ] },
     ],
-    feature: { title: 'Dual-bank pre-approval in 48h', body: 'Two banks with different valuer panels, so one low valuation never costs your deposit.', href: '/contact', cta: 'Start pre-approval' },
+    feature: { title: 'Prepare for pre-approval', body: 'Understand your budget and the documents your lender needs.', href: '/contact', cta: 'Start pre-approval' },
   },
   {
     label: 'Rates', href: '/rates',
     cols: [
       { title: 'Benchmarks', links: [
-        { label: '24-bank rate & revert bible', href: '/rates/uae-mortgage-rates-eibor-revert-bible' },
-        { label: 'EIBOR live tracker', href: '/rates/eibor-live-tracker' },
+        { label: 'UAE mortgage rate comparison', href: '/rates/uae-mortgage-rates-eibor-revert-bible' },
+        { label: 'EIBOR tracker', href: '/rates/eibor-live-tracker' },
         { label: 'All bank comparisons', href: '/rates#compare' },
       ] },
       { title: 'Popular banks', links: BANKS.filter((b) => ['emirates-nbd', 'hsbc', 'fab', 'dib', 'adcb', 'mashreq'].includes(b.key)).map((b) => ({ label: b.name, href: `/rates/${b.slug}` })) },
@@ -48,7 +48,7 @@ export const NAV: NavItem[] = [
         { label: 'Conventional vs Islamic', href: '/rates/compare/conventional-vs-islamic-mortgage-uae-math' },
       ] },
     ],
-    feature: { title: '3M EIBOR 4.45%', body: 'Fixed from 3.75%. Reverts at EIBOR + 1.00% to 1.99%.', href: '/rates/uae-mortgage-rates-eibor-revert-bible', cta: 'See all 24 banks' },
+    feature: { title: 'More than a fixed rate', body: 'Compare the revert margin, floor rate and fees as well.', href: '/rates/uae-mortgage-rates-eibor-revert-bible', cta: 'See all 24 banks' },
   },
   {
     label: 'Calculators', href: '/calculators',
@@ -79,9 +79,9 @@ export const NAV: NavItem[] = [
       { title: 'Handover', links: [
         { label: 'Off-plan handover guide', href: '/handover/dubai-off-plan-handover-mortgage-guide' },
         { label: 'Handover & cash-out calculator', href: '/calculators/handover-equity-release' },
-        { label: 'All 80 handover projects', href: '/handover' },
+        { label: 'Explore handover projects', href: '/handover' },
       ] },
-      { title: 'Developer APL hubs', links: DEVELOPERS.filter((d) => d.hub).slice(0, 7).map((d) => ({ label: d.name, href: `/handover/${d.slug}` })) },
+      { title: 'Developer guides', links: DEVELOPERS.filter((d) => d.hub).slice(0, 7).map((d) => ({ label: d.name, href: `/handover/${d.slug}` })) },
       { title: ' ', links: DEVELOPERS.filter((d) => d.hub).slice(7).map((d) => ({ label: d.name, href: `/handover/${d.slug}` })) },
     ],
   },
@@ -112,13 +112,13 @@ export const NAV: NavItem[] = [
   {
     label: 'Resources', href: '/guides',
     cols: [
-      { title: 'Playbooks', links: [
+      { title: 'Buying guides', links: [
         { label: 'Form F protection clauses', href: '/guides/dubai-form-f-mortgage-valuation-protection-clause' },
         { label: 'Credit cards & DBR', href: '/guides/how-credit-card-limits-reduce-uae-mortgage-dbr' },
         { label: 'Transfer-day checklist', href: '/guides/complete-dld-trustee-transfer-day-checklist' },
         { label: 'All guides', href: '/guides' },
       ] },
-      { title: '360° advisory', links: [
+      { title: 'Property advisory', links: [
         { label: 'Commercial property finance', href: '/advisory/commercial-property-finance' },
         { label: 'DIFC wills', href: '/advisory/difc-wills-and-estate-planning' },
         { label: 'External life insurance', href: '/advisory/external-mortgage-life-insurance' },

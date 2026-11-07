@@ -1,24 +1,24 @@
 import type { Metadata } from 'next';
 import { PageHero, Section, CtaBand } from '@/components/ui';
 
-export const metadata: Metadata = { title: 'Meet Our RERA & CBUAE Underwriting Desk', description: 'Specialist mortgage desks at Betterway: residents, non-residents, self-employed, off-plan handover, Islamic and private client.', alternates: { canonical: '/our-underwriters' } };
+export const metadata: Metadata = { title: 'Mortgage Specialists for Dubai & UAE', description: 'Specialist mortgage desks at Betterway: residents, non-residents, self-employed, off-plan handover, Islamic and private client.', alternates: { canonical: '/our-underwriters' } };
 
 // Desk structure. Named profiles (with Person schema) are added once each advisor's licence details are confirmed.
 const DESKS = [
-  ['Resident & first-home desk', 'Salaried expats and UAE Nationals; employer-category mapping across 24 banks.', ['Salary-transfer vs non-STL pricing', 'MRHE / SZHP top-ups', '48h dual pre-approval']],
-  ['Non-resident desk', 'Overseas buyers in 25 country corridors; bureau, tax-proof and FX haircut mapping.', ['Video PoA closing', 'Home-country credit files', 'Wholesale FX']],
+  ['Resident & first-home desk', 'Salaried expats and UAE Nationals; employer and income requirements.', ['Salary-transfer vs non-STL pricing', 'MRHE / SZHP top-ups', 'Pre-approval documents']],
+  ['Non-resident desk', 'Overseas income, tax documents and credit files.', ['Video PoA closing', 'Home-country credit files', 'FX costs']],
   ['Self-employed desk', 'Freezone and mainland owners; corporate net profit and add-back presentation.', ['Audited financial review', 'Retained-earnings cases', 'Commercial premises']],
-  ['Off-plan & handover desk', 'APL tracking for 14 developers and 80 projects; valuation uplift cash-out.', ['APL coverage checks', 'Developer NOCs', 'Handover cash-out']],
+  ['Off-plan & handover desk', 'Project eligibility, developer payments and valuation requirements.', ['APL coverage checks', 'Developer NOCs', 'Handover cash-out']],
   ['Islamic finance desk', 'Ijara, Murabaha and Diminishing Musharaka across eight Islamic lenders.', ['Takaful assignment', 'Profit-rate comparison', 'Sharia board documentation']],
-  ['Private client & commercial', 'AED 15M+ trophy assets, portfolios and commercial property up to AED 600M.', ['Relationship pricing', 'Two-valuer panels', 'SPV structures']],
+  ['Private client & commercial', 'AED 15M+ trophy assets, portfolios and commercial property finance.', ['Relationship pricing', 'Property valuation', 'SPV structures']],
 ] as const;
 
 export default function Page() {
   return (
     <>
-      <PageHero crumbs={[{ name: 'Our underwriters', href: '/our-underwriters' }]} eyebrow="People" title="Meet our RERA & CBUAE underwriting desk"
-        capsule="Every Betterway file is owned by a salaried specialist underwriter on one of six desks—residents, non-residents, self-employed, off-plan handover, Islamic finance and private client. Underwriters are not paid per approval or per bank, so recommendations follow the client’s five-year cost." />
-      <Section title="Six specialist desks">
+      <PageHero crumbs={[{ name: 'Our underwriters', href: '/our-underwriters' }]} eyebrow="People" title="Mortgage support for your situation."
+        capsule="Explore guidance for residents, overseas buyers, business owners, handover purchases, Islamic finance and high-value property. An advisor can help you prepare; the lender carries out underwriting and makes the lending decision." />
+      <Section title="Six areas of mortgage support">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {DESKS.map(([t, b, pts]) => (
             <div key={t} className="card">

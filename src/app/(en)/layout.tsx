@@ -7,11 +7,11 @@ import { SITE } from '@/data/site';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: 'Betterway Mortgages — Compare 24 UAE Banks, Fixed from 3.75%', template: '%s | Betterway Mortgages' },
-  description: 'CBUAE-registered Dubai mortgage consultancy at Al Nasr Plaza, Oud Metha. Salaried underwriters compare 24 UAE banks side by side at zero brokerage cost.',
+  title: { default: 'Betterway Mortgages — Mortgage Broker in Dubai & UAE', template: '%s | Betterway Mortgages' },
+  description: 'Dubai mortgage advice for residents, non-residents and investors. Compare UAE mortgage rates, calculate payments and understand upfront costs.',
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: '/favicon.ico' }], apple: '/apple-touch-icon.png' },
   manifest: '/site.webmanifest',
-  openGraph: { type: 'website', siteName: SITE.name, images: ['/og-hero.png'], locale: 'en_AE' },
+  openGraph: { type: 'website', siteName: SITE.name, images: ['/images/dubai-waterfront-1280.webp'], locale: 'en_AE' },
   twitter: { card: 'summary_large_image' },
   alternates: { languages: { 'en-AE': '/', 'ar-AE': '/ar' } },
 };

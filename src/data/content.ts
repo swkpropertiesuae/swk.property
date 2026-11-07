@@ -40,7 +40,7 @@ export const ADVISORY: Advisory[] = [
     capsule: 'Non-Muslim expats can register a DIFC Wills Service Centre will so UAE property and bank accounts pass according to their wishes rather than default inheritance rules. A single-property will is a cost-effective option for joint mortgage holders, preventing a mortgaged home or joint account being frozen.',
     points: ['Full-estate and single-property DIFC wills', 'Guardianship provisions for minor children', 'Joint-mortgage succession planning', 'Coordination with life-policy assignment', 'Registration and witness appointments'],
     faqs: [{ q: 'Why does a will matter with a mortgage?', a: 'If a joint owner dies without a registered will, accounts and the property can be frozen while the bank still expects EMIs.' }] },
-  { slug: 'external-mortgage-life-insurance', name: 'External Mortgage Life Insurance', title: 'External Mortgage Life Insurance: Save 50%+ vs Bank-Bundled Cover',
+  { slug: 'external-mortgage-life-insurance', name: 'External Mortgage Life Insurance', title: 'External Mortgage Life Insurance: Compare Cover & Costs',
     capsule: 'UAE banks require life cover on a mortgage, typically bundled at about 0.65% p.a. of the loan. Assigning an external decreasing-term policy from Zurich, MetLife or Sukoon at HSBC, ADCB, Standard Chartered, Emirates NBD or FAB can cut that to roughly 0.26% p.a.—over AED 80,000 saved on a 15-year AED 2M loan.',
     points: ['Decreasing-term cover matched to your balance', 'Assignment letters accepted by 5+ banks', 'Premium fixed at underwriting age', 'Lower monthly outgoings improve DBR', 'Takaful options for Islamic finance'],
     faqs: [{ q: 'Is the bank allowed to refuse my external policy?', a: 'Some banks only accept their own cover; we route applications to lenders that accept assignment where it saves you money.' }] },
@@ -53,8 +53,8 @@ export const ADVISORY: Advisory[] = [
     points: ['15-minute Dubai Courts video notarisation', 'Mortgage-specific PoA wording', 'Embassy legalisation route where needed', 'Attorney attends trustee transfer', 'Original title deed couriered or held'],
     faqs: [{ q: 'Who can act as my attorney?', a: 'A trusted individual or a licensed conveyancer; the bank must approve the PoA wording before the transfer appointment.' }] },
   { slug: 'property-valuation-appeal-desk', name: 'Valuation Appeal Desk', title: 'Property Valuation Appeal Desk: Fighting Down-Valuations',
-    capsule: 'When a bank valuer values a Dubai property below the Form F price, the buyer must fund the gap or renegotiate. Betterway’s appeal desk submits comparable DLD transactions to the valuer within 48 hours and, if needed, switches to a backup bank using a different valuer panel.',
-    points: ['Comparable DLD transaction evidence packs', 'Appeals within 48 hours of the report', 'Valuer-panel mapping across banks', 'Backup-bank switch where appeals fail', 'Price renegotiation support under Form F'],
+    capsule: 'When a bank valuer values a Dubai property below the Form F price, the buyer must fund the gap or renegotiate. Betterway’s appeal desk submits comparable DLD transactions to the valuer for a lender review and, if appropriate, explores to a backup bank using a different valuer panel.',
+    points: ['Comparable DLD transaction evidence packs', 'Ask about the lender’s appeal deadline', 'Valuer-panel mapping across banks', 'Backup-bank switch where appeals fail', 'Price renegotiation support under Form F'],
     faqs: [{ q: 'How often do appeals succeed?', a: 'Appeals backed by recent like-for-like transactions frequently close part of the gap; a backup bank closes the rest.' }] },
 ];
 
@@ -84,7 +84,7 @@ export const GUIDES: Guide[] = [
     capsule: 'When both buyer and seller have mortgages, the seller’s bank issues a liability letter stating the exact payoff, valid for about 15 days. The buyer’s bank issues a manager’s cheque to clear it, and the transfer must complete before expiry—or the whole sequence restarts.',
     steps: [
       { h: 'Order of events', p: 'Buyer FOL → seller liability letter → buyer bank payoff cheque → seller bank releases original title / clearance → DLD transfer at the trustee office.' },
-      { h: 'Where it breaks', p: 'Letters expire while developer NOCs or bank cheques are pending. Our portal runs a 15-day countdown and books the trustee slot before day 10.' },
+      { h: 'Where it breaks', p: 'Letters expire while developer NOCs or bank cheques are pending. Confirm the actual expiry date with the issuing bank and coordinate NOC, cheque and trustee dates accordingly.' },
     ],
     faqs: [{ q: 'Who pays to re-issue an expired letter?', a: 'Usually the seller; some banks charge AED 100–500 per re-issue.' }] },
   { slug: '3-year-clawback-clause-on-uae-mortgage-buyouts', tool: 'buyout-refinance-savings',

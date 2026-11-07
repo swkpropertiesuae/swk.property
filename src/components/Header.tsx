@@ -3,20 +3,20 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 import { NAV } from '@/data/nav';
-import { BENCH } from '@/data/site';
 
 export default function Header() {
   const [open, setOpen] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const path = usePathname();
+  const reduce = useReducedMotion();
   useEffect(() => { setOpen(null); setMobile(false); }, [path]);
   useEffect(() => {
     const close = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(null); };
-    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(null);
+    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpen(null); setMobile(false); } };
     document.addEventListener('mousedown', close);
     document.addEventListener('keydown', esc);
     return () => { document.removeEventListener('mousedown', close); document.removeEventListener('keydown', esc); };
@@ -33,7 +33,7 @@ export default function Header() {
           {NAV.map((n) => (
             <button key={n.label} type="button" aria-expanded={open === n.label} onClick={() => setOpen((c) => (c === n.label ? null : n.label))}
               onMouseEnter={() => open && setOpen(n.label)}
-              className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium transition ${open === n.label ? 'bg-mist text-navy' : 'text-slate hover:text-navy'}`}>
+              className={`flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium transition ${open === n.label ? 'bg-mist text-navy' : 'text-slate hover:text-navy'}`}>
               {n.label}
               <ChevronDown size={15} className={`transition-transform duration-300 ${open === n.label ? 'rotate-180' : ''}`} />
             </button>
@@ -41,8 +41,8 @@ export default function Header() {
         </nav>
         <div className="hidden items-center gap-2 lg:flex">
           <Link href="/ar" className="hidden rounded-full px-3 py-2 xl:inline text-sm font-medium text-slate hover:text-navy" lang="ar">العربية</Link>
-          <Link href="/portal/login" className="btn btn-ghost !py-2.5">Client login</Link>
-          <Link href="/contact" className="btn btn-primary !py-2.5">Get pre-approved</Link>
+
+          <Link href="/contact" className="btn btn-primary !py-2.5">Talk to an advisor</Link>
         </div>
         <button type="button" className="rounded-full p-2 text-navy lg:hidden" aria-label={mobile ? 'Close menu' : 'Open menu'} aria-expanded={mobile} onClick={() => setMobile((m) => !m)}>
           {mobile ? <X /> : <Menu />}
@@ -52,8 +52,8 @@ export default function Header() {
       <AnimatePresence initial={false}>
         {active?.cols && (
           <motion.div key={active.label} initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} className="hidden overflow-hidden border-t border-line bg-white lg:block">
-            <div className="wrap grid grid-cols-[1fr_1fr_1fr_280px] gap-8 py-8">
+            transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }} className="hidden overflow-hidden border-t border-line bg-white lg:block">
+            <div className="wrap grid grid-cols-[1fr_1fr_1fr_240px] gap-6 py-8">
               {active.cols.map((c, ci) => (
                 <div key={ci}>
                   <p className="eyebrow mb-4 h-4">{c.title.trim()}</p>
@@ -71,7 +71,7 @@ export default function Header() {
               ))}
               {active.cols.length < 3 && <div />}
               <div className="rounded-card bg-navy p-6 text-white">
-                <p className="font-display text-lg font-semibold">{active.feature?.title ?? `3M EIBOR ${BENCH.eibor3m}%`}</p>
+                <p className="font-display text-lg font-semibold">{active.feature?.title ?? 'Plan your next move'}</p>
                 <p className="mt-2 text-sm text-white/70">{active.feature?.body ?? 'Every calculator is free to use, with no sign-up.'}</p>
                 <Link href={active.feature?.href ?? active.href} className="btn btn-light mt-5 !py-2">{active.feature?.cta ?? `All ${active.label.toLowerCase()}`} <ArrowRight size={15} /></Link>
               </div>
@@ -82,7 +82,7 @@ export default function Header() {
 
       <AnimatePresence initial={false}>
         {mobile && (
-          <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden border-t border-line lg:hidden">
+          <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} transition={{ duration: reduce ? 0 : 0.25 }} className="overflow-hidden border-t border-line lg:hidden">
             <nav aria-label="Mobile" className="wrap max-h-[calc(100dvh-72px)] overflow-y-auto pb-8 pt-2">
               {NAV.map((n) => (
                 <details key={n.label} className="group border-b border-line">
@@ -97,8 +97,8 @@ export default function Header() {
                 </details>
               ))}
               <div className="mt-6 grid gap-3">
-                <Link href="/contact" className="btn btn-primary w-full">Get pre-approved</Link>
-                <Link href="/portal/login" className="btn btn-ghost w-full">Client login</Link>
+                <Link href="/contact" className="btn btn-primary w-full">Talk to an advisor</Link>
+
                 <Link href="/ar" className="btn btn-ghost w-full" lang="ar">العربية</Link>
               </div>
             </nav>
