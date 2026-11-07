@@ -87,6 +87,10 @@ export default function PhoneHero() {
   const [i, setI] = useState(0);
   const run = !reduce && !paused;
   useEffect(() => {
+    // one pause control for all hero motion, including the background video loop
+    document.querySelectorAll<HTMLVideoElement>('video[data-hero-bg]').forEach((v) => (paused ? v.pause() : v.play().catch(() => {})));
+  }, [paused]);
+  useEffect(() => {
     if (!run) return;
     const t = setInterval(() => setI((x) => (x + 1) % SCREENS.length), 3500);
     return () => clearInterval(t);

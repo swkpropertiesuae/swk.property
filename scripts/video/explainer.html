@@ -1,0 +1,170 @@
+<!doctype html>
+<!-- Betterway explainer, 32 s @ 1920x1080. Fully time-driven: render(t) sets every element, so frames are deterministic. -->
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Jakarta;src:url(../../node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2) format('woff2');font-weight:200 800}
+@font-face{font-family:Inter;src:url(../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2) format('woff2');font-weight:100 900}
+@font-face{font-family:Mono;src:url(../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2) format('woff2');font-weight:100 800}
+:root{--teal:#007D78;--navy:#081D37;--mist:#F2F7F6;--slate:#51616E;--line:#DBE5E3;--mint:#6FE3C9}
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--mist);font-family:Inter,sans-serif;color:var(--navy)}
+.scene{position:absolute;inset:0;opacity:0}
+.h{font-family:Jakarta;font-weight:800;letter-spacing:-.03em;line-height:1.02}
+.num{font-family:Mono;font-variant-numeric:tabular-nums}
+.abs{position:absolute}
+.grid{background-image:linear-gradient(to right,rgba(8,29,55,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(8,29,55,.05) 1px,transparent 1px);background-size:64px 64px}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 30px 60px -30px rgba(8,29,55,.35)}
+.chip{position:absolute;padding:14px 22px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:24px;font-weight:600;white-space:nowrap}
+.row{position:absolute;left:0;right:0;height:82px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-radius:18px;font-size:30px;font-weight:600;background:var(--mist)}
+.phone{position:absolute;width:420px;height:860px;border-radius:64px;background:#0b1220;padding:16px;box-shadow:0 60px 100px -40px rgba(8,29,55,.6)}
+.screen{width:100%;height:100%;border-radius:50px;background:#fff;overflow:hidden;position:relative;padding:90px 30px 0}
+.island{position:absolute;left:50%;top:18px;width:130px;height:38px;border-radius:99px;background:#0b1220;transform:translateX(-50%)}
+.node{position:absolute;width:76px;height:76px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 30px Mono;border:3px solid var(--line);background:#fff;color:var(--slate)}
+.lbl{position:absolute;width:280px;text-align:center;font-size:28px;font-weight:600}
+.fine{position:absolute;left:120px;bottom:56px;font-size:20px;color:var(--slate)}
+</style></head><body>
+
+<!-- S1 logo -->
+<div class="scene grid" id="s1">
+  <img id="s1sym" class="abs" src="../../public/brand/symbol-teal.svg" style="left:860px;top:250px;width:200px;height:200px">
+  <img id="s1word" class="abs" src="../../public/brand/logo-primary.svg" style="left:660px;top:250px;width:600px;opacity:0">
+  <div id="s1tag" class="abs h" style="left:0;right:0;top:600px;text-align:center;font-size:76px">Compare 24 UAE banks.</div>
+  <div id="s1sub" class="abs" style="left:0;right:0;top:700px;text-align:center;font-size:36px;color:var(--slate)">One application. AED 0 client fee.</div>
+</div>
+
+<!-- S2 one bank vs 24 -->
+<div class="scene" id="s2" style="background:#fff">
+  <div id="s2h1" class="abs h" style="left:120px;top:120px;font-size:84px">Going direct?<br>You see one offer.</div>
+  <div id="s2h2" class="abs h" style="left:120px;top:120px;font-size:84px;opacity:0">We put <span style="color:var(--teal)">24 banks</span><br>side by side.</div>
+  <div id="chips"></div>
+</div>
+
+<!-- S3 rates -->
+<div class="scene grid" id="s3">
+  <div class="abs h" style="left:120px;top:120px;font-size:80px">Today’s best rates</div>
+  <div class="abs" style="left:120px;top:228px;font-size:32px;color:var(--slate)">And what each loan costs after the fixed period.</div>
+  <div class="abs card" style="left:120px;top:320px;width:1100px;height:620px;padding:40px"><div id="rows" class="abs" style="left:40px;right:40px;top:40px;bottom:40px"></div></div>
+  <div class="abs card" style="left:1300px;top:320px;width:500px;padding:44px">
+    <div style="font-size:26px;color:var(--slate)">3M EIBOR</div><div class="num" style="font-size:72px;font-weight:700">4.45%</div>
+    <div style="margin-top:28px;font-size:26px;color:var(--slate)">Fixed from</div><div id="s3fix" class="num" style="font-size:96px;font-weight:700;color:var(--teal)">3.75%*</div>
+    <div style="margin-top:28px;font-size:24px;color:var(--slate)">Revert margins from +1.00% to +1.99%</div>
+  </div>
+  <div class="fine">*Illustrative lowest advertised fixed rate, November 2026. Subject to bank approval.</div>
+</div>
+
+<!-- S4 phone calculator -->
+<div class="scene" id="s4" style="background:#fff">
+  <div class="abs h" style="left:120px;top:200px;font-size:84px">Know every dirham<br>before you sign.</div>
+  <div class="abs" style="left:120px;top:420px;font-size:32px;color:var(--slate);width:700px">AED 2,000,000 home · 20% down · 25 years</div>
+  <div id="items" class="abs" style="left:120px;top:500px;width:640px"></div>
+  <div class="phone" id="ph" style="left:1180px;top:110px"><div class="screen"><div class="island"></div>
+    <div style="display:flex;align-items:center;gap:12px"><img src="../../public/brand/symbol-teal.svg" style="width:36px;height:36px"><b style="font-size:26px">Betterway</b></div>
+    <div style="margin-top:40px;background:var(--navy);color:#fff;border-radius:28px;padding:34px">
+      <div style="font-size:22px;opacity:.7">Monthly payment</div>
+      <div id="emi" class="num" style="font-size:44px;font-weight:700;margin-top:6px;white-space:nowrap">AED 8,437</div>
+      <div style="margin-top:22px;height:10px;border-radius:9px;background:rgba(255,255,255,.15)"><div id="bar" style="height:100%;border-radius:9px;background:var(--mint);width:0"></div></div>
+    </div>
+    <div style="margin-top:22px;background:var(--mist);border-radius:20px;padding:22px;font-size:22px;display:flex;justify-content:space-between"><span style="color:var(--slate)">Cash to close</span><b id="ctc" class="num" style="white-space:nowrap">AED 534,220</b></div>
+    <div style="margin-top:12px;background:var(--mist);border-radius:20px;padding:22px;font-size:22px;display:flex;justify-content:space-between"><span style="color:var(--slate)">Rate</span><b class="num">3.99%</b></div>
+  </div></div>
+</div>
+
+<!-- S5 steps -->
+<div class="scene grid" id="s5">
+  <div class="abs h" style="left:0;right:0;top:150px;text-align:center;font-size:84px">Pre-approved in 48 hours.</div>
+  <div class="abs" style="left:0;right:0;top:268px;text-align:center;font-size:34px;color:var(--slate)">Two banks work on your file at once.</div>
+  <div class="abs" style="left:300px;width:1320px;top:574px;height:6px;border-radius:6px;background:var(--line)"><div id="prog" style="height:100%;border-radius:6px;background:var(--teal);width:0"></div></div>
+  <div id="steps"></div>
+</div>
+
+<!-- S6 CTA -->
+<div class="scene" id="s6" style="background:var(--navy);color:#fff">
+  <div class="abs" style="right:-260px;top:-260px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(0,125,120,.28),transparent 65%)"></div>
+  <img id="s6logo" class="abs" src="../../public/brand/logo-white.svg" style="left:120px;top:140px;width:420px">
+  <div id="s6h" class="abs h" style="left:120px;top:360px;font-size:110px;color:#fff">Get pre-approved<br>in <span style="color:var(--mint)">48 hours</span>.</div>
+  <div id="s6c" class="abs" style="left:120px;top:690px;display:flex;gap:18px;font-size:30px">
+    <span style="padding:16px 26px;border-radius:99px;background:rgba(255,255,255,.1)">AED 0 client fee</span>
+    <span style="padding:16px 26px;border-radius:99px;background:rgba(255,255,255,.1)">Salaried advisors</span>
+    <span style="padding:16px 26px;border-radius:99px;background:rgba(255,255,255,.1)">Al Nasr Plaza, Oud Metha</span>
+  </div>
+  <div id="s6u" class="abs num" style="left:120px;top:830px;font-size:44px;color:var(--mint)">betterwaymortgages.com</div>
+  <div class="fine" style="color:rgba(255,255,255,.5)">*Rates illustrative, subject to bank approval. Betterway is paid by the lending bank.</div>
+</div>
+
+<script>
+const BANKS = ['Emirates NBD','HSBC','FAB','ADCB','Dubai Islamic Bank','Mashreq','ADIB','Standard Chartered','Emirates Islamic','CBD','RAKBANK','Sharjah Islamic','UAB','Ajman Bank','NBF','Arab Bank','RAKislamic','Al Hilal','NBQ','Citi','Bank of Baroda','Invest Bank','CBI','Amlak'];
+const RATES = [['Sharjah Islamic Bank','3.75%','+1.75%'],['Emirates NBD','3.89%','+1.65%'],['United Arab Bank','3.89%','+1.50%'],['First Abu Dhabi Bank','3.95%','+1.50%'],['HSBC UAE','3.99%','+1.24%'],['Dubai Islamic Bank','3.99%','+1.00%']];
+const STEPS = ['Documents','Pre-approval','Valuation','Final offer','Keys'];
+const COST = [['Down payment 20%','AED 400,000'],['DLD 4% + title deed','AED 80,580'],['Mortgage registration','AED 4,290'],['Trustee + valuation','AED 7,350'],['Agency 2% + VAT','AED 42,000']];
+
+const $ = (id) => document.getElementById(id);
+const cl = (x) => Math.max(0, Math.min(1, x));
+const seg = (t, a, b) => cl((t - a) / (b - a));
+const eo = (x) => 1 - Math.pow(1 - x, 3);
+const eio = (x) => (x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+const set = (el, o, tx = 0, ty = 0, sc = 1) => { el.style.opacity = o; el.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`; };
+const fmt = (n) => 'AED ' + Math.round(n).toLocaleString('en-US');
+
+// build dynamic nodes once
+const chips = $('chips');
+BANKS.forEach((b, i) => { const d = document.createElement('div'); d.className = 'chip'; d.textContent = b; chips.appendChild(d); });
+const rows = $('rows');
+RATES.forEach((r, i) => { const d = document.createElement('div'); d.className = 'row'; d.style.top = (i * 92) + 'px'; d.innerHTML = `<span>${r[0]}</span><span class="num" style="display:flex;gap:60px"><span>${r[1]}</span><span class="eib" style="font-size:24px;align-self:center;opacity:.7">EIBOR ${r[2]}</span></span>`; rows.appendChild(d); });
+const items = $('items');
+COST.forEach(([a, b]) => { const d = document.createElement('div'); d.style.cssText = 'display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid #DBE5E3;font-size:28px'; d.innerHTML = `<span style="color:#51616E">${a}</span><b class="num">${b}</b>`; items.appendChild(d); });
+const stepsEl = $('steps');
+STEPS.forEach((s, i) => { const x = 300 + i * 330; const n = document.createElement('div'); n.className = 'node'; n.style.left = (x - 38) + 'px'; n.style.top = '539px'; n.textContent = i + 1; stepsEl.appendChild(n); const l = document.createElement('div'); l.className = 'lbl'; l.style.left = (x - 140) + 'px'; l.style.top = '650px'; l.textContent = s; stepsEl.appendChild(l); });
+
+const SC = [['s1', 0, 4.5], ['s2', 4.5, 9.5], ['s3', 9.5, 15.5], ['s4', 15.5, 21.5], ['s5', 21.5, 27.5], ['s6', 27.5, 32.5]];
+
+function render(t) {
+  for (const [id, a, b] of SC) { const o = id === 's1' ? (t < b - .4 ? 1 : 1 - seg(t, b - .4, b)) : id === 's6' ? seg(t, a, a + .4) : Math.min(seg(t, a, a + .4), 1 - seg(t, b - .4, b)); $(id).style.opacity = o; }
+
+  // S1
+  { const p = eo(seg(t, .2, 1.2)), q = eio(seg(t, 1.4, 2.3));
+    set($('s1sym'), p * (1 - q), 0, (1 - p) * 40, .7 + .3 * p);
+    set($('s1word'), q, (1 - q) * 30, 0);
+    set($('s1tag'), eo(seg(t, 2.2, 3)), 0, (1 - eo(seg(t, 2.2, 3))) * 30);
+    set($('s1sub'), eo(seg(t, 2.6, 3.4)), 0, (1 - eo(seg(t, 2.6, 3.4))) * 30); }
+
+  // S2: one chip, then all 24 fan into a grid
+  { const l = t - 4.5, swap = eio(seg(l, 2, 2.6));
+    set($('s2h1'), 1 - swap, 0, -swap * 20); set($('s2h2'), swap, 0, (1 - swap) * 20);
+    [...chips.children].forEach((c, i) => {
+      const col = i % 3, row = Math.floor(i / 3), gx = 980 + col * 300, gy = 110 + row * 106;
+      const sx = 1220, sy = 480;
+      const p = i === 0 ? 1 : eo(seg(l, 2 + i * .05, 2.7 + i * .05));
+      c.style.left = (sx + (gx - sx) * p) + 'px'; c.style.top = (sy + (gy - sy) * p) + 'px';
+      c.style.opacity = i === 0 ? eo(seg(l, .3, .9)) : p;
+      c.style.fontSize = (i === 0 ? 34 - 10 * eio(seg(l, 2, 2.6)) : 24) + 'px';
+      c.style.borderColor = i === 0 ? '#007D78' : '#DBE5E3'; });
+  }
+
+  // S3: rows slide in, best row turns teal
+  { const l = t - 9.5;
+    [...rows.children].forEach((r, i) => { const p = eo(seg(l, .5 + i * .18, 1.1 + i * .18)); set(r, p, (1 - p) * 60, 0);
+      const hl = i === 0 ? eo(seg(l, 2.4, 3)) : 0; r.style.background = hl ? `rgba(0,125,120,${hl})` : '#F2F7F6'; r.style.color = hl > .5 ? '#fff' : '#081D37'; });
+    const p = eo(seg(l, 2.4, 3.2)); $('s3fix').style.transform = `scale(${.85 + .15 * p})`; $('s3fix').style.transformOrigin = 'left center'; }
+
+  // S4: phone rises, EMI counts up, cost items tick in
+  { const l = t - 15.5, p = eo(seg(l, .2, 1.2));
+    set($('ph'), p, 0, (1 - p) * 120);
+    const k = eo(seg(l, .8, 2.4)); $('emi').textContent = fmt(6200 + (8437 - 6200) * k); $('bar').style.width = (72 * k) + '%';
+    $('ctc').textContent = fmt(400000 + 134220 * eo(seg(l, 2.4, 4.4)));
+    [...items.children].forEach((d, i) => { const q = eo(seg(l, 1.6 + i * .4, 2.1 + i * .4)); set(d, q, (1 - q) * -30, 0); }); }
+
+  // S5: progress line runs, nodes check off
+  { const l = t - 21.5, p = eio(seg(l, .8, 4.6)); $('prog').style.width = (p * 100) + '%';
+    [...stepsEl.children].forEach((el, j) => { const i = j >> 1, on = p * 4 >= i - .001 && l > .8 + i * .05;
+      if (el.className === 'node') { el.style.background = on ? '#007D78' : '#fff'; el.style.borderColor = on ? '#007D78' : '#DBE5E3'; el.style.color = on ? '#fff' : '#51616E'; el.textContent = on ? '✓' : String(i + 1); el.style.transform = `scale(${on ? 1.08 : 1})`; }
+      else { el.style.color = on ? '#081D37' : '#51616E'; } }); }
+
+  // S6: CTA build
+  { const l = t - 27.5;
+    set($('s6logo'), eo(seg(l, .3, 1)), 0, (1 - eo(seg(l, .3, 1))) * 20);
+    set($('s6h'), eo(seg(l, .6, 1.4)), 0, (1 - eo(seg(l, .6, 1.4))) * 30);
+    set($('s6c'), eo(seg(l, 1.2, 2)), 0, (1 - eo(seg(l, 1.2, 2))) * 30);
+    set($('s6u'), eo(seg(l, 1.6, 2.4)), 0, 0); }
+}
+window.render = render; render(0);
+</script></body></html>

@@ -45,23 +45,27 @@ export default function Home() {
   ];
   return (
     <>
-      {/* HERO: split SSR hero — copy + qualifier, live benchmarks rendered server-side */}
-      <section className="relative overflow-hidden bg-mist">
-        <div className="grid-bg pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true" />
-        <div className="pointer-events-none absolute -end-40 -top-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgb(0_125_120/0.18),transparent_65%)]" aria-hidden="true" />
+      {/* HERO: Dubai skyline video loop under a navy scrim; phones on the right */}
+      <section className="relative overflow-hidden bg-navy text-white">
+        <video className="absolute inset-0 hidden h-full w-full object-cover opacity-70 motion-safe:md:block" data-hero-bg autoPlay muted loop playsInline preload="metadata" poster="/video/hero-dubai.jpg" aria-hidden="true" tabIndex={-1}>
+          <source src="/video/hero-dubai.webm" type="video/webm" />
+          <source src="/video/hero-dubai.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[url('/video/hero-dubai.jpg')] bg-cover bg-center opacity-60 md:motion-safe:hidden" aria-hidden="true" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(8_29_55/0.95)_0%,rgb(8_29_55/0.8)_45%,rgb(8_29_55/0.35)_100%)]" aria-hidden="true" />
         <div className="wrap relative grid min-h-[calc(100svh-108px)] items-center gap-12 py-12 lg:grid-cols-[1.1fr_1fr] lg:py-16">
           <div>
-            <p className="tag mb-5"><ShieldCheck size={13} className="me-1" /> CBUAE-registered · AED 0 client fee</p>
-            <h1 className="h1">Compare 24 UAE banks.<br />Fixed from <span className="text-teal">3.75%*</span></h1>
-            <p className="lead mt-6 max-w-xl">One application. Every Dubai mortgage offer side by side. Salaried advisors, never paid by the bank you pick.</p>
+            <p className="mb-5 inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-mint"><ShieldCheck size={13} className="me-1" /> CBUAE-registered · AED 0 client fee</p>
+            <h1 className="h1 !text-white">Compare 24 UAE banks.<br />Fixed from <span className="text-mint">3.75%*</span></h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">One application. Every Dubai mortgage offer side by side. Salaried advisors, never paid by the bank you pick.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="btn btn-primary">Get pre-approved in 48h <ArrowRight size={16} /></Link>
-              <Link href="/calculators/mortgage-calculator" className="btn btn-ghost">Calculate my payment</Link>
+              <Link href="/calculators/mortgage-calculator" className="btn btn-light">Calculate my payment</Link>
             </div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate">
-              {['Expats & UAE Nationals', 'Non-residents', 'Off-plan handover', 'Switch bank'].map((t) => <li key={t} className="flex items-center gap-1.5"><Check size={15} className="text-teal" />{t}</li>)}
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/80">
+              {['Expats & UAE Nationals', 'Non-residents', 'Off-plan handover', 'Switch bank'].map((t) => <li key={t} className="flex items-center gap-1.5"><Check size={15} className="text-mint" />{t}</li>)}
             </ul>
-            <Disclosure />
+            <Disclosure dark />
           </div>
           <PhoneHero />
         </div>
@@ -78,6 +82,19 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <Section eyebrow="How it works" title="Your mortgage in 30 seconds">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.6fr_1fr]">
+          <video className="w-full rounded-card border border-line bg-navy shadow-[0_30px_60px_-30px_rgb(8_29_55/0.45)]" controls playsInline preload="none" poster="/video/betterway-explainer.jpg" aria-describedby="explainer-steps">
+            <source src="/video/betterway-explainer.mp4" type="video/mp4" />
+          </video>
+          <ol id="explainer-steps" className="space-y-5">
+            {[['Compare 24 banks', 'Rates, revert margins, floors and fees in one table.'], ['Know every dirham', 'Monthly payment and full cash to close, before you sign.'], ['Pre-approved in 48 hours', 'Two banks work on your file at once.'], ['Valuation, offer, keys', 'We track every deadline to DLD transfer.']].map(([t, b], i) => (
+              <li key={t} className="flex gap-4"><span className="num flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-teal-50 text-sm font-semibold text-teal">{i + 1}</span><span><span className="block font-display text-lg font-semibold text-navy">{t}</span><span className="text-slate">{b}</span></span></li>
+            ))}
+          </ol>
+        </div>
+      </Section>
 
       <Section tone="mist" eyebrow="30-second rate check" title="See which banks will lend to you">
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">

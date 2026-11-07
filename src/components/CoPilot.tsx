@@ -53,7 +53,7 @@ export default function CoPilot() {
           </div>
         </div>
       )}
-      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="btn btn-dark ms-auto flex !rounded-full shadow-lg">
+      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="btn btn-dark ms-auto flex !rounded-full shadow-lg ring-1 ring-white/25">
         <Sparkles size={16} className="text-mint" /> Ask Ease AI
       </button>
     </div>

@@ -1,0 +1,67 @@
+<!doctype html>
+<!-- Hero background loop: stylised Dubai skyline at dusk in brand navy/teal. Every motion has period 8 s, so the loop is seamless. -->
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#081D37}canvas{display:block}</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script>
+const W = 1920, H = 1080, T = 8, TAU = Math.PI * 2;
+const c = document.getElementById('c'), g = c.getContext('2d');
+let s = 7; const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+const ground = 900;
+// skyline: two depth layers of towers + Burj Khalifa landmark
+const layer = (n, minH, maxH, wMin, wMax) => { const out = []; let x = -120; while (x < W + 240) { const w = wMin + rnd() * (wMax - wMin); out.push({ x, w, h: minH + rnd() ** 1.6 * (maxH - minH), crown: rnd() < 0.3, win: [] }); x += w + 6 + rnd() * 26; } return out; };
+const back = layer(0, 140, 360, 50, 120), front = layer(0, 120, 420, 70, 150);
+for (const b of front) for (let y = ground - b.h + 18; y < ground - 12; y += 16) for (let x = b.x + 8; x < b.x + b.w - 8; x += 14) if (rnd() < 0.42) b.win.push({ x, y, k: 1 + Math.floor(rnd() * 3), p: rnd() * TAU });
+const stars = Array.from({ length: 90 }, () => ({ x: rnd() * W, y: rnd() * 520, r: rnd() * 1.4 + 0.3, p: rnd() * TAU }));
+const cars = Array.from({ length: 26 }, (_, i) => ({ o: i / 26 + rnd() * 0.02, lane: i % 2, c: i % 2 ? '#6FE3C9' : '#F2F7F6' }));
+
+function burj(x, alpha) {
+  const base = ground, top = 150, w = 230;
+  g.save(); g.globalAlpha = alpha;
+  const grad = g.createLinearGradient(0, top, 0, base); grad.addColorStop(0, '#2e5f7a'); grad.addColorStop(1, '#0c2747');
+  g.fillStyle = grad; g.beginPath();
+  const steps = [[1, 0], [0.82, 0.18], [0.66, 0.34], [0.5, 0.5], [0.36, 0.64], [0.24, 0.76], [0.14, 0.86], [0.06, 0.94], [0.015, 1]];
+  g.moveTo(x - w / 2, base);
+  for (const [k, f] of steps) { const y = base - f * (base - top); g.lineTo(x - (w / 2) * k, y + 10); g.lineTo(x - (w / 2) * k, y); }
+  for (const [k, f] of [...steps].reverse()) { const y = base - f * (base - top); g.lineTo(x + (w / 2) * k * 0.8, y); g.lineTo(x + (w / 2) * k * 0.8, y + 10); }
+  g.lineTo(x + w * 0.4, base); g.closePath(); g.fill();
+  g.restore();
+}
+
+function render(t) {
+  const ph = (t % T) / T, drift = Math.sin(ph * TAU) * 24;
+  const sky = g.createLinearGradient(0, 0, 0, ground);
+  sky.addColorStop(0, '#061428'); sky.addColorStop(0.55, '#0b2a4a'); sky.addColorStop(1, '#0f4f5c');
+  g.fillStyle = sky; g.fillRect(0, 0, W, H);
+  // horizon glow
+  const glow = g.createRadialGradient(W * 0.62 + drift, ground, 40, W * 0.62 + drift, ground, 900);
+  glow.addColorStop(0, 'rgba(0,125,120,0.55)'); glow.addColorStop(1, 'rgba(0,125,120,0)');
+  g.fillStyle = glow; g.fillRect(0, 0, W, H);
+  for (const st of stars) { g.globalAlpha = 0.35 + 0.35 * Math.sin(ph * TAU * 2 + st.p); g.fillStyle = '#F2F7F6'; g.beginPath(); g.arc(st.x + drift * 0.2, st.y, st.r, 0, TAU); g.fill(); }
+  g.globalAlpha = 1;
+  // rate line across the sky (dash flows one full pattern per loop)
+  g.save(); g.strokeStyle = 'rgba(111,227,201,0.55)'; g.lineWidth = 2.5; g.setLineDash([10, 14]); g.lineDashOffset = -ph * 24 * 10;
+  g.shadowColor = '#6FE3C9'; g.shadowBlur = 14; g.beginPath();
+  for (let x = -40; x <= W + 40; x += 20) { const y = 330 + Math.sin(x / 260 + 0.6) * 40 + x * 0.06; x === -40 ? g.moveTo(x + drift * 0.4, y) : g.lineTo(x + drift * 0.4, y); }
+  g.stroke(); g.restore();
+  // back layer
+  g.fillStyle = '#123557'; for (const b of back) g.fillRect(b.x + drift * 0.45, ground - b.h - 60, b.w, b.h + 60);
+  burj(W * 0.64 + drift * 0.6, 1);
+  // front layer + windows
+  for (const b of front) {
+    const x = b.x + drift; g.fillStyle = '#0a2240'; g.fillRect(x, ground - b.h, b.w, b.h);
+    if (b.crown) { g.fillStyle = '#0a2240'; g.fillRect(x + b.w * 0.4, ground - b.h - 26, b.w * 0.2, 26); }
+    for (const w of b.win) { const a = 0.25 + 0.55 * (0.5 + 0.5 * Math.sin(ph * TAU * w.k + w.p)); g.fillStyle = `rgba(242,247,246,${a * 0.7})`; g.fillRect(w.x + drift, w.y, 5, 7); }
+  }
+  // road with light trails
+  g.fillStyle = '#05101f'; g.fillRect(0, ground, W, H - ground);
+  for (const car of cars) {
+    const p = (car.o + ph * (car.lane ? 1 : -1) + 2) % 1, x = car.lane ? p * (W + 400) - 200 : W + 200 - p * (W + 400), y = ground + 40 + car.lane * 34;
+    const tr = g.createLinearGradient(x - (car.lane ? 160 : -160), 0, x, 0); tr.addColorStop(0, 'rgba(0,0,0,0)'); tr.addColorStop(1, car.c);
+    g.strokeStyle = tr; g.lineWidth = 3; g.beginPath(); g.moveTo(x - (car.lane ? 160 : -160), y); g.lineTo(x, y); g.stroke();
+  }
+  // water reflection band
+  const refl = g.createLinearGradient(0, ground + 100, 0, H); refl.addColorStop(0, 'rgba(0,125,120,0.18)'); refl.addColorStop(1, 'rgba(6,20,40,1)');
+  g.fillStyle = refl; g.fillRect(0, ground + 100, W, H - ground - 100);
+}
+window.render = render; render(0);
+</script></body></html>
