@@ -1,6 +1,7 @@
 'use client';
 // 30-second 4-step rate qualifier (Module 5 hero). Ends in a pre-filled WhatsApp handoff—no data stored client-side.
 import { useState } from 'react';
+import { REG, maxLtv } from '@/data/regulation';
 import { ArrowLeft, ArrowRight, MessageCircle } from 'lucide-react';
 import { waLink } from '@/data/site';
 import { BANKS } from '@/data/banks';
@@ -21,7 +22,7 @@ export default function Qualifier() {
   const selfEmp = ans[2] === 'Self-employed' || ans[2] === 'Both';
   const SELF = ['rakbank', 'rakislamic', 'mashreq', 'cbd', 'emirates-nbd', 'dib', 'fab']; // Market Bible 14.2 #5
   const banks = BANKS.filter((b) => (!nr || b.nrLtv) && (!selfEmp || SELF.includes(b.key)) && (ans[0] !== 'Switch bank' || b.feeBuyout === '0%'));
-  const ltv = nr ? Math.max(...banks.map((b) => b.nrLtv ?? 0)) : ans[1] === 'UAE National' ? (big ? 75 : 85) : big ? 70 : 80;
+  const ltv = nr ? Math.max(...banks.map((b) => b.nrLtv ?? 0)) : maxLtv(ans[1] === 'UAE National' ? 'national' : 'expat', big ? REG.valueThreshold + 1 : REG.valueThreshold);
   const from = banks.length ? Math.min(...banks.map((b) => b.intro)) : null;
 
   return (

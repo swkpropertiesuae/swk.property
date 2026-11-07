@@ -1,3 +1,4 @@
+import { LENDER, EARLY_SETTLEMENT_TEXT } from './regulation';
 // Silo 03 — calculators & micro-tools. Server-safe metadata (titles, capsules). Logic lives in components/calc/registry.ts.
 export type ToolMeta = { slug: string; base: 'calculators' | 'tools'; name: string; ar: string; title: string; capsule: string; method: string[] };
 
@@ -16,7 +17,7 @@ export const TOOLS: ToolMeta[] = [
     method: ['Intro period at the bank’s fixed rate', 'Then max(3M EIBOR + margin, floor) for the remaining horizon', 'Cost = total payments − principal repaid over 5 years'] },
   { slug: 'buyout-refinance-savings', base: 'calculators', name: 'Buyout Net-Savings Calculator', ar: 'حاسبة توفير نقل التمويل',
     title: 'Mortgage Buyout Net-Savings & 36-Month Clawback Tool',
-    capsule: 'Switching banks in the UAE costs up to AED 10,500 in early-settlement fees (1% or AED 10,000 + VAT), plus 0.25% mortgage re-registration. This tool nets those costs against your monthly saving and shows the break-even month and 36-month net gain.',
+    capsule: `Switching banks in the UAE means an early-settlement fee capped by the CBUAE at ${EARLY_SETTLEMENT_TEXT}, plus 0.25% mortgage re-registration. This tool nets those costs against your monthly saving and shows the break-even month and 36-month net gain.`,
     method: ['Exit fee = min(1% × balance, AED 10,000) × 1.05', 'Switch cost = exit fee + 0.25% × balance + AED 290 + new bank fee', 'Net = 36 × EMI saving + balance gap − switch cost'] },
   { slug: 'handover-equity-release', base: 'calculators', name: 'Handover & Cash-Out Calculator', ar: 'حاسبة التسليم وتحرير السيولة',
     title: 'Off-Plan Handover (60/40, 70/30, 80/20) & Cash-Out Calculator',
@@ -27,8 +28,8 @@ export const TOOLS: ToolMeta[] = [
     capsule: 'Under February 2026 rules a mortgaged property valued at AED 2M or more qualifies for the 10-year Golden Visa with no minimum paid equity. This estimator checks eligibility and totals DLD, GDRFA, Emirates ID, medical and bank NOC fees for you and your family.',
     method: ['Eligible if title / Oqood / DLD valuation ≥ AED 2,000,000', 'Investor package AED 9,421–10,111', 'Each dependant ~AED 7,200–7,680 + AED 318.75 family file'] },
   { slug: 'non-resident-rental-coverage', base: 'calculators', name: 'Non-Resident Rental Coverage', ar: 'حاسبة تغطية الإيجار',
-    title: 'Non-Resident 50–65% LTV & Net Rental Coverage Simulator',
-    capsule: 'Non-resident investors borrow 50–65% of value. This simulator compares the monthly EMI against net Dubai rent after service charges and management to show whether the property pays for itself and the cash yield on your down payment.',
+    title: 'Non-Resident Mortgage & Net Rental Coverage Simulator',
+    capsule: `Banks typically lend non-residents ${LENDER.nonResidentLtv.min}–${LENDER.nonResidentLtv.max}% of value (bank policy, not a CBUAE cap). This simulator compares the monthly EMI against net Dubai rent after service charges and management to show whether the property pays for itself and the cash yield on your down payment.`,
     method: ['Loan = price × LTV', 'Net rent = gross rent − service charge − 5% management', 'Coverage = net monthly rent ÷ EMI'] },
   { slug: 'rent-vs-buy-dubai', base: 'calculators', name: 'Rent vs Buy Calculator', ar: 'حاسبة الإيجار مقابل الشراء',
     title: 'Dubai Ejari Rent Escalation vs Mortgage Equity Calculator',

@@ -1,4 +1,5 @@
 import { BANKS } from './banks';
+import { REG, LENDER } from './regulation';
 
 export type NavLink = { label: string; href: string; desc?: string };
 export type NavCol = { title: string; links: NavLink[] };
@@ -7,17 +8,17 @@ export type NavItem = { label: string; href: string; cols?: NavCol[]; feature?: 
 // Top-level IA follows the UAE mortgage-broker convention (Buy · Refinance · Rates · Calculators · Commercial · Resources).
 export const NAV: NavItem[] = [
   {
-    label: 'Buy', href: '/mortgages',
+    label: 'Home loans', href: '/mortgages',
     cols: [
       { title: 'Living in the UAE', links: [
-        { label: 'Expat residents', href: '/mortgages/uae-residents', desc: 'Up to 80% LTV' },
-        { label: 'UAE Nationals', href: '/mortgages/uae-nationals', desc: 'Up to 85% LTV' },
+        { label: 'Expat residents', href: '/mortgages/uae-residents', desc: `Up to ${REG.ltv.expat.first}% LTV` },
+        { label: 'UAE Nationals', href: '/mortgages/uae-nationals', desc: `Up to ${REG.ltv.national.first}% LTV` },
         { label: 'GCC Nationals', href: '/mortgages/gcc-nationals' },
         { label: 'Self-employed', href: '/mortgages/self-employed' },
         { label: 'Islamic home finance', href: '/mortgages/islamic-home-finance' },
       ] },
       { title: 'Investing from abroad', links: [
-        { label: 'Non-resident buyers', href: '/mortgages/non-resident-dubai', desc: 'Up to 65% LTV' },
+        { label: 'Non-resident buyers', href: '/mortgages/non-resident-dubai', desc: `${LENDER.nonResidentLtv.min}–${LENDER.nonResidentLtv.max}% LTV` },
         { label: 'Golden Visa mortgages', href: '/mortgages/golden-visa-mortgage' },
         { label: 'Second home & investment', href: '/mortgages/second-home-investment' },
         { label: 'High-value homes', href: '/mortgages/mega-loans-luxury-villas' },
@@ -32,28 +33,7 @@ export const NAV: NavItem[] = [
     feature: { title: 'Know your budget first', body: 'See your borrowing power and upfront costs before you view a property.', href: '/calculators/dbr-borrowing-power', cta: 'Check eligibility' },
   },
   {
-    label: 'Refinance', href: '/mortgages/mortgage-buyout-refinance',
-    cols: [
-      { title: 'Switch your mortgage', links: [
-        { label: 'Switch bank (buyout)', href: '/mortgages/mortgage-buyout-refinance' },
-        { label: 'Refinance savings calculator', href: '/calculators/buyout-refinance-savings' },
-        { label: 'Fixed vs revert analyser', href: '/calculators/fixed-to-revert-analyzer' },
-      ] },
-      { title: 'Release value', links: [
-        { label: 'Equity release & cash-out', href: '/mortgages/equity-release' },
-        { label: 'Portfolio consolidation', href: '/mortgages/portfolio-consolidation' },
-        { label: 'Handover & cash-out calculator', href: '/calculators/handover-equity-release' },
-      ] },
-      { title: 'Plan ahead', links: [
-        { label: '3-year clawback explained', href: '/guides/3-year-clawback-clause-on-uae-mortgage-buyouts' },
-        { label: 'Overpayment calculator', href: '/calculators/overpayment-early-settlement' },
-        { label: 'EIBOR tracker', href: '/rates/eibor-live-tracker' },
-      ] },
-    ],
-    feature: { title: 'Is your fixed rate ending?', body: 'Compare your revert rate with switching costs before it resets.', href: '/calculators/buyout-refinance-savings', cta: 'Calculate savings' },
-  },
-  {
-    label: 'Rates', href: '/rates',
+    label: 'Bank rates', href: '/rates',
     cols: [
       { title: 'Benchmarks', links: [
         { label: 'UAE mortgage rate comparison', href: '/rates/uae-mortgage-rates-eibor-revert-bible' },
@@ -71,7 +51,7 @@ export const NAV: NavItem[] = [
     feature: { title: 'More than a fixed rate', body: 'Compare the revert margin, floor rate and fees as well.', href: '/rates/uae-mortgage-rates-eibor-revert-bible', cta: 'See all 24 banks' },
   },
   {
-    label: 'Calculators', href: '/calculators',
+    label: 'Tools', href: '/calculators',
     cols: [
       { title: 'Most used', links: [
         { label: 'Mortgage calculator', href: '/calculators/mortgage-calculator' },
@@ -94,7 +74,28 @@ export const NAV: NavItem[] = [
     ],
   },
   {
-    label: 'Commercial Finance', href: '/advisory/commercial-property-finance',
+    label: 'Switch & save', href: '/mortgages/mortgage-buyout-refinance',
+    cols: [
+      { title: 'Switch your mortgage', links: [
+        { label: 'Switch bank (buyout)', href: '/mortgages/mortgage-buyout-refinance' },
+        { label: 'Switching savings estimator', href: '/calculators/buyout-refinance-savings' },
+        { label: 'Fixed vs revert analyser', href: '/calculators/fixed-to-revert-analyzer' },
+      ] },
+      { title: 'Release value', links: [
+        { label: 'Equity release & cash-out', href: '/mortgages/equity-release' },
+        { label: 'Portfolio consolidation', href: '/mortgages/portfolio-consolidation' },
+        { label: 'Handover & cash-out calculator', href: '/calculators/handover-equity-release' },
+      ] },
+      { title: 'Plan ahead', links: [
+        { label: '3-year clawback explained', href: '/guides/3-year-clawback-clause-on-uae-mortgage-buyouts' },
+        { label: 'Overpayment calculator', href: '/calculators/overpayment-early-settlement' },
+        { label: 'EIBOR tracker', href: '/rates/eibor-live-tracker' },
+      ] },
+    ],
+    feature: { title: 'Is your fixed rate ending?', body: 'Compare your revert rate with switching costs before it resets.', href: '/calculators/buyout-refinance-savings', cta: 'Calculate savings' },
+  },
+  {
+    label: 'Business property', href: '/advisory/commercial-property-finance',
     cols: [
       { title: 'Business property', links: [
         { label: 'Commercial property finance', href: '/advisory/commercial-property-finance' },
@@ -114,7 +115,7 @@ export const NAV: NavItem[] = [
     ],
   },
   {
-    label: 'Resources', href: '/guides',
+    label: 'Learn', href: '/guides',
     cols: [
       { title: 'Learn', links: [
         { label: 'How it works', href: '/#how-it-works' },

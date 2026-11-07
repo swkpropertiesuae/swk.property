@@ -1,3 +1,4 @@
+import { REG } from './regulation';
 // Silos 08, 09, 10 — affordability brackets, advisory desk, cornerstone guides.
 import type { Faq } from './products';
 
@@ -25,8 +26,8 @@ export type Advisory = { slug: string; name: string; title: string; capsule: str
 
 export const ADVISORY: Advisory[] = [
   { slug: 'commercial-property-finance', name: 'Commercial Property Finance', title: 'Commercial Property Finance in the UAE: Loans up to AED 600M',
-    capsule: 'Betterway’s commercial desk arranges acquisition and equity-release finance for offices, warehouses, retail, schools and hospitality assets across the UAE—loans up to AED 600M at up to 80% LTV over 15-year tenures, serviced from rental income or operating cash flow rather than personal salary.',
-    points: ['Up to 80% LTV on income-producing assets', 'Tenures up to 15 years', 'Rental-income or EBITDA serviceability (DSCR ≥ 1.25x)', 'Portfolio and single-asset structures', 'Owner-occupied clinics, schools and warehouses'],
+    capsule: 'Betterway’s commercial desk arranges acquisition and equity-release finance for offices, warehouses, retail, schools and hospitality assets across the UAE—with loan-to-value and tenure set by each lender, serviced from rental income or operating cash flow rather than personal salary.',
+    points: ['Loan-to-value set by each lender', 'Terms agreed case by case', 'Rental-income or EBITDA serviceability (DSCR ≥ 1.25x)', 'Portfolio and single-asset structures', 'Owner-occupied clinics, schools and warehouses'],
     faqs: [{ q: 'Can a company borrow for commercial property?', a: 'Yes—most commercial facilities are booked to an operating or SPV company with shareholder guarantees.' }] },
   { slug: 'sme-and-corporate-lending', name: 'SME & Corporate Lending', title: 'SME & Corporate Lending for UAE Business Owners',
     capsule: 'Business owners can pair a home loan with working-capital lines, trade finance, equipment loans and commercial mortgages. Betterway structures facilities across UAE banks so that business borrowings and personal mortgage DBR are planned together rather than competing for the same affordability.',
@@ -122,7 +123,7 @@ export const GUIDES: Guide[] = [
     faqs: [{ q: 'Can only one spouse be on the title?', a: 'Some banks allow a non-owning spouse as guarantor, but most require all income contributors on title.' }] },
   { slug: 'buying-out-developer-post-handover-payment-plan', tool: 'handover-equity-release',
     title: 'Buying Out a Developer Post-Handover Payment Plan with a Mortgage',
-    capsule: 'If you hold a post-handover payment plan, a mortgage can clear the remaining developer balance once title is issued—often at a lower monthly cost. Banks treat it as a ready-property purchase or buyout at up to 80% LTV for residents, subject to the developer’s clearance letter.',
+    capsule: `If you hold a post-handover payment plan, a mortgage can clear the remaining developer balance once title is issued—often at a lower monthly cost. Banks treat it as a ready-property purchase or buyout, so the CBUAE first-home caps apply (${REG.ltv.expat.first}% for expatriates up to AED 5M), subject to the developer’s clearance letter.`,
     steps: [
       { h: 'Get the clearance letter', p: 'The developer confirms the outstanding balance and releases the title on payoff.' },
       { h: 'Compare monthly cost', p: 'Post-handover instalments are often 1% a month; a 25-year mortgage spreads the same balance far lower.' },

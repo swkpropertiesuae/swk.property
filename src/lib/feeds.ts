@@ -1,4 +1,5 @@
 import { ROUTES, HUBS, indexable, type Route } from './routes';
+import { SOURCES, CHECKED_ON, REG, LENDER } from '@/data/regulation';
 import { SITE, BENCH, LTV_RULES, RULES, DISCLOSURE_FULL, fullAddress } from '@/data/site';
 import { BANKS, revert } from '@/data/banks';
 import { PRODUCTS } from '@/data/products';
@@ -61,12 +62,15 @@ The following legacy assumptions and bank examples are not current offers or ver
 |---|---|---|---|---|---|---|---|---|---|---|---|
 ${bankRows}
 
-## CBUAE rules
-${LTV_RULES.map((l) => `- ${l.profile}: max LTV ${l.ltv} (min down ${l.down})`).join('\n')}
+## Loan-to-value and consumer rules (checked ${CHECKED_ON})
+${LTV_RULES.map((l) => `- ${l.profile}: max LTV ${l.ltv} (min down ${l.down}) — ${l.basis === 'CBUAE' ? 'CBUAE regulation' : 'bank policy, varies by lender'}`).join('\n')}
 ${RULES.map((x) => `- ${x.k}: ${x.v}`).join('\n')}
 
+## Regulatory sources
+${Object.values(SOURCES).map((x) => `- ${x.name}: ${x.url}`).join('\n')}
+
 ## Formulas
-- EMI = P × r(1+r)^n / ((1+r)^n − 1); r = annual rate/12; n = years × 12; tenure = min(25, 65 − age) salaried, min(25, 70 − age) self-employed/nationals
+- EMI = P × r(1+r)^n / ((1+r)^n − 1); r = annual rate/12; n = years × 12; tenure = min(${REG.tenorMax}, bank age limit − age); age limits are bank policy (commonly ${LENDER.ageAtMaturity.salaried} salaried, ${LENDER.ageAtMaturity.selfEmployed} self-employed)
 - DBR: available EMI = 0.5 × gross salary − existing EMIs − card limits × 5% (3% at HSBC, ADCB, DIB)
 - Cash to close (Dubai ready purchase): down payment + 4% DLD + AED 580 title deed + 0.25% of loan + AED 290 mortgage registration + AED 4,200 trustee (≥ AED 500k, incl. VAT) + AED 3,150 valuation + 2% agency + 5% VAT
 - Off-plan handover: no 4% DLD (Oqood paid); loan up to 80% of fresh valuation for residents

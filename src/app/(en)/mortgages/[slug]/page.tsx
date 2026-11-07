@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { PageHero, Section, Facts, FaqList, CtaBand, LinkGrid, JsonLd } from '@/components/ui';
+import { PageHero, Section, Facts, FaqList, CtaBand, LinkGrid, JsonLd, Sources } from '@/components/ui';
 import Calculator from '@/components/calc/Calculator';
 import RateTable from '@/components/RateTable';
 import { PRODUCTS, productBy } from '@/data/products';
@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <PageHero crumbs={[{ name: 'Mortgages', href: '/mortgages' }, { name: p.name, href: `/mortgages/${p.slug}` }]} eyebrow={p.badge} title={p.title} capsule={p.capsule}>
         <div className="mt-8 flex flex-wrap gap-3"><Link href="/contact" className="btn btn-primary">{p.cta}</Link><Link href={`/${tool.base}/${tool.slug}`} className="btn btn-ghost">{tool.name}</Link></div>
       </PageHero>
-      <Section title={`${p.name}: key numbers`}><Facts facts={p.facts} /></Section>
+      <Section title={`${p.name}: key numbers`}><Facts facts={p.facts} /><Sources /></Section>
       <Section tone="mist" title="How it works">
         <div className="grid gap-6 lg:grid-cols-3">
           {p.sections.map((s) => <div key={s.h} className="card"><h3 className="h3">{s.h}</h3><p className="mt-3 text-[15px] leading-relaxed text-slate">{s.p}</p></div>)}
@@ -74,7 +74,7 @@ function CountryPage({ slug, c }: { slug: string; c: (typeof COUNTRIES)[number] 
         <div className="mt-8 flex flex-wrap gap-3"><Link href="/contact" className="btn btn-primary">Check my eligibility</Link><Link href="/calculators/non-resident-rental-coverage" className="btn btn-ghost">Rental coverage simulator</Link></div>
       </PageHero>
       <Section title={`What ${c.demonym} applicants need`}>
-        <Facts facts={[['Max LTV', c.ltv], ['FX haircut', c.fx], ['Credit bureau', c.bureau], ['Salaried proof', c.salaried], ['Self-employed proof', c.selfEmp], ['Lead lenders', c.banks]]} />
+        <Facts facts={[['Typical LTV (bank policy)', c.ltv], ['FX haircut', c.fx], ['Credit bureau', c.bureau], ['Salaried proof', c.salaried], ['Self-employed proof', c.selfEmp], ['Lead lenders', c.banks]]} />
         <p className="lead mt-8 max-w-3xl">{c.note}</p>
       </Section>
       <Section tone="mist" title="Non-resident lenders on our panel"><RateTable banks={lenders} /></Section>

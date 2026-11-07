@@ -1,4 +1,6 @@
 // Silo 02 — Core mortgage products & buyer profiles (/mortgages/[slug]).
+import { REG, LENDER } from './regulation';
+
 export type Faq = { q: string; a: string };
 export type Product = {
   slug: string;
@@ -19,18 +21,18 @@ export type Product = {
 export const PRODUCTS: Product[] = [
   {
     slug: 'uae-residents', name: 'Expat Resident Mortgages', ar: 'تمويل المقيمين الوافدين', core: true,
-    title: 'Expat Resident Mortgages in Dubai: 80% LTV on Your First Home',
-    badge: 'Up to 80% LTV', cta: 'Start my mortgage enquiry',
+    title: `Expat Resident Mortgages in Dubai: ${REG.ltv.expat.first}% LTV on Your First Home`,
+    badge: `Up to ${REG.ltv.expat.first}% LTV`, cta: 'Start my mortgage enquiry',
     card: 'Plan your deposit, monthly payment and application for a UAE home.',
-    capsule: 'Expat residents in the UAE can borrow up to 80% of a first home valued at AED 5M or less and 70% above AED 5M under CBUAE rules. Tenures run to 25 years, with maturity age set by lender policy, with total debt repayments capped at 50% of gross monthly income.',
-    facts: [['Max LTV (≤ AED 5M)', '80%'], ['Max LTV (> AED 5M)', '70%'], ['Minimum salary', 'AED 10,000–15,000 / month'], ['Max tenure', '25 yrs or age 65'], ['Pre-approval', 'Lender-dependent'], ['Fees', 'Confirm in writing']],
+    capsule: `Under CBUAE rules, expatriate residents can borrow up to ${REG.ltv.expat.first}% of a first home worth AED 5M or less, and ${REG.ltv.expat.firstAbove}% above that. The term can run to ${REG.tenorMax} years (each bank sets its own age limit), and all monthly debt repayments must stay within ${REG.dbrMax}% of gross income.`,
+    facts: [['Max LTV (≤ AED 5M)', `${REG.ltv.expat.first}%`], ['Max LTV (> AED 5M)', `${REG.ltv.expat.firstAbove}%`], ['Minimum salary', 'Set by each bank'], ['Max tenure', `${REG.tenorMax} years`], ['Pre-approval', 'Lender-dependent'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'How residents are underwritten', p: 'Banks read your salary certificate (dated within 30 days), six months of payslips and six consecutive salary credits. Fixed allowances count in full; variable pay, bonuses and commissions are usually averaged over 12–24 months at 50–75%. Your employer’s listing category with each bank changes both the rate and whether salary transfer is required.' },
       { h: 'The real cash you need', p: 'On top of the 20% down payment, budget about 7% for the 4% DLD fee, AED 580 title deed, 0.25% mortgage registration, AED 4,200 trustee fee, AED 3,150 valuation and the 2.1% agency commission. Our calculator itemises every dirham before you sign anything.' },
       { h: 'Why dual pre-approval matters', p: 'A pre-approval from one bank can collapse if its valuer down-values the unit. We submit to a primary and a backup bank whose valuer panels differ, but neither a backup application nor pre-approval guarantees a valuation or protects a deposit. Contract conditions need legal review.' },
     ],
     faqs: [
-      { q: 'Can I buy with 10% down as an expat?', a: 'No. CBUAE caps first-home LTV for expats at 80% (≤ AED 5M), so at least 20% must be your own funds—and it cannot come from a UAE personal loan.' },
+      { q: 'Can I buy with 10% down as an expat?', a: `No. The CBUAE cap for an expatriate's first home up to AED 5M is ${REG.ltv.expat.first}%, so at least ${100 - REG.ltv.expat.first}% must come from your own funds.` },
       { q: 'Do I need to transfer my salary?', a: 'Not always. Salary-transfer products are 0.10–0.25% cheaper, but around half the panel offers non-salary-transfer pricing for listed employers.' },
       { q: 'How long does the whole process take?', a: 'Typically 3–5 weeks from pre-approval to DLD transfer: document review, valuation, a Final Offer Letter and trustee transfer. The lender confirms timing.' },
     ],
@@ -38,10 +40,10 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: 'uae-nationals', name: 'UAE National Mortgages', ar: 'تمويل المواطنين الإماراتيين',
-    title: 'UAE National & Emirati Mortgages: 85% LTV + MRHE and Sheikh Zayed Top-Ups',
-    badge: 'Up to 85% LTV', cta: 'Check Emirati eligibility',
+    title: `UAE National & Emirati Mortgages: ${REG.ltv.national.first}% LTV + MRHE and Sheikh Zayed Top-Ups`,
+    badge: `Up to ${REG.ltv.national.first}% LTV`, cta: 'Check Emirati eligibility',
     card: 'Explore home finance and housing-programme requirements for Emirati buyers.',
-    capsule: 'UAE Nationals can borrow up to 85% of a first home valued at AED 5M or less and 75% above, with tenures to 25 years and maturity up to age 70. Bank loans can be layered on top of Mohammed bin Rashid Housing Establishment or Sheikh Zayed Housing Programme approvals to fund larger villas.',
+    capsule: `CBUAE rules let UAE Nationals borrow up to ${REG.ltv.national.first}% of a first home worth AED 5M or less and ${REG.ltv.national.firstAbove}% above that, over a term of up to ${REG.tenorMax} years. Bank loans can be layered on top of Mohammed bin Rashid Housing Establishment or Sheikh Zayed Housing Programme approvals to fund larger villas.`,
     facts: [['Max LTV (≤ AED 5M)', '85%'], ['Max LTV (> AED 5M)', '75%'], ['Max age at maturity', '70'], ['Housing grant top-ups', 'MRHE · SZHP'], ['Pension income', 'Accepted'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'Combining government housing with a bank loan', p: 'Where an MRHE or SZHP loan covers part of a villa build or purchase, the bank can register a second-ranking facility for the balance. We sequence both approvals so the housing authority NOC and bank offer arrive together.' },
@@ -49,7 +51,7 @@ export const PRODUCTS: Product[] = [
       { h: 'Government and semi-government employers', p: 'Federal, emirate-level and GRE employees typically fall into the top employer category at every bank, unlocking the lowest rate tiers and higher income multiples.' },
     ],
     faqs: [
-      { q: 'Can a UAE National borrow for a second home?', a: 'Yes—second and investment homes are capped at 65% LTV for nationals, with rental income counted toward affordability.' },
+      { q: 'Can a UAE National borrow for a second home?', a: `Yes. CBUAE caps second and later homes at ${REG.ltv.national.subsequent}% LTV for UAE Nationals; banks may count rental income toward affordability.` },
       { q: 'Is the MRHE loan counted in my DBR?', a: 'Yes. Its monthly instalment is included in the 50% debt burden ratio, which is why sequencing and tenor choice matter.' },
     ],
     calc: 'dbr-borrowing-power',
@@ -57,10 +59,10 @@ export const PRODUCTS: Product[] = [
   {
     slug: 'gcc-nationals', name: 'GCC National Mortgages', ar: 'تمويل مواطني دول الخليج',
     title: 'GCC National Mortgages in Dubai & Abu Dhabi: Saudi, Qatari, Kuwaiti, Bahraini & Omani Buyers',
-    badge: 'Up to 75% LTV', cta: 'Check GCC eligibility',
+    badge: 'Bank-specific LTV', cta: 'Check GCC eligibility',
     card: 'Understand UAE property finance for GCC citizens, at home or overseas.',
-    capsule: 'GCC citizens buying in Dubai or Abu Dhabi are underwritten close to UAE National terms when resident, and at up to 65–70% LTV when living in their home country. Banks verify income through GOSI, employer letters or commercial registrations and pull SIMAH, QCB or Ci-Net bureau reports.',
-    facts: [['Resident GCC LTV', 'Up to 75–80%'], ['Non-resident GCC LTV', '65–70%'], ['FX haircut', '0–5% (pegged currencies)'], ['Credit bureaux', 'SIMAH · QCB · Ci-Net · Benefit'], ['Freehold access', 'All UAE freehold zones'], ['Fees', 'Confirm in writing']],
+    capsule: 'GCC citizens buying in Dubai or Abu Dhabi are underwritten close to UAE National terms when resident, and on bank-specific non-resident terms when living in their home country. Banks verify income through GOSI, employer letters or commercial registrations and pull SIMAH, QCB or Ci-Net bureau reports.',
+    facts: [['Resident GCC LTV', 'Bank-specific'], ['Non-resident GCC LTV', 'Bank-specific'], ['FX haircut', '0–5% (pegged currencies)'], ['Credit bureaux', 'SIMAH · QCB · Ci-Net · Benefit'], ['Freehold access', 'All UAE freehold zones'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'Pegged currencies, minimal haircut', p: 'Because SAR, QAR, BHD and OMR are pegged to the dollar, most banks apply little or no FX haircut to GCC income—unlike the 15–20% applied to GBP, EUR or INR.' },
       { h: 'Documents banks ask for', p: 'Salaried: salary certificate plus six months of statements (GOSI certificate for Saudi applicants). Self-employed: commercial registration, establishment card and two years of audited accounts.' },
@@ -70,11 +72,11 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: 'non-resident-dubai', name: 'Non-Resident Mortgages', ar: 'تمويل غير المقيمين', core: true,
-    title: 'Non-Resident Dubai Mortgages: Up to 65% LTV Across 14 UAE Banks',
-    badge: 'Up to 65% LTV · Remote PoA', cta: 'Check non-resident LTV',
+    title: `Non-Resident Dubai Mortgages: ${LENDER.nonResidentLtv.min}–${LENDER.nonResidentLtv.max}% LTV, Set by Each Bank`,
+    badge: `${LENDER.nonResidentLtv.min}–${LENDER.nonResidentLtv.max}% LTV · bank policy`, cta: 'Check non-resident LTV',
     card: 'Explore UAE mortgage options using overseas salary or business income.',
     capsule: 'Non-residents can get a Dubai mortgage without an Emirates ID across 14 UAE banks. HSBC, Emirates NBD, FAB, ADCB, Standard Chartered and DIB lend up to 60% LTV; Mashreq, CBD and Amlak lend up to 65%. Closing can be fully remote in 3–5 weeks via a 15-minute Dubai Courts video Power of Attorney.',
-    facts: [['Max LTV', '60–65%'], ['Active lenders', '14 banks'], ['Max tenure', '25 years'], ['FX haircut', '0–20% by currency'], ['Remote closing', 'Confirm lender & notary requirements'], ['Timeline', '3–5 weeks']],
+    facts: [['Typical LTV (bank policy)', `${LENDER.nonResidentLtv.min}–${LENDER.nonResidentLtv.max}%`], ['Active lenders', '14 banks'], ['Max tenure', `${REG.tenorMax} years`], ['FX haircut', '0–20% by currency'], ['Remote closing', 'Confirm lender & notary requirements'], ['Timeline', '3–5 weeks']],
     sections: [
       { h: 'How overseas income is read', p: 'Banks convert foreign income at a haircut (e.g. 15% for GBP or EUR, 20% for INR) and verify it with home-country tax returns and credit bureau reports. Country guides outline documents to discuss with the lender.' },
       { h: 'Closing without flying in', p: 'Form F is signed through Dubai REST OTP. A Dubai Courts Smart Notary video call issues a Power of Attorney that must explicitly include borrowing and first-degree mortgage registration authority, dated within two years.' },
@@ -91,7 +93,7 @@ export const PRODUCTS: Product[] = [
     title: 'Self-Employed & Freezone Company Owner Mortgages: Retained Earnings and Dividend Add-Back Underwriting',
     badge: 'Corporate income accepted', cta: 'Assess my business income',
     card: 'Prepare your company accounts and income evidence for a lender review.',
-    capsule: 'Self-employed borrowers in the UAE need a trade licence held for at least two years, two years of audited financials and 6–12 months of corporate statements. Banks such as RAKBANK, Mashreq, CBD, Emirates NBD, DIB and FAB can underwrite corporate net profit plus depreciation and director drawings at up to 80% LTV.',
+    capsule: `Self-employed borrowers in the UAE need a trade licence held for at least two years, two years of audited financials and 6–12 months of corporate statements. Banks such as RAKBANK, Mashreq, CBD, Emirates NBD, DIB and FAB can underwrite corporate net profit plus depreciation and director drawings within the CBUAE first-home cap of ${REG.ltv.expat.first}% for expatriates.`,
     facts: [['Trading history', '≥ 2 years'], ['Financials', '2 years audited'], ['Max LTV', '80% (resident)'], ['Max age at maturity', '70'], ['Income method', 'Net profit + add-backs × shareholding'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'The retained-earnings problem', p: 'Most rejections happen because owners pay themselves little salary and leave profit in the company. We present corporate net profit, depreciation and director drawings to banks that accept them, attributed by shareholding.' },
@@ -139,7 +141,7 @@ export const PRODUCTS: Product[] = [
     capsule: 'A UAE mortgage buyout moves your loan to a cheaper bank. CBUAE caps early settlement penalties at 1% of the outstanding balance or AED 10,000, whichever is lower, plus VAT. Most banks waive buyout processing and valuation fees but claw them back if you leave within 36 months.',
     facts: [['Exit penalty cap', '1% or AED 10,000 (+VAT)'], ['Buyout processing fee', '0% at most banks'], ['Clawback window', 'Typically 36 months'], ['Break-even target', '< 12 months'], ['Golden Visa', 'Remains valid'], ['Fees', 'Confirm in writing']],
     sections: [
-      { h: 'When a switch pays', p: 'As a rule of thumb, a 0.50% rate cut on a balance above AED 1M recovers the AED 10,500 exit cost in under a year. Our calculator includes the old bank’s penalty, new mortgage registration (0.25% + AED 290) and any clawback exposure.' },
+      { h: 'When a switch pays', p: 'As a rule of thumb, a 0.50% rate cut on a balance above AED 1M recovers the capped exit fee (1% or AED 10,000) in under a year. Our calculator includes the old bank’s penalty, new mortgage registration (0.25% + AED 290) and any clawback exposure.' },
       { h: 'The liability letter sequence', p: 'Your new bank issues an FOL, your current bank issues a liability letter (valid ~15 days), the new bank pays off the old loan by manager’s cheque, and DLD re-registers the mortgage—usually 3–4 weeks.' },
     ],
     faqs: [{ q: 'Can I take cash out when I switch?', a: 'Yes—combine the buyout with equity release up to 80% of the new valuation for residents (subject to DBR).' }],
@@ -147,11 +149,11 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: 'equity-release', name: 'Equity Release & Cash-Out', ar: 'تحرير حقوق الملكية', core: true,
-    title: 'Equity Release & Cash-Out Refinancing: Unlock up to 80% LTV from Paid-Off or Appreciated Homes',
+    title: `Equity Release & Cash-Out Refinancing: Borrow Against a Home You Own`,
     badge: 'Property-backed borrowing', cta: 'Calculate unlocked equity',
     card: 'Explore borrowing against property you own, subject to a new affordability review.',
-    capsule: 'UAE equity release lets owners of paid-off or appreciated property borrow against current market value—up to 80% LTV for resident expats, 85% for UAE Nationals and 60–65% for investment property. Tax treatment depends on your circumstances, end use is checked and the new EMI must fit within the 50% DBR cap.',
-    facts: [['Max LTV (resident home)', '80%'], ['Max LTV (investment)', '60–65%'], ['Valuation basis', 'Current RERA valuation'], ['Tenure', 'Up to 25 years'], ['Typical timeline', '2–3 weeks'], ['Fees', 'Confirm in writing']],
+    capsule: `Equity release lets owners borrow against today's value of a home they own. The CBUAE caps still apply: ${REG.ltv.expat.first}% for an expatriate's first home and ${REG.ltv.national.first}% for a UAE National's (up to AED 5M), and ${REG.ltv.expat.subsequent}% / ${REG.ltv.national.subsequent}% on investment property. Banks check how the money will be used, and the new repayment must fit within the ${REG.dbrMax}% debt burden limit.`,
+    facts: [['Max LTV (expat first home)', `${REG.ltv.expat.first}%`], ['Max LTV (investment)', `${REG.ltv.expat.subsequent}% expat · ${REG.ltv.national.subsequent}% National`], ['Valuation basis', 'Current RERA valuation'], ['Tenure', 'Up to 25 years'], ['Typical timeline', '2–3 weeks'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'Using equity to buy the next property', p: 'Many investors release equity from a paid-off apartment to fund the down payment and fees on an off-plan or second ready unit. Banks treat the released cash as own funds, unlike a personal loan.' },
       { h: 'Protect the family while you leverage', p: 'Assigning an external life policy (instead of the bank’s) saves roughly half the premium, and a DIFC single-property Will stops the asset freezing if a joint owner dies.' },
@@ -161,11 +163,11 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: 'second-home-investment', name: 'Investment & Second Homes', ar: 'تمويل المنزل الثاني والاستثمار',
-    title: 'Investment & Second Property Mortgages: 60–65% LTV and Using Ejari Rent to Boost DBR',
-    badge: '60–65% LTV', cta: 'Model rental coverage',
+    title: `Investment & Second Property Mortgages: ${REG.ltv.expat.subsequent}% / ${REG.ltv.national.subsequent}% LTV and Using Rent to Support Affordability`,
+    badge: `${REG.ltv.expat.subsequent}–${REG.ltv.national.subsequent}% LTV`, cta: 'Model rental coverage',
     card: 'Plan a second-home purchase with rental assumptions and a suitable deposit.',
-    capsule: 'A second or investment home in the UAE is capped at 60–65% LTV for residents. Banks count 70–80% of the property’s registered Ejari rental income toward affordability, which can offset the new EMI within the 50% DBR limit—making portfolio growth feasible on a single salary.',
-    facts: [['Max LTV', '60–65%'], ['Rent counted', '70–80% of Ejari'], ['Proof of rent', 'Ejari + 6 months credits'], ['Short-let income', 'Some banks, with DTCM permit'], ['Tenure', 'Up to 25 years'], ['Fees', 'Confirm in writing']],
+    capsule: `CBUAE caps a second or later home at ${REG.ltv.expat.subsequent}% LTV for expatriates and ${REG.ltv.national.subsequent}% for UAE Nationals, whatever its value. Many banks count part of the registered Ejari rent as income, which can help the new repayment fit within the ${REG.dbrMax}% debt burden limit.`,
+    facts: [['Max LTV', `${REG.ltv.expat.subsequent}% expat · ${REG.ltv.national.subsequent}% National`], ['Rent counted', 'Bank-specific share of Ejari'], ['Proof of rent', 'Ejari + 6 months credits'], ['Short-let income', 'Some banks, with DTCM permit'], ['Tenure', 'Up to 25 years'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'How rent improves your borrowing power', p: 'If your second unit rents for AED 96,000 a year, a bank counting 80% adds AED 6,400 per month to eligible income—roughly AED 1.1M of extra borrowing capacity at today’s stress rates.' },
       { h: 'Gross yields by community', p: 'Our 60 community hubs publish indicative price per square foot and gross yields so you can compare EMI coverage before choosing where to buy.' },
@@ -189,16 +191,16 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: 'under-construction-off-plan', name: 'Off-Plan & Handover Finance', ar: 'تمويل العقارات على الخارطة', core: true,
-    title: 'Under-Construction Off-Plan Mortgages: CBUAE 50% LTV Ceiling and the 80% Handover Shift',
+    title: `Under-Construction Off-Plan Mortgages: Lending During Construction and at Handover`,
     badge: 'Emaar · Meraas · Sobha', cta: 'Check my project’s APL',
     card: 'Plan your developer balance and confirm project eligibility before handover.',
-    capsule: 'CBUAE caps lending on off-plan property under early construction at 50% LTV. Within 60–90 days of handover, banks underwrite the final developer instalment as a ready property at up to 80% LTV for expat residents—only if the project is on the bank’s Approved Project List (APL).',
+    capsule: `Most banks lend no more than ${LENDER.offPlanLtv}% on a property still under construction. Close to handover they can treat it as a ready home, so the CBUAE first-home caps apply (${REG.ltv.expat.first}% for expatriates, ${REG.ltv.national.first}% for UAE Nationals up to AED 5M), but only if the project is on that bank's Approved Project List.`,
     facts: [['Under-construction LTV', '50% max'], ['Handover LTV', '80% resident · 85% National'], ['DLD fee at handover', 'None (Oqood paid)'], ['Handover fees', '0.25% + AED 290, AED 4,200, AED 580, AED 3,150'], ['Projects mapped', '80 handover pages'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'The APL is everything', p: 'Each bank keeps an approved list by developer and tower. A missing tower means no loan from that bank, so we check APL coverage before your developer’s handover notice arrives.' },
-      { h: 'Valuation uplift cash-out', p: 'Banks lending on fresh handover valuation can fund more than the developer balance. Bought at AED 2.0M on 80/20, now valued at AED 2.8M? 80% LTV is AED 2.24M—AED 400k to the developer, the rest released as cash.' },
+      { h: 'Valuation uplift cash-out', p: `Banks lending on fresh handover valuation can fund more than the developer balance. Bought at AED 2.0M on 80/20, now valued at AED 2.8M? At ${REG.ltv.expat.first}% LTV that is AED 2.24M—AED 400k to the developer, the rest released as cash.` },
     ],
-    faqs: [{ q: 'Can I get a mortgage before 50% is paid?', a: 'Yes, but under-construction loans are capped at 50% LTV and offered by fewer banks; most buyers wait for handover financing.' }],
+    faqs: [{ q: 'Can I get a mortgage before 50% is paid?', a: `Yes, but fewer banks offer it and most lend no more than ${LENDER.offPlanLtv}% during construction; many buyers wait for handover financing.` }],
     calc: 'handover-equity-release',
   },
   {
@@ -206,7 +208,7 @@ export const PRODUCTS: Product[] = [
     title: 'HNW Mega Mortgages & Trophy Asset Financing: AED 15M to AED 100M+ in Emirates Hills & Palm Jumeirah',
     badge: 'AED 15M–100M+', cta: 'Speak to the private desk',
     card: 'Prepare a tailored finance assessment for a high-value property.',
-    capsule: 'Mega mortgages above AED 15M in the UAE are typically structured by private-banking arms of FAB, HSBC, Emirates NBD and Standard Chartered. Residents borrow up to 70% LTV above AED 5M; pricing is negotiated on relationship assets, and global wealth or rental income can substitute for salary.',
+    capsule: `Mega mortgages above AED 15M in the UAE are typically structured by private-banking arms of FAB, HSBC, Emirates NBD and Standard Chartered. CBUAE caps first homes above AED 5M at ${REG.ltv.expat.firstAbove}% for expatriates and ${REG.ltv.national.firstAbove}% for UAE Nationals; pricing is negotiated on relationship assets, and global wealth or rental income can substitute for salary.`,
     facts: [['Loan size', 'AED 15M–100M+'], ['Max LTV (> AED 5M)', '70% resident · 75% National'], ['Income basis', 'Global assets, dividends, rent'], ['Pricing', 'Relationship-negotiated'], ['Valuation', 'Two-valuer panels'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'Relationship pricing', p: 'Depositing AUM with the lender can cut 0.25–0.50% off the rate. We run the numbers to show whether the opportunity cost of parked assets beats the rate saving.' },
@@ -221,7 +223,7 @@ export const PRODUCTS: Product[] = [
     badge: '2–10 properties', cta: 'Review my portfolio',
     card: 'Review property loans together, including fees, security and repayment terms.',
     capsule: 'Portfolio consolidation refinances 2 to 10 mortgaged UAE properties into one bank facility, aligning revert dates and often cutting the blended rate by 0.25–0.75%. Each property is valued separately, rents are assessed together, and CBUAE early-settlement caps limit exit costs to 1% or AED 10,000 per loan.',
-    facts: [['Properties', '2–10'], ['Blended LTV', '60–65%'], ['Exit cap per loan', '1% or AED 10,000'], ['Rent assessment', 'Portfolio-level'], ['Benefit', 'One rate, one revert date'], ['Fees', 'Confirm in writing']],
+    facts: [['Properties', '2–10'], ['Max LTV (investment)', `${REG.ltv.expat.subsequent}% expat · ${REG.ltv.national.subsequent}% National`], ['Exit cap per loan', '1% or AED 10,000'], ['Rent assessment', 'Portfolio-level'], ['Benefit', 'One rate, one revert date'], ['Fees', 'Confirm in writing']],
     sections: [
       { h: 'Why consolidate', p: 'Landlords with loans at four banks face four revert dates and four floor rates. One facility simplifies cash flow and strengthens your negotiating position at renewal.' },
       { h: 'Exit-cost math', p: 'Each existing loan carries its own capped exit penalty; we only recommend moving loans where the rate gain clears the penalty within 12 months.' },

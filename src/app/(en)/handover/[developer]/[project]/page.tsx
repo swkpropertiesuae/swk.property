@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { REG } from '@/data/regulation';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PageHero, Section, Facts, FaqList, CtaBand, LinkGrid, aed, aedM } from '@/components/ui';
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ developer
   const { developer, project } = await params;
   const p = find(developer, project);
   const d = devBy(developer);
-  return p && d ? { title: `${p.name} Handover Mortgage — ${d.name}, ${p.community}`, description: `Handover mortgage for ${p.name} (${p.community}): ${p.plan ? `${p.plan} plan, ` : ''}${p.apl ? `${p.apl} APL banks, ` : ''}80% LTV at completion and cash-out on valuation uplift.`, alternates: { canonical: `/handover/${developer}/${project}` } } : {};
+  return p && d ? { title: `${p.name} Handover Mortgage — ${d.name}, ${p.community}`, description: `Handover mortgage for ${p.name} (${p.community}): ${p.plan ? `${p.plan} plan, ` : ''}${p.apl ? `${p.apl} APL banks, ` : ''}${REG.ltv.expat.first}% LTV at completion and cash-out on valuation uplift.`, alternates: { canonical: `/handover/${developer}/${project}` } } : {};
 }
 
 export default async function Page({ params }: { params: Promise<{ developer: string; project: string }> }) {
@@ -34,8 +35,8 @@ export default async function Page({ params }: { params: Promise<{ developer: st
   const siblings = projectsOf(p.dev).filter((x) => x.slug !== p.slug).slice(0, 6);
   const crumbs = [{ name: 'Off-plan handover', href: '/handover' }, ...(d.hub ? [{ name: d.name, href: `/handover/${d.slug}` }] : []), { name: p.name, href: `/handover/${d.slug}/${p.slug}` }];
   const capsule = r
-    ? `${p.name} by ${d.name} in ${p.community} hands over ${p.window} on a ${p.plan} plan, leaving ${p.balancePct}% due at completion. Launched around ${aedM(p.launch!)}, units now value near ${aedM(p.value!)}. ${p.apl} banks hold it on their APL; at 80% LTV a buyer could borrow ${aed(r.loanCap)} and release up to ${aed(r.cashOut)}.`
-    : `${p.name} by ${d.name} in ${p.community} is scheduled for handover in ${p.window}. At completion, banks on ${d.name}’s Approved Project List can finance the remaining developer balance at up to 80% LTV for residents, with no 4% DLD fee because Oqood was paid at launch. Our desk confirms tower-level APL coverage before your handover notice.`;
+    ? `${p.name} by ${d.name} in ${p.community} hands over ${p.window} on a ${p.plan} plan, leaving ${p.balancePct}% due at completion. Launched around ${aedM(p.launch!)}, units now value near ${aedM(p.value!)}. ${p.apl} banks hold it on their APL; at ${REG.ltv.expat.first}% LTV (expat first home) a buyer could borrow ${aed(r.loanCap)} and release up to ${aed(r.cashOut)}.`
+    : `${p.name} by ${d.name} in ${p.community} is scheduled for handover in ${p.window}. At completion, banks on ${d.name}’s Approved Project List can finance the remaining developer balance at up to ${REG.ltv.expat.first}% LTV for an expat first home, with no 4% DLD fee because Oqood was paid at launch. Our desk confirms tower-level APL coverage before your handover notice.`;
   return (
     <>
       <PageHero crumbs={crumbs} eyebrow={`${d.name} · ${p.community}`} title={`${p.name} handover mortgage: APL banks, payment plan & cash-out`} capsule={capsule}>

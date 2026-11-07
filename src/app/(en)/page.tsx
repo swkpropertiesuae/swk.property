@@ -48,30 +48,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how-it-works" className="journey-section scroll-mt-24">
-        <div className="wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-20">
-          <MotionReveal className="journey-image"><img src="/images/dubai-interior-1280.webp" srcSet="/images/dubai-interior-720.webp 720w, /images/dubai-interior-1280.webp 1280w" sizes="(min-width:1024px) 46vw, 100vw" width={1280} height={720} loading="lazy" alt="Conceptual Dubai apartment with a bright waterfront outlook" /></MotionReveal>
-          <div><h2 className="h2 mt-4 !text-white">Know what comes next.</h2><ol className="journey-steps">{[['Set your budget', 'Check income, deposit and purchase costs.'], ['Compare your options', 'Review rates, fees and lender requirements.'], ['Apply for pre-approval', 'Submit documents for the bank’s assessment.'], ['Value, finalise, transfer', 'Complete valuation, final approval and registration.']].map(([t, b], i) => <li key={t}><span>{String(i + 1).padStart(2, '0')}</span><div><h3>{t}</h3><p>{b}</p></div></li>)}</ol><Link href="/guides/complete-dld-trustee-transfer-day-checklist" className="inline-flex items-center gap-2 text-sm font-semibold text-mint">Your transfer-day checklist <ArrowRight size={15} /></Link></div>
-        </div>
-      </section>
-
-      <Section id="calculator" tone="mist" eyebrow="Mortgage calculator" title="Make the numbers work for you." intro="Estimate your monthly payment and upfront costs. No sign-up needed.">
-        <div className="rounded-[28px] border border-line bg-white p-5 sm:p-8"><Calculator slug="mortgage-calculator" /></div>
-        <p className="mt-4 text-xs leading-relaxed text-slate">Planning estimates only. Rates and fees depend on the lender, property and your circumstances. Bank processing fees and insurance may be additional.</p>
-      </Section>
-
-      <Section eyebrow="Find your way" title="A mortgage for your next move." action={{ label: 'All mortgage options', href: '/mortgages' }}>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PRODUCTS.map(([n, name, body, href, tag]) => <Link key={n} href={href} className="card mortgage-card group"><span className="flex items-center justify-between"><span className="eyebrow">{tag}</span><span className="num text-xs text-slate/60">{n}</span></span><h3 className="mt-10 text-xl font-semibold group-hover:text-teal">{name}</h3><p className="mt-3 text-sm leading-relaxed text-slate">{body}</p><ArrowUpRight size={21} className="mt-auto pt-6 box-content text-teal" /></Link>)}
-        </div>
-        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-teal">
-          <Link className="ulink" href="/mortgages/uae-nationals">UAE National Mortgages ↗</Link>
-          <Link className="ulink" href="/mortgages/islamic-home-finance">Islamic Home Finance ↗</Link>
-          <Link className="ulink" href="/mortgages/golden-visa-mortgage">Golden Visa Mortgages ↗</Link>
-          <Link className="ulink" href="/mortgages/equity-release">Equity Release & Cash-Out ↗</Link>
-        </div>
-      </Section>
-
       <Section tone="mist" eyebrow="Your starting point" title="A few questions. A clearer direction.">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
           <div className="max-w-md"><p className="text-lg leading-relaxed text-slate">Tell us what you want to do. Explore indicative options, then discuss your documents with an advisor.</p><p className="mt-5 text-sm text-slate">No credit check. No application submitted.</p><Link className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-teal" href="/guides">New to UAE mortgages? Start here <ArrowRight size={15} /></Link></div>
@@ -93,6 +69,23 @@ export default function Home() {
         <p className="mt-5 text-xs leading-relaxed text-slate">Directory information is indicative, not a live offer or confirmation of a bank partnership. Request a current written quote.</p>
       </Section>
 
+      <Section id="calculator" tone="mist" eyebrow="Mortgage calculator" title="Make the numbers work for you." intro="Estimate your monthly payment and upfront costs. No sign-up needed.">
+        <div className="rounded-[28px] border border-line bg-white p-5 sm:p-8"><Calculator slug="mortgage-calculator" /></div>
+        <p className="mt-4 text-xs leading-relaxed text-slate">Planning estimates only. Rates and fees depend on the lender, property and your circumstances. Bank processing fees and insurance may be additional.</p>
+      </Section>
+
+      <Section eyebrow="Find your way" title="A mortgage for your next move." action={{ label: 'All mortgage options', href: '/mortgages' }}>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {PRODUCTS.map(([n, name, body, href, tag]) => <Link key={n} href={href} className="card mortgage-card group"><span className="flex items-center justify-between"><span className="eyebrow">{tag}</span><span className="num text-xs text-slate/60">{n}</span></span><h3 className="mt-10 text-xl font-semibold group-hover:text-teal">{name}</h3><p className="mt-3 text-sm leading-relaxed text-slate">{body}</p><ArrowUpRight size={21} className="mt-auto pt-6 box-content text-teal" /></Link>)}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-teal">
+          <Link className="ulink" href="/mortgages/uae-nationals">UAE National Mortgages ↗</Link>
+          <Link className="ulink" href="/mortgages/islamic-home-finance">Islamic Home Finance ↗</Link>
+          <Link className="ulink" href="/mortgages/golden-visa-mortgage">Golden Visa Mortgages ↗</Link>
+          <Link className="ulink" href="/mortgages/equity-release">Equity Release & Cash-Out ↗</Link>
+        </div>
+      </Section>
+
       <section className="bg-mist py-12 lg:py-16"><div className="wrap market-intro"><div><h2 className="mt-4">Published benchmarks.<br />A clearer starting point.</h2><p>Follow the latest public EIBOR fixing, then compare the full terms of your mortgage offer.</p></div><LiveBenchmark /></div></section>
 
       <section className="bg-white py-16 lg:py-24">
@@ -104,6 +97,13 @@ export default function Home() {
             <p className="mt-4 text-lg leading-relaxed text-slate">Go through the fixed period, revert margin, floor rate, fees and insurance with an advisor, line by line.</p>
             <Link href="/contact" className="btn btn-primary mt-8">Book a consultation <ArrowRight size={15} /></Link>
           </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" className="journey-section scroll-mt-24">
+        <div className="wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-20">
+          <MotionReveal className="journey-image"><img src="/images/dubai-interior-1280.webp" srcSet="/images/dubai-interior-720.webp 720w, /images/dubai-interior-1280.webp 1280w" sizes="(min-width:1024px) 46vw, 100vw" width={1280} height={720} loading="lazy" alt="Conceptual Dubai apartment with a bright waterfront outlook" /></MotionReveal>
+          <div><h2 className="h2 mt-4 !text-white">Know what comes next.</h2><ol className="journey-steps">{[['Set your budget', 'Check income, deposit and purchase costs.'], ['Compare your options', 'Review rates, fees and lender requirements.'], ['Apply for pre-approval', 'Submit documents for the bank’s assessment.'], ['Value, finalise, transfer', 'Complete valuation, final approval and registration.']].map(([t, b], i) => <li key={t}><span>{String(i + 1).padStart(2, '0')}</span><div><h3>{t}</h3><p>{b}</p></div></li>)}</ol><Link href="/guides/complete-dld-trustee-transfer-day-checklist" className="inline-flex items-center gap-2 text-sm font-semibold text-mint">Your transfer-day checklist <ArrowRight size={15} /></Link></div>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { REG } from '@/data/regulation';
 import Link from 'next/link';
 import { PageHero, Section, CtaBand, aed } from '@/components/ui';
 import { Filter } from '@/components/client';
@@ -7,14 +8,14 @@ import { buyoutSavings, handoverRelease, borrowingPower } from '@/lib/math';
 export const metadata: Metadata = { title: 'Client Reviews & Case Studies', description: 'Illustrative mortgage scenarios by profile: non-resident, self-employed, off-plan handover and buyout.', alternates: { canonical: '/reviews' } };
 
 const bo = buyoutSavings({ balance: 1_800_000, currentRate: 6.1, newRate: 3.99, yearsLeft: 21 });
-const ho = handoverRelease(2_000_000, 20, 2_800_000, 80);
+const ho = handoverRelease(2_000_000, 20, 2_800_000, REG.ltv.expat.first);
 const cards = borrowingPower({ salary: 38_000, existingEmis: 0, cardLimits: 120_000, years: 25 });
 const noCards = borrowingPower({ salary: 38_000, existingEmis: 0, cardLimits: 0, years: 25 });
 
 // Worked scenarios show the method with real formulas; they are not client testimonials.
 const CASES = [
   { tags: ['Buyout'], title: 'Revert shock on a Marina apartment', body: `AED 1.8M balance reverting to 6.10%. Switch to a 3.99% 3-year fixed: ${aed(bo.monthly)}/month lower, switch costs ${aed(bo.switchCost)} recovered in ${bo.breakEvenMonths} months.`, href: '/calculators/buyout-refinance-savings' },
-  { tags: ['Handover'], title: '80/20 handover with valuation uplift', body: `Bought at AED 2.0M, valued AED 2.8M at handover. 80% LTV gives ${aed(ho.loanCap)}: AED 400,000 to the developer and up to ${aed(ho.cashOut)} released, subject to DBR.`, href: '/calculators/handover-equity-release' },
+  { tags: ['Handover'], title: '80/20 handover with valuation uplift', body: `Bought at AED 2.0M, valued AED 2.8M at handover. At the ${REG.ltv.expat.first}% expat first-home cap the loan could reach ${aed(ho.loanCap)}: AED 400,000 to the developer and up to ${aed(ho.cashOut)} released, subject to DBR.`, href: '/calculators/handover-equity-release' },
   { tags: ['Self-employed'], title: 'Freezone owner on a low salary draw', body: 'Example: an owner draws AED 15,000 salary from a DMCC company earning AED 1.2M profit a year. Banks that count company profit can assess income near AED 100,000 a month.', href: '/mortgages/self-employed' },
   { tags: ['Resident'], title: 'Unused credit cards blocking approval', body: `AED 38,000 salary with AED 120,000 of card limits. Closing two unused cards raised the maximum loan from ${aed(cards.maxLoan)} to ${aed(noCards.maxLoan)}.`, href: '/calculators/dbr-borrowing-power' },
   { tags: ['Non-resident'], title: 'UK buyer closing without flying in', body: 'Example: P60, SA302 and an Experian report, income counted at a 15% GBP haircut, 60% LTV, Form F signed by Dubai REST OTP and a 15-minute video PoA.', href: '/mortgages/non-resident-uk' },

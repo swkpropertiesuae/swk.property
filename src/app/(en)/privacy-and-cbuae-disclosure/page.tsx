@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { PageHero, Section } from '@/components/ui';
+import { PageHero, Section, Sources } from '@/components/ui';
 import { SITE, DISCLOSURE_FULL, RULES, fullAddress } from '@/data/site';
 
 export const metadata: Metadata = { title: 'CBUAE Consumer Protection Disclosure, Privacy Policy & Terms', description: 'How Betterway Mortgages is paid, how rates, floors and fees are shown, and how personal data is handled.', alternates: { canonical: '/privacy-and-cbuae-disclosure' } };
@@ -23,6 +23,7 @@ export default function Page() {
             <div key={h}><h3 className="font-display text-xl font-semibold">{h}</h3><div className="prose-bw mt-3">{ps.map((p) => <p key={p}>{p}</p>)}</div></div>
           ))}
         </div>
+        <Sources />
       </Section>
     </>
   );

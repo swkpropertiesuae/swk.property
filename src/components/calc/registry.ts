@@ -1,5 +1,6 @@
 // Declarative calculator definitions: inputs + pure compute. One renderer (Calculator.tsx) draws all of them in EN or AR.
 import * as M from '@/lib/math';
+import { REG } from '@/data/regulation';
 import { BANKS } from '@/data/banks';
 import { BENCH } from '@/data/site';
 
@@ -54,7 +55,7 @@ export const CALCS: Record<string, CalcDef> = {
           { label: l('50% DBR capacity / month', 'سعة عبء الدين 50%'), v: r.capacity, f: 'aed' },
           { label: l('Credit card hit / month', 'خصم البطاقات الائتمانية'), v: r.cardHit, f: 'aed' },
           { label: l('Available for mortgage EMI', 'المتاح لقسط التمويل'), v: r.available, f: 'aed' },
-          { label: l('Max property at 80% LTV', 'أقصى سعر عقار بنسبة 80%'), v: r.maxLoan / 0.8, f: 'aed', strong: true },
+          { label: l(`Max property at ${REG.ltv.expat.first}% LTV (expat first home)`, `أقصى سعر عقار بنسبة ${REG.ltv.expat.first}%`), v: r.maxLoan / (REG.ltv.expat.first / 100), f: 'aed', strong: true },
           { label: l('Extra loan if cards closed', 'تمويل إضافي عند إغلاق البطاقات'), v: Math.max(0, noCards.maxLoan - r.maxLoan), f: 'aed' },
         ],
         note: l('Stress rate 6.5% · capped at 7× annual income. Banks vary.', 'معدل اختبار 6.5% · بحد أقصى 7 أضعاف الدخل السنوي.'),
