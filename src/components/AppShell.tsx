@@ -8,7 +8,7 @@ export default function AppShell({ title, nav, active, children, sub }: { title:
     <div className="bg-mist">
       <div className="border-b border-line bg-white">
         <div className="wrap flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
-          <p className="flex items-center gap-2 text-slate"><Info size={15} className="text-teal" /> Preview with sample data. Live accounts open at {sub}.</p>
+          <p className="flex items-center gap-2 text-slate"><Info size={15} className="text-teal" /> Product demonstration with fictional data. No live account access or document uploads.</p>
         </div>
       </div>
       <div className="wrap grid gap-8 py-10 lg:grid-cols-[220px_1fr]">

@@ -20,7 +20,7 @@ export const TOOLS: ToolMeta[] = [
     method: ['Exit fee = min(1% × balance, AED 10,000) × 1.05', 'Switch cost = exit fee + 0.25% × balance + AED 290 + new bank fee', 'Net = 36 × EMI saving + balance gap − switch cost'] },
   { slug: 'handover-equity-release', base: 'calculators', name: 'Handover & Cash-Out Calculator', ar: 'حاسبة التسليم وتحرير السيولة',
     title: 'Off-Plan Handover (60/40, 70/30, 80/20) & Cash-Out Calculator',
-    capsule: 'At handover, UAE banks can lend up to 80% of the fresh valuation for resident expats. This calculator shows the developer balance owed under your payment plan, the maximum loan on today’s valuation and the cash you could release—Module 13 example: AED 2.0M bought, AED 2.8M valued, AED 1.84M released.',
+    capsule: 'At handover, UAE banks can lend up to 80% of the fresh valuation for resident expats. This calculator shows the developer balance owed under your payment plan, the maximum loan on today’s valuation and the cash you could release—for example: AED 2.0M bought, AED 2.8M valued, AED 1.84M released.',
     method: ['Owed = purchase × handover %', 'Max loan = valuation × LTV', 'Cash-out = max loan − owed (subject to DBR)'] },
   { slug: 'golden-visa-mortgage-calculator', base: 'calculators', name: 'Golden Visa Mortgage Calculator', ar: 'حاسبة الإقامة الذهبية',
     title: '2026 Golden Visa Mortgage & Family Fee Estimator',

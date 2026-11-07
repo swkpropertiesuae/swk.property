@@ -19,7 +19,7 @@ export const SITE = {
   // TODO: replace with the real desk numbers, licence and e-mail before launch.
   phone: '', // e.g. '+971 4 123 4567'; hidden site-wide while empty
   phoneHref: '',
-  whatsapp: '971500000000',
+  whatsapp: '',
   email: 'hello@betterwaymortgages.com',
   licence: '', // e.g. 'DED licence no. 123456'; hidden while empty
   hours: 'Mon–Sat 09:00–19:00 GST',
@@ -30,7 +30,7 @@ export const SITE = {
 export const fullAddress = `${SITE.address.building}, ${SITE.address.plot}, ${SITE.address.street}, ${SITE.address.district}, ${SITE.address.city}, UAE`;
 
 export const waLink = (text = 'Hi Betterway, I would like a mortgage quote.') =>
-  `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
+  SITE.whatsapp ? `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}` : `mailto:${SITE.email}?subject=Mortgage%20enquiry&body=${encodeURIComponent(text)}`;
 
 /** CBUAE / EIBOR benchmarks, November 2026 (Market Bible, Module 1.2). */
 export const BENCH = {
@@ -76,15 +76,15 @@ export const LTV_RULES = [
 
 export const RULES = [
   { k: 'Maximum Debt Burden Ratio', v: '50% of gross monthly income' },
-  { k: 'Credit card limits counted as debt', v: '5% of total limits (3% at HSBC, ADCB, DIB)' },
+  { k: 'Credit card limits counted as debt', v: 'Lender-specific assessment; calculator defaults to 5%' },
   { k: 'Maximum tenure', v: '25 years' },
-  { k: 'Age at maturity', v: '65 salaried · 70 self-employed & UAE Nationals' },
+  { k: 'Age at maturity', v: 'Set by the lender’s lending and retirement-income policy' },
   { k: 'Early settlement cap', v: '1% of outstanding or AED 10,000, whichever is lower (+5% VAT)' },
   { k: 'Down payment source', v: 'Cannot be funded by a UAE personal loan' },
 ];
 
 export const DISCLOSURE_SHORT =
-  '*Illustrative lowest advertised fixed rate across our 24-bank panel. Subject to bank credit approval and salary transfer.';
+  'Illustrative rates and estimates, not live bank offers. Approval and pricing depend on the lender.';
 
 export const DISCLOSURE_FULL =
-  'Rates shown reflect the lowest advertised introductory fixed tier across our 24-bank panel as of November 2026 and require meeting specific lender criteria (including minimum salary transfer, LTV ratio, and approved employer/property lists). Following the initial fixed period (1 to 5 years), loans revert to the bank’s variable rate (3-Month EIBOR plus a fixed bank margin, subject to a minimum floor rate specified in your Final Offer Letter). Betterway Mortgages is remunerated directly by the lending bank upon successful disbursal—there is no client brokerage fee.';
+  'Rates, EIBOR values and lender criteria shown are illustrative planning data, not a live feed or binding offer. Confirm current rates, eligibility, fees and any broker remuneration in writing before applying. Variable rates depend on the benchmark, bank margin and any floor in your offer. Calculators estimate costs using stated assumptions; insurance, processing fees and property-specific charges may be additional. Pre-approval does not guarantee final approval, valuation or deposit protection.';

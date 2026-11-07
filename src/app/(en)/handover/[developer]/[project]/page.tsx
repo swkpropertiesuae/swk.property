@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: Promise<{ developer: st
         { q: 'What if the valuation comes in below my purchase price?', a: 'The loan is based on the lower of price or valuation for a purchase; our appeal desk and backup bank route help close the gap.' },
       ]} /></div></Section>
       {siblings.length > 0 && <Section title={`More ${d.name} projects`}><LinkGrid links={siblings.map((x) => ({ title: x.name, body: `${x.community} · ${x.window}`, href: `/handover/${x.dev}/${x.slug}` }))} /></Section>}
-      <CtaBand title="Handover notice arrived?" body="Send us your SPA and payment-plan statement; we confirm APL banks and your cash-out within 48 hours." />
+      <CtaBand title="Handover notice arrived?" body="Ask an advisor about project eligibility, your payment plan and the documents needed for a lender review." />
     </>
   );
 }
