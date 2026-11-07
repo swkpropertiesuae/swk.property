@@ -1,14 +1,16 @@
 // Verifies every internal href in out/**/*.html resolves to an exported file. Usage: node scripts/check-links.mjs
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
-const out = path.resolve('out');
+const out = path.resolve('.next/server/app');
+const assets = path.resolve('public');
 const files = [];
 const walk = (d) => readdirSync(d).forEach((f) => { const p = path.join(d, f); statSync(p).isDirectory() ? (f !== '_next' && walk(p)) : p.endsWith('.html') && files.push(p); });
 walk(out);
 const ok = (href) => {
   const p = decodeURIComponent(href.split(/[?#]/)[0]).replace(/\/$/, '') || '/';
   if (p === '/') return true;
-  return [p, `${p}.html`, `${p}/index.html`].some((c) => existsSync(path.join(out, c)) && statSync(path.join(out, c)).isFile());
+  if (existsSync(path.join(assets,p)) && statSync(path.join(assets,p)).isFile()) return true;
+  return [p, `${p}.html`, `${p}/index.html`, `${p}.body`].some((c) => existsSync(path.join(out, c)) && statSync(path.join(out, c)).isFile());
 };
 const bad = new Map();
 for (const f of files) {

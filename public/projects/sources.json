@@ -1,0 +1,38 @@
+{
+  "sourceRepository": "https://github.com/swkpropertiesuae/swkpropertiesuae.com",
+  "sourceCommit": "3f6a349ef806feffbccd3bd7f663f385bcdba682",
+  "images": [
+    {
+      "file": "the-oasis.webp",
+      "upstreamPath": "public/img/hero/slides/05-emaar-the-oasis-desktop.webp",
+      "officialReference": "https://www.emaar.com/en/our-communities/the-oasis",
+      "credit": "Emaar \u00b7 developer architectural render"
+    },
+    {
+      "file": "damac-islands.webp",
+      "upstreamPath": "public/img/projects/damac/damac-islands.webp",
+      "officialReference": "https://www.damacproperties.com",
+      "credit": "DAMAC \u00b7 developer architectural render"
+    },
+    {
+      "file": "sobha-one.webp",
+      "upstreamPath": "public/img/projects/sobha/sobha-one.webp",
+      "officialReference": "https://sobharealty.com/sobha-communities/sobha-one",
+      "credit": "Sobha Realty \u00b7 developer architectural render"
+    }
+  ],
+  "logos": [
+    {
+      "file": "emaar.svg",
+      "upstreamPath": "public/img/developers/emaar.svg"
+    },
+    {
+      "file": "damac.png",
+      "upstreamPath": "public/img/developers/damac.png"
+    },
+    {
+      "file": "sobha.png",
+      "upstreamPath": "public/img/developers/sobha.png"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isoDate, parseEibor } from './eibor.ts';
+const data = { historicalDates:['06 Nov 2026'], historicalValueDates:['10 Nov 2026'], historicalOnRates:[3.66539], historicalOneMonth:[4.1425], historicalThreeMonth:[4.20677], historicalSixMonth:[4.68714], historicalOneYear:[4.80361] };
+const html = (d:unknown) => `<script type="application/json" id="eibor-chart-data">${JSON.stringify(d)}</script>`;
+test('CBUAE payload retains fixing and value dates and six-decimal rates',()=>{ const [r]=parseEibor(html(data));assert.equal(r.date,'2026-11-06');assert.equal(r.valueDate,'2026-11-10');assert.equal(r.threeMonth,4.20677); });
+test('missing upstream payload fails closed',()=>assert.throws(()=>parseEibor('<h1>Unavailable</h1>')));
+test('mismatched series cannot be published',()=>assert.throws(()=>parseEibor(html({...data,historicalSixMonth:[]}))));
+test('non-numeric and out-of-range rates cannot be published',()=>{for(const bad of ['4.2',null,99])assert.throws(()=>parseEibor(html({...data,historicalThreeMonth:[bad]})));});
+test('invalid calendar dates cannot be published',()=>assert.throws(()=>isoDate('31 Feb 2026')));
+test('legacy empty value dates outside the recent window do not invalidate current fixings',()=>{const dates=Array.from({length:70},(_,i)=>{const d=new Date(Date.UTC(2026,7,1+i));return `${String(d.getUTCDate()).padStart(2,'0')} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getUTCMonth()]} ${d.getUTCFullYear()}`;});const d=Object.fromEntries(Object.entries(data).map(([k,v])=>[k,k==='historicalDates'?dates:k==='historicalValueDates'?dates.map((x,i)=>i===0?'':x):Array(70).fill(v[0])]));assert.equal(parseEibor(html(d)).length,65);});

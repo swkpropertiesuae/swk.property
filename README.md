@@ -1,3 +1,5 @@
+> **Startup experience update (7 Nov 2026):** This project now uses the Next.js server runtime for the CBUAE public benchmark endpoint while retaining prerendered marketing pages. See [startup experience and integration status](docs/STARTUP_EXPERIENCE.md). The static-export commands described further below are historical.
+
 > **7 Nov 2026 visual/content refresh:** See [the refresh notes](docs/FINTECH_REFRESH.md) for current behavior, validation and remaining data/integration limits. This supersedes older marketing and live-feature descriptions below.
 
 # Betterway Mortgages — betterwaymortgages.com

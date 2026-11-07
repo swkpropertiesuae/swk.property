@@ -13,6 +13,7 @@ export const metadata: Metadata = { title: 'وسيط تمويل عقاري في 
 export default function Page() {
   return (
     <>
+      <div className="border-b border-line bg-white px-5 py-3 text-center text-xs text-slate">معاينة المحتوى العربي · يرجى تأكيد التفاصيل الحالية مع المستشار</div>
       <ArHero crumbs={[]} eyebrow="التمويل العقاري في دبي والإمارات" title="منزلك. تمويلك. طريق أوضح."
         capsule="قارن خيارات التمويل العقاري، وافهم القسط والتكاليف المقدمة، واستعد لخطوات طلبك من الاستفسار الأول إلى استلام المفاتيح." en="/" />
       <ArSection id="mortgages" title={AR_UI.mortgages}>
