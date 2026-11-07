@@ -5,13 +5,14 @@ import { PageHero, Section, CtaBand, LinkGrid, aed } from '@/components/ui';
 import RateTable from '@/components/RateTable';
 import { COMPARISONS, type Comparison } from '@/data/compare';
 import { BANKS, bankBy, revert, pct, type Bank } from '@/data/banks';
+import { BENCH } from '@/data/site';
 import { fixedThenRevert, borrowingPower, emi, lifeInsurance } from '@/lib/math';
 
 export const dynamicParams = false;
 export const generateStaticParams = () => COMPARISONS.map((c) => ({ slug: c.slug }));
 const find = (s: string) => COMPARISONS.find((c) => c.slug === s);
 
-const cost5 = (b: Bank, loan = 1_500_000) => fixedThenRevert(loan, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, 4.45, b.margin, b.floor, 5).cost;
+const cost5 = (b: Bank, loan = 1_500_000) => fixedThenRevert(loan, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, BENCH.eibor3m, b.margin, b.floor, 5).cost;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const c = find((await params).slug);
@@ -74,7 +75,7 @@ function Topic({ c, crumbs }: { c: Comparison; crumbs: { name: string; href: str
     const loan = 2_000_000;
     const tiers = [['Lowest 2-year', Math.min(...BANKS.map((b) => b.intro))], ['Lowest 3-year', Math.min(...BANKS.map((b) => b.fixed3))], ['Lowest 5-year', Math.min(...BANKS.map((b) => b.fixed5))]] as const;
     return (<>
-      <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`In November 2026 the lowest UAE fixed rates are ${tiers[0][1]}% short-term, ${tiers[1][1]}% for 3 years and ${tiers[2][1]}% for 5 years. Longer fixes cost more today but remove revert risk; with 3M EIBOR at 4.45% and margins of +1.00% to +1.99%, reverting early can cost more than a 5-year fix.`} />
+      <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`In November 2026 the lowest UAE fixed rates are ${tiers[0][1]}% short-term, ${tiers[1][1]}% for 3 years and ${tiers[2][1]}% for 5 years. Longer fixes cost more today but remove revert risk; with 3M EIBOR at ${BENCH.eibor3m.toFixed(2)}% (CBUAE, ${BENCH.eiborDate}) and margins of +1.00% to +1.99%, reverting early can cost more than a 5-year fix.`} />
       <Section title="Monthly payment on AED 2M (25 years)">
         <div className="grid gap-4 md:grid-cols-3">{tiers.map(([k, r]) => <div key={k} className="card"><p className="text-sm text-slate">{k} · {r}%</p><p className="num mt-1 text-2xl font-semibold text-navy">{aed(emi(loan, r, 25))}/mo</p></div>)}</div>
       </Section>

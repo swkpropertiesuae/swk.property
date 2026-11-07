@@ -1,5 +1,6 @@
 // 24-bank rate & revert bible — Market Bible Module 10 (November 2026).
-// Revert = 3M EIBOR (4.45%) + margin. Rates are illustrative lowest advertised tiers.
+// Revert = latest published 3M EIBOR (BENCH.eibor3m) + margin. Fixed rates are illustrative lowest advertised tiers.
+import { BENCH } from './site';
 
 export type Bank = {
   slug: string; // /rates/[slug]
@@ -48,7 +49,7 @@ export const BANKS: Bank[] = [
   b('hsbc-uae-mortgage', 'hsbc', 'HSBC UAE', 'HSBC', 'إتش إس بي سي الإمارات', 'Conventional', 3.99, '2Y', 4.05, 4.19, 1.24, 1.99, '0.525–1%', '0%', 25, 60, 'Dubai',
     'Lowest floor (1.99%) and one of the thinnest revert margins (+1.24%), 25% free overpayment, and only 3% of card limits counted toward DBR.', { cc3: true, ext: true }),
   b('dubai-islamic-bank-dib-mortgage', 'dib', 'Dubai Islamic Bank', 'DIB', 'بنك دبي الإسلامي', 'Islamic', 3.99, '1Y', 4.1, 4.35, 1.0, 2.24, '0%', '0%', 10, 60, 'Dubai',
-    'The lowest revert margin in the UAE (+1.00%, 5.45% effective) with zero purchase fee; on most Dubai developer APLs.', { cc3: true }),
+    'The lowest revert margin on the panel (+1.00% over 3M EIBOR) with zero purchase fee; on most Dubai developer APLs.', { cc3: true }),
   b('adcb-mortgage', 'adcb', 'ADCB', 'ADCB', 'بنك أبوظبي التجاري', 'Conventional', 3.99, '2Y', 4.09, 4.29, 1.49, 2.49, '1.05%', '0%', 20, 60, 'Abu Dhabi',
     'Counts 3% of card limits for DBR and allows 20% free overpayment; strong in Abu Dhabi and for external life insurance assignment.', { cc3: true, ext: true }),
   b('standard-chartered-uae-mortgage', 'standard-chartered', 'Standard Chartered UAE', 'SC', 'ستاندرد تشارترد الإمارات', 'Conventional', 4.05, '2Y', 4.15, 4.35, 1.35, 2.0, '0.525%', '0%', 10, 60, 'Dubai',
@@ -86,5 +87,5 @@ export const BANKS: Bank[] = [
 ];
 
 export const bankBy = (key: string) => BANKS.find((x) => x.key === key || x.slug === key);
-export const revert = (bk: Bank, eibor = 4.45) => +(eibor + bk.margin).toFixed(2);
+export const revert = (bk: Bank, eibor = BENCH.eibor3m) => +(eibor + bk.margin).toFixed(2);
 export const pct = (n: number) => `${n.toFixed(2)}%`;

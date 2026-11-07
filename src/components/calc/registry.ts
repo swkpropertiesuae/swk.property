@@ -1,6 +1,7 @@
 // Declarative calculator definitions: inputs + pure compute. One renderer (Calculator.tsx) draws all of them in EN or AR.
 import * as M from '@/lib/math';
 import { BANKS } from '@/data/banks';
+import { BENCH } from '@/data/site';
 
 export type L = { en: string; ar: string };
 export type Input = { k: string; label: L; def: number; min: number; max: number; step: number; unit: 'AED' | '%' | 'yrs' | '' ; options?: { v: number; label: L }[] };
@@ -61,7 +62,7 @@ export const CALCS: Record<string, CalcDef> = {
     },
   },
   'fixed-to-revert-analyzer': {
-    inputs: [{ k: 'loan', label: l('Loan amount', 'مبلغ التمويل'), def: 1_500_000, min: 300_000, max: 20_000_000, step: 50_000, unit: 'AED' }, years(), { k: 'eibor', label: l('3M EIBOR assumption', '3 أشهر إيبور'), def: 4.45, min: 2, max: 7, step: 0.05, unit: '%' }],
+    inputs: [{ k: 'loan', label: l('Loan amount', 'مبلغ التمويل'), def: 1_500_000, min: 300_000, max: 20_000_000, step: 50_000, unit: 'AED' }, years(), { k: 'eibor', label: l('3M EIBOR assumption', '3 أشهر إيبور'), def: +BENCH.eibor3m.toFixed(2), min: 2, max: 7, step: 0.05, unit: '%' }],
     compute: (v) => {
       const res = BANKS.map((b) => {
         const fy = b.introTerm === '1Y' ? 1 : 2;

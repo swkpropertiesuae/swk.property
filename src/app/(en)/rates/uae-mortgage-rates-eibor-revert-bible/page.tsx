@@ -5,16 +5,17 @@ import RateTable from '@/components/RateTable';
 import Calculator from '@/components/calc/Calculator';
 import { CostBars, RatePath } from '@/components/Charts';
 import { BANKS } from '@/data/banks';
+import { BENCH } from '@/data/site';
 import { fixedThenRevert } from '@/lib/math';
 
 export const metadata: Metadata = { title: '2026 UAE 24-Bank Mortgage Rate, EIBOR Revert & Floor Rate Bible', description: 'Every UAE bank’s fixed rates, 3M EIBOR revert margin, minimum floor, fees, overpayment and non-resident LTV—November 2026.', alternates: { canonical: '/rates/uae-mortgage-rates-eibor-revert-bible' } };
 
 export default function Page() {
-  const ranked = BANKS.map((b) => ({ b, r: fixedThenRevert(1_500_000, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, 4.45, b.margin, b.floor, 5) })).sort((a, c) => a.r.cost - c.r.cost);
+  const ranked = BANKS.map((b) => ({ b, r: fixedThenRevert(1_500_000, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, BENCH.eibor3m, b.margin, b.floor, 5) })).sort((a, c) => a.r.cost - c.r.cost);
   return (
     <>
       <PageHero crumbs={[{ name: 'Rates', href: '/rates' }, { name: 'Rate & revert bible', href: '/rates/uae-mortgage-rates-eibor-revert-bible' }]} eyebrow="UAE mortgage rates" title="UAE mortgage rates: 24-bank comparison, EIBOR revert & floor rates"
-        capsule="As of November 2026, UAE fixed mortgage rates start at 3.75% (1-year Islamic profit rate at Sharjah Islamic Bank) and 3.89% (2-year conventional fixed at Emirates NBD and United Arab Bank), while 3-year fixed rates range between 3.95% and 4.39%. After the fixed term, loans revert to 3-Month EIBOR (~4.45%) plus 1.00% to 1.99%, subject to a minimum floor rate.">
+        capsule={`As of November 2026, UAE fixed mortgage rates start at 3.75% (1-year Islamic profit rate at Sharjah Islamic Bank) and 3.89% (2-year conventional fixed at Emirates NBD and United Arab Bank), while 3-year fixed rates range between 3.95% and 4.39%. After the fixed term, loans revert to 3-Month EIBOR (${BENCH.eibor3m.toFixed(2)}%, CBUAE fixing ${BENCH.eiborDate}) plus 1.00% to 1.99%, subject to a minimum floor rate.`}>
         <Disclosure />
       </PageHero>
       <Section title="All 24 banks"><RateTable /></Section>

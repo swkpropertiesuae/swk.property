@@ -3,13 +3,14 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { BANKS } from '@/data/banks';
 import { fixedThenRevert } from '@/lib/math';
+import { BENCH } from '@/data/site';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const aedK = (n: number) => `AED ${Math.round(n / 1000).toLocaleString('en-US')}k`;
 
 /** 5-year interest on AED 1.5M / 25y for every bank, ranked. */
 export function costRanking(loan = 1_500_000) {
-  return BANKS.map((b) => ({ b, cost: fixedThenRevert(loan, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, 4.45, b.margin, b.floor, 5).cost })).sort((x, y) => x.cost - y.cost);
+  return BANKS.map((b) => ({ b, cost: fixedThenRevert(loan, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, BENCH.eibor3m, b.margin, b.floor, 5).cost })).sort((x, y) => x.cost - y.cost);
 }
 
 export function CostBars({ limit = 10, compact = false }: { limit?: number; compact?: boolean }) {
@@ -31,7 +32,7 @@ export function CostBars({ limit = 10, compact = false }: { limit?: number; comp
           </li>
         ))}
       </ul>
-      {!compact && <figcaption className="mt-4 text-xs text-slate">Interest paid in 5 years on AED 1.5M over 25 years: intro fixed rate, then 3M EIBOR 4.45% + bank margin (floored). Lower is better.</figcaption>}
+      {!compact && <figcaption className="mt-4 text-xs text-slate">Interest paid in 5 years on AED 1.5M over 25 years: intro fixed rate, then 3M EIBOR {BENCH.eibor3m.toFixed(2)}% (CBUAE, {BENCH.eiborDate}) + bank margin (floored). Lower is better.</figcaption>}
     </figure>
   );
 }
@@ -42,7 +43,7 @@ export function RatePath() {
   const a = BANKS.find((b) => b.key === 'sib')!, b = BANKS.find((x) => x.key === 'dib')!;
   const W = 520, H = 200, X = (yr: number) => 40 + (yr / 5) * (W - 60), Y = (r: number) => 20 + ((6.4 - r) / (6.4 - 3.4)) * (H - 50);
   const path = (intro: number, years: number, rev: number) => `M${X(0)},${Y(intro)} L${X(years)},${Y(intro)} L${X(years)},${Y(rev)} L${X(5)},${Y(rev)}`;
-  const ra = Math.max(4.45 + a.margin, a.floor), rb = Math.max(4.45 + b.margin, b.floor);
+  const ra = Math.max(BENCH.eibor3m + a.margin, a.floor), rb = Math.max(BENCH.eibor3m + b.margin, b.floor);
   const draw = (d: number) => (reduce ? {} : { initial: { pathLength: 0 }, whileInView: { pathLength: 1 }, viewport: { once: true }, transition: { duration: 1.6, delay: d, ease } });
   return (
     <figure>
@@ -72,7 +73,7 @@ export function OfferDashboard() {
       <div className="flex min-w-0 flex-1 flex-col gap-2 p-3">
         <div className="flex items-center justify-between"><b className="text-[12px] text-navy sm:text-[13px]">Example offer comparison</b><span className="rounded-full bg-teal-50 px-2 py-0.5 text-teal">24 banks</span></div>
         <div className="grid grid-cols-3 gap-1.5">
-          {[['Best 5-yr cost', top.b.short], ['3M EIBOR', '4.45%'], ['Lowest floor', '1.99%']].map(([k, v]) => <div key={k} className="rounded bg-mist p-1.5"><div className="text-slate">{k}</div><div className="num font-semibold text-navy">{v}</div></div>)}
+          {[['Best 5-yr cost', top.b.short], ['3M EIBOR', `${BENCH.eibor3m.toFixed(2)}%`], ['Lowest floor', '1.99%']].map(([k, v]) => <div key={k} className="rounded bg-mist p-1.5"><div className="text-slate">{k}</div><div className="num font-semibold text-navy">{v}</div></div>)}
         </div>
         <div className="min-h-0 flex-1 rounded border border-line p-2"><CostBars limit={7} compact /></div>
       </div>

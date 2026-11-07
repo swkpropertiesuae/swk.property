@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BANKS, revert, pct, type Bank } from '@/data/banks';
+import { BENCH } from '@/data/site';
 
 /** Full 24-bank table, server-rendered (no 0% hydration state). */
 export default function RateTable({ banks = BANKS, limit }: { banks?: Bank[]; limit?: number }) {
@@ -11,7 +12,7 @@ export default function RateTable({ banks = BANKS, limit }: { banks?: Bank[]; li
         <thead>
           <tr>
             <th scope="col">Bank</th><th scope="col">Type</th><th scope="col">Intro fixed</th><th scope="col">3Y</th><th scope="col">5Y</th>
-            <th scope="col">Revert margin</th><th scope="col">Revert @4.45%</th><th scope="col">Floor</th><th scope="col">Free overpay</th><th scope="col">Non-res LTV</th>
+            <th scope="col">Revert margin</th><th scope="col">Revert @{BENCH.eibor3m.toFixed(2)}%</th><th scope="col">Floor</th><th scope="col">Free overpay</th><th scope="col">Non-res LTV</th>
           </tr>
         </thead>
         <tbody className="num">

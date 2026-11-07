@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { PageHero, Section, Facts, FaqList, CtaBand, LinkGrid, aed } from '@/components/ui';
 import Calculator from '@/components/calc/Calculator';
 import { BANKS, revert, pct } from '@/data/banks';
+import { BENCH } from '@/data/site';
 import { COMPARISONS } from '@/data/compare';
 import { fixedThenRevert, emi } from '@/lib/math';
 
@@ -20,11 +21,11 @@ export default async function Page({ params }: { params: Promise<{ bank: string 
   const b = find((await params).bank);
   if (!b) notFound();
   const fy = b.introTerm === '1Y' ? 1 : 2;
-  const r = fixedThenRevert(1_500_000, 25, b.intro, fy, 4.45, b.margin, b.floor, 5);
-  const rank = BANKS.map((x) => fixedThenRevert(1_500_000, 25, x.intro, x.introTerm === '1Y' ? 1 : 2, 4.45, x.margin, x.floor, 5).cost).sort((a, c) => a - c).indexOf(r.cost) + 1;
+  const r = fixedThenRevert(1_500_000, 25, b.intro, fy, BENCH.eibor3m, b.margin, b.floor, 5);
+  const rank = BANKS.map((x) => fixedThenRevert(1_500_000, 25, x.intro, x.introTerm === '1Y' ? 1 : 2, BENCH.eibor3m, x.margin, x.floor, 5).cost).sort((a, c) => a - c).indexOf(r.cost) + 1;
   const comps = COMPARISONS.filter((c) => c.a === b.key || c.b === b.key);
   const peers = BANKS.filter((x) => x.type === b.type && x.slug !== b.slug).slice(0, 4);
-  const lifeDiff = emi(2_000_000, revert(b), 20) - emi(2_000_000, 4.45 + 1.0, 20);
+  const lifeDiff = emi(2_000_000, revert(b), 20) - emi(2_000_000, BENCH.eibor3m + 1.0, 20);
   return (
     <>
       <PageHero crumbs={[{ name: 'Rates', href: '/rates' }, { name: b.name, href: `/rates/${b.slug}` }]} eyebrow={`${b.type} · ${b.hq}`} title={`${b.name} mortgage rates & credit policy (November 2026)`}

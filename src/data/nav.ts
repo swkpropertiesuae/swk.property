@@ -1,36 +1,56 @@
 import { BANKS } from './banks';
-import { DEVELOPERS } from './handover';
 
 export type NavLink = { label: string; href: string; desc?: string };
 export type NavCol = { title: string; links: NavLink[] };
 export type NavItem = { label: string; href: string; cols?: NavCol[]; feature?: { title: string; body: string; href: string; cta: string } };
 
+// Top-level IA follows the UAE mortgage-broker convention (Buy · Refinance · Rates · Calculators · Commercial · Resources).
 export const NAV: NavItem[] = [
   {
-    label: 'Mortgages', href: '/mortgages',
+    label: 'Buy', href: '/mortgages',
     cols: [
-      { title: 'Buy a home', links: [
+      { title: 'Living in the UAE', links: [
         { label: 'Expat residents', href: '/mortgages/uae-residents', desc: 'Up to 80% LTV' },
         { label: 'UAE Nationals', href: '/mortgages/uae-nationals', desc: 'Up to 85% LTV' },
         { label: 'GCC Nationals', href: '/mortgages/gcc-nationals' },
         { label: 'Self-employed', href: '/mortgages/self-employed' },
         { label: 'Islamic home finance', href: '/mortgages/islamic-home-finance' },
       ] },
-      { title: 'Invest & grow', links: [
+      { title: 'Investing from abroad', links: [
         { label: 'Non-resident buyers', href: '/mortgages/non-resident-dubai', desc: 'Up to 65% LTV' },
         { label: 'Golden Visa mortgages', href: '/mortgages/golden-visa-mortgage' },
         { label: 'Second home & investment', href: '/mortgages/second-home-investment' },
-        { label: 'HNW mega loans', href: '/mortgages/mega-loans-luxury-villas' },
-        { label: 'Portfolio consolidation', href: '/mortgages/portfolio-consolidation' },
+        { label: 'High-value homes', href: '/mortgages/mega-loans-luxury-villas' },
       ] },
-      { title: 'Switch, release, build', links: [
-        { label: 'Switch bank (buyout)', href: '/mortgages/mortgage-buyout-refinance' },
-        { label: 'Equity release', href: '/mortgages/equity-release' },
+      { title: 'Off-plan & new builds', links: [
         { label: 'Off-plan & handover', href: '/mortgages/under-construction-off-plan' },
+        { label: 'Handover guide', href: '/handover/dubai-off-plan-handover-mortgage-guide' },
+        { label: 'Handover projects', href: '/handover' },
         { label: 'Plot & construction', href: '/mortgages/land-plot-construction' },
       ] },
     ],
-    feature: { title: 'Prepare for pre-approval', body: 'Understand your budget and the documents your lender needs.', href: '/contact', cta: 'Start pre-approval' },
+    feature: { title: 'Know your budget first', body: 'See your borrowing power and upfront costs before you view a property.', href: '/calculators/dbr-borrowing-power', cta: 'Check eligibility' },
+  },
+  {
+    label: 'Refinance', href: '/mortgages/mortgage-buyout-refinance',
+    cols: [
+      { title: 'Switch your mortgage', links: [
+        { label: 'Switch bank (buyout)', href: '/mortgages/mortgage-buyout-refinance' },
+        { label: 'Refinance savings calculator', href: '/calculators/buyout-refinance-savings' },
+        { label: 'Fixed vs revert analyser', href: '/calculators/fixed-to-revert-analyzer' },
+      ] },
+      { title: 'Release value', links: [
+        { label: 'Equity release & cash-out', href: '/mortgages/equity-release' },
+        { label: 'Portfolio consolidation', href: '/mortgages/portfolio-consolidation' },
+        { label: 'Handover & cash-out calculator', href: '/calculators/handover-equity-release' },
+      ] },
+      { title: 'Plan ahead', links: [
+        { label: '3-year clawback explained', href: '/guides/3-year-clawback-clause-on-uae-mortgage-buyouts' },
+        { label: 'Overpayment calculator', href: '/calculators/overpayment-early-settlement' },
+        { label: 'EIBOR tracker', href: '/rates/eibor-live-tracker' },
+      ] },
+    ],
+    feature: { title: 'Is your fixed rate ending?', body: 'Compare your revert rate with switching costs before it resets.', href: '/calculators/buyout-refinance-savings', cta: 'Calculate savings' },
   },
   {
     label: 'Rates', href: '/rates',
@@ -53,20 +73,20 @@ export const NAV: NavItem[] = [
   {
     label: 'Calculators', href: '/calculators',
     cols: [
-      { title: 'Buy', links: [
-        { label: 'Mortgage & upfront costs', href: '/calculators/mortgage-calculator' },
-        { label: 'DBR & borrowing power', href: '/calculators/dbr-borrowing-power' },
+      { title: 'Most used', links: [
+        { label: 'Mortgage calculator', href: '/calculators/mortgage-calculator' },
+        { label: 'Eligibility (DBR) calculator', href: '/calculators/dbr-borrowing-power' },
+        { label: 'Refinance calculator', href: '/calculators/buyout-refinance-savings' },
         { label: 'Rent vs buy', href: '/calculators/rent-vs-buy-dubai' },
-        { label: 'Golden Visa estimator', href: '/calculators/golden-visa-mortgage-calculator' },
       ] },
-      { title: 'Own & optimise', links: [
+      { title: 'Plan & compare', links: [
         { label: 'Fixed vs revert analyser', href: '/calculators/fixed-to-revert-analyzer' },
-        { label: 'Buyout net savings', href: '/calculators/buyout-refinance-savings' },
         { label: 'Overpayment', href: '/calculators/overpayment-early-settlement' },
         { label: 'Handover & cash-out', href: '/calculators/handover-equity-release' },
+        { label: 'Golden Visa estimator', href: '/calculators/golden-visa-mortgage-calculator' },
         { label: 'Non-resident rental coverage', href: '/calculators/non-resident-rental-coverage' },
       ] },
-      { title: 'Legal micro-tools', links: [
+      { title: 'Buying tools', links: [
         { label: 'Form F clause generator', href: '/tools/form-f-clause-generator' },
         { label: 'Life insurance auditor', href: '/tools/life-insurance-assignment-audit' },
         { label: 'Transfer-day cheque splitter', href: '/tools/transfer-day-cheque-calculator' },
@@ -74,61 +94,44 @@ export const NAV: NavItem[] = [
     ],
   },
   {
-    label: 'Off-plan', href: '/handover/dubai-off-plan-handover-mortgage-guide',
+    label: 'Commercial Finance', href: '/advisory/commercial-property-finance',
     cols: [
-      { title: 'Handover', links: [
-        { label: 'Off-plan handover guide', href: '/handover/dubai-off-plan-handover-mortgage-guide' },
-        { label: 'Handover & cash-out calculator', href: '/calculators/handover-equity-release' },
-        { label: 'Explore handover projects', href: '/handover' },
+      { title: 'Business property', links: [
+        { label: 'Commercial property finance', href: '/advisory/commercial-property-finance' },
+        { label: 'SME & corporate lending', href: '/advisory/sme-and-corporate-lending' },
+        { label: 'Portfolio consolidation', href: '/mortgages/portfolio-consolidation' },
       ] },
-      { title: 'Developer guides', links: DEVELOPERS.filter((d) => d.hub).slice(0, 7).map((d) => ({ label: d.name, href: `/handover/${d.slug}` })) },
-      { title: ' ', links: DEVELOPERS.filter((d) => d.hub).slice(7).map((d) => ({ label: d.name, href: `/handover/${d.slug}` })) },
-    ],
-  },
-  {
-    label: 'Areas', href: '/areas',
-    cols: [
-      { title: 'Dubai', links: [
-        { label: 'Dubai Marina', href: '/areas/dubai/dubai-marina' },
-        { label: 'Downtown Dubai', href: '/areas/dubai/downtown-dubai' },
-        { label: 'Dubai Hills Estate', href: '/areas/dubai/dubai-hills-estate' },
-        { label: 'Palm Jumeirah', href: '/areas/dubai/palm-jumeirah' },
-        { label: 'All 45 Dubai areas', href: '/areas/dubai' },
+      { title: 'Around the transaction', links: [
+        { label: 'Conveyancing', href: '/advisory/rera-conveyancing-services' },
+        { label: 'Valuation appeal desk', href: '/advisory/property-valuation-appeal-desk' },
+        { label: 'Wholesale FX', href: '/advisory/wholesale-fx-currency-exchange' },
       ] },
-      { title: 'Abu Dhabi & North', links: [
-        { label: 'Yas Island', href: '/areas/abu-dhabi/yas-island' },
-        { label: 'Saadiyat Island', href: '/areas/abu-dhabi/saadiyat-island' },
-        { label: 'All Abu Dhabi areas', href: '/areas/abu-dhabi' },
-        { label: 'RAK & Sharjah', href: '/areas/northern' },
-      ] },
-      { title: 'By budget', links: [
-        { label: 'AED 20,000 salary', href: '/affordability/20000-aed-salary-mortgage-dubai' },
-        { label: 'AED 30,000 salary', href: '/affordability/30000-aed-salary-mortgage-dubai' },
-        { label: 'AED 2M Golden Visa home', href: '/affordability/2-million-aed-golden-visa-property-mortgage' },
-        { label: 'All budgets', href: '/affordability' },
+      { title: 'Protect what you own', links: [
+        { label: 'External life insurance', href: '/advisory/external-mortgage-life-insurance' },
+        { label: 'DIFC wills', href: '/advisory/difc-wills-and-estate-planning' },
+        { label: 'All advisory services', href: '/advisory' },
       ] },
     ],
   },
   {
     label: 'Resources', href: '/guides',
     cols: [
-      { title: 'Buying guides', links: [
+      { title: 'Learn', links: [
+        { label: 'How it works', href: '/#how-it-works' },
+        { label: 'Buying guides', href: '/guides' },
         { label: 'Form F protection clauses', href: '/guides/dubai-form-f-mortgage-valuation-protection-clause' },
-        { label: 'Credit cards & DBR', href: '/guides/how-credit-card-limits-reduce-uae-mortgage-dbr' },
         { label: 'Transfer-day checklist', href: '/guides/complete-dld-trustee-transfer-day-checklist' },
-        { label: 'All guides', href: '/guides' },
       ] },
-      { title: 'Property advisory', links: [
-        { label: 'Commercial property finance', href: '/advisory/commercial-property-finance' },
-        { label: 'DIFC wills', href: '/advisory/difc-wills-and-estate-planning' },
-        { label: 'External life insurance', href: '/advisory/external-mortgage-life-insurance' },
-        { label: 'All advisory services', href: '/advisory' },
+      { title: 'Explore', links: [
+        { label: 'Areas & communities', href: '/areas' },
+        { label: 'Affordability by salary', href: '/affordability' },
+        { label: 'Developer guides', href: '/handover' },
       ] },
       { title: 'Company', links: [
         { label: 'About Betterway', href: '/about-us' },
-        { label: 'Betterway vs going direct', href: '/why-betterway-vs-direct-bank' },
-        { label: 'Our underwriters', href: '/our-underwriters' },
-        { label: 'Client reviews', href: '/reviews' },
+        { label: 'Broker or bank?', href: '/why-betterway-vs-direct-bank' },
+        { label: 'Our team', href: '/our-underwriters' },
+        { label: 'Contact', href: '/contact' },
       ] },
     ],
   },
