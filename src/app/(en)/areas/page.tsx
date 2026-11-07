@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <>
       <PageHero crumbs={[{ name: 'Areas', href: '/areas' }]} eyebrow="Areas" title="60 freehold communities, priced for a mortgage"
-        capsule={`Dubai recorded AED ${BENCH.dldYtdAedBn}B across ${BENCH.dldYtdSales.toLocaleString('en-US')} sales year to date in 2026 at a median AED ${BENCH.medianPsf.toLocaleString('en-US')} per sq.ft. Our community hubs show indicative price per sq.ft., gross yield and whether rent covers the EMI for residents and investors.`} />
+        capsule={`So far in 2026, Dubai has registered ${BENCH.dldYtdSales.toLocaleString('en-US')} sales worth AED ${BENCH.dldYtdAedBn}B, at a median of AED ${BENCH.medianPsf.toLocaleString('en-US')} per sq.ft. Each area page gives a guide price, gross yield and how far rent goes towards the repayment for owner-occupiers and investors.`} />
       {(Object.keys(EMIRATES) as Emirate[]).map((k, i) => (
         <Section key={k} tone={i % 2 ? 'mist' : 'white'} title={EMIRATES[k].name} action={{ label: `All ${EMIRATES[k].name}`, href: `/areas/${k}` }}>
           <LinkGrid cols={4} links={COMMUNITIES.filter((c) => c.emirate === k).map((c) => ({ title: c.name, body: `AED ${c.psf.toLocaleString('en-US')}/sq.ft. · ${c.yieldPct}% yield`, href: `/areas/${k}/${c.slug}` }))} />

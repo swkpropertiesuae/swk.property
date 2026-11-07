@@ -2,20 +2,20 @@ import type { Metadata } from 'next';
 import { PageHero, Section } from '@/components/ui';
 import { SITE } from '@/data/site';
 
-export const metadata: Metadata = { title: 'Careers at Betterway Mortgages', description: 'Register your interest in mortgage advisory and progression opportunities at Betterway in Dubai.', alternates: { canonical: '/careers' } };
+export const metadata: Metadata = { title: 'Careers at Betterway Mortgages', description: 'Tell us you are interested in mortgage advice and progression roles at Betterway in Dubai.', alternates: { canonical: '/careers' } };
 
 const ROLES = [
-  ['Senior Mortgage Underwriter', 'Resident & first-home desk', 'Own files end to end across 24 banks; 3+ years UAE bank or brokerage underwriting.'],
-  ['Non-Resident Mortgage Specialist', 'Non-resident desk', 'Structure overseas income files; experience with UK, Indian or European tax documents.'],
-  ['RERA Progression Manager', 'Conveyancing', 'Run Form F to title deed: NOCs, liability letters, cheques and trustee appointments.'],
-  ['Partner Success Manager', 'Partner Hub', 'Onboard and support RERA-registered agents on the mortgage referral process.'],
+  ['Senior Mortgage Underwriter', 'Resident & first-home desk', 'Manage cases from start to finish across 24 lenders. At least three years of UAE bank or brokerage underwriting.'],
+  ['Non-Resident Mortgage Specialist', 'Non-resident desk', 'Build cases on foreign income. Familiarity with UK, Indian or European tax paperwork.'],
+  ['RERA Progression Manager', 'Conveyancing', 'Take files from Form F to title deed: NOCs, payoff letters, cheques and trustee bookings.'],
+  ['Partner Success Manager', 'Partner Hub', 'Bring estate agents on board and look after them through the referral process.'],
 ];
 
 export default function Page() {
   return (
     <>
       <PageHero crumbs={[{ name: 'Careers', href: '/careers' }]} eyebrow="Careers" title="Build a career in mortgage advice."
-        capsule="Interested in mortgage advisory, application support or property progression? Send an expression of interest to our team. We will confirm whether a suitable role is currently available." updated={false} />
+        capsule="Thinking about a career in mortgage advice, application support or file progression? Send us a short note about yourself, and we will let you know if a suitable opening exists." updated={false} />
       <Section title="Areas of interest">
         <div className="divide-y divide-line rounded-card border border-line">
           {ROLES.map(([t, d, b]) => (

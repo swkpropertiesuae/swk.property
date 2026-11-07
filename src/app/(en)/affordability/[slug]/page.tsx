@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     return (
       <>
         <PageHero crumbs={crumbs} eyebrow="Affordability by salary" title={a.title}
-          capsule={`On a AED ${s.toLocaleString('en-US')} monthly salary with no other debts, the CBUAE ${REG.dbrMax}% DBR rule allows up to AED ${(s / 2).toLocaleString('en-US')} a month in total repayments. Stress-tested at 6.5% over 25 years, that supports a loan of about ${aed(clean.maxLoan)}—a property near ${aed(maxPrice)} with ${100 - (maxPrice <= REG.valueThreshold ? REG.ltv.expat.first : REG.ltv.expat.firstAbove)}% down. Car loans and card limits reduce it.`} />
+          capsule={`Earning AED ${s.toLocaleString('en-US')} a month with no other borrowing, you can spend up to AED ${(s / 2).toLocaleString('en-US')} a month on all debt repayments, because the central bank caps the total at ${REG.dbrMax}% of income. Tested at a 6.5% stress rate over 25 years, that points to a loan of roughly ${aed(clean.maxLoan)}. That buys a home of about ${aed(maxPrice)} if you put down ${100 - (maxPrice <= REG.valueThreshold ? REG.ltv.expat.first : REG.ltv.expat.firstAbove)}%. A car loan or credit card limits would bring the figure down.`} />
         <Section title="Your numbers">
           <Facts facts={[['50% DBR capacity', `${aed(s / 2)}/mo`], ['Max loan, no debts', aed(clean.maxLoan)], [`Max property (expat first home, ${maxLtv('expat', maxPrice)}% LTV)`, aed(maxPrice)], ['With a car loan & cards*', aed(typical.maxLoan)], ['EMI on max loan @3.99%', `${aed(emi(clean.maxLoan, 3.99, 25))}/mo`], ['Cash to close', aed(cashToClose({ price: maxPrice, downPct: 20 }).total)]]} />
           <p className="mt-3 text-xs text-slate">*Assumes existing EMIs of 10% of salary and card limits of 2× salary.</p>
@@ -41,8 +41,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <Section tone="mist" title="Adjust for your debts and cards"><div className="rounded-card border border-line bg-white p-5 sm:p-8"><Calculator slug="dbr-borrowing-power" initial={{ salary: Math.min(300_000, s) }} /></div></Section>
         {fits.length > 0 && <Section title="Communities within reach"><LinkGrid cols={4} links={fits.map((c) => ({ title: c.name, body: `Typical AED ${c.typical}M · ${c.yieldPct}% yield`, href: `/areas/${c.emirate}/${c.slug}` }))} /></Section>}
         <Section tone="mist" title="FAQ"><div className="max-w-3xl"><FaqList faqs={[
-          { q: `Is AED ${s.toLocaleString('en-US')} enough for a mortgage in Dubai?`, a: s >= 15000 ? 'Yes. Most banks require at least AED 10,000–15,000 a month; higher salaries unlock more lenders and better pricing.' : 'Some banks accept AED 10,000, but options are limited.' },
-          { q: 'How can I borrow more?', a: `Close unused credit cards, clear small loans, add a co-borrower, choose a 3% card-policy bank, or extend the term (up to ${REG.tenorMax} years; each bank sets its age limit).` },
+          { q: `Is AED ${s.toLocaleString('en-US')} enough for a mortgage in Dubai?`, a: s >= 15000 ? 'Yes. Many lenders set a floor of around AED 10,000 to 15,000 a month, and a higher salary widens the choice of banks and rates.' : 'Some banks accept AED 10,000, but options are limited.' },
+          { q: 'How can I borrow more?', a: `Cancel cards you do not use, pay off small loans, apply with a partner, pick a lender that counts 3% of card limits, or take a longer term (as long as ${REG.tenorMax} years, within your bank’s age limit).` },
         ]} /></div></Section>
         <Section title="Other salary levels"><LinkGrid cols={4} links={others} /></Section>
         <CtaBand />
@@ -59,7 +59,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <PageHero crumbs={crumbs} eyebrow="Affordability by price" title={a.title}
-        capsule={`Buying a AED ${p.toLocaleString('en-US')} home in Dubai as an expat resident needs ${100 - ltv}% down (${aed(c.down)}) because CBUAE caps LTV at ${ltv}%${p > 5_000_000 ? ' above AED 5M' : ''}. With 4% DLD, registration, trustee, valuation and agency fees, total cash to close is about ${aed(c.total)}, and the payment at 3.99% over 25 years is ${aed(e)} a month.`} />
+        capsule={`An expatriate resident buying at AED ${p.toLocaleString('en-US')} must fund at least ${100 - ltv}% (${aed(c.down)}) themselves, since the loan can be no more than ${ltv}% of value${p > 5_000_000 ? ' above AED 5M' : ''}. Once the DLD fee, registration, trustee, valuation and agency costs are added, expect to need around ${aed(c.total)} in total. At 3.99% over 25 years the repayment comes to ${aed(e)} a month.`} />
       <Section title="Cash to close, itemised">
         <div className="overflow-hidden rounded-card border border-line">
           <table className="table-bw"><tbody className="num">

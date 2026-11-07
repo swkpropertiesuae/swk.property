@@ -49,7 +49,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div className="rounded-card border border-line p-5 sm:p-8"><Calculator slug={p.calc} /></div>
       </Section>
       {slug === 'non-resident-dubai' && (
-        <Section tone="mist" title="Non-resident guides by country" intro="Documents, credit bureau and FX haircut for 25 buyer nationalities.">
+        <Section tone="mist" title="Non-resident guides by country" intro="Documents, credit bureaux and currency discounts for 25 nationalities.">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {COUNTRIES.map((x) => <Link key={x.slug} href={`/mortgages/${NR}${x.slug}`} className="card !p-4"><span className="font-semibold text-navy">{x.name}</span><span className="num mt-1 block text-sm text-slate">{x.ltv} LTV · {x.fx}</span></Link>)}
           </div>
@@ -59,7 +59,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <Section title="Frequently asked"><div className="max-w-3xl"><FaqList faqs={p.faqs} /></div></Section>
       <Section tone="mist" title="Related mortgages"><LinkGrid links={related.map((r) => ({ title: r.name, body: r.card, href: `/mortgages/${r.slug}`, tag: r.badge }))} /></Section>
       <CtaBand />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FinancialProduct', name: p.name, description: p.capsule, provider: { '@id': `${SITE.url}/#org` }, feesAndCommissionsSpecification: 'Confirm broker and bank fees in writing; lender terms apply.', url: `${SITE.url}/mortgages/${p.slug}` }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FinancialProduct', name: p.name, description: p.capsule, provider: { '@id': `${SITE.url}/#org` }, feesAndCommissionsSpecification: 'Get every broker and bank fee in writing. The lender’s terms apply.', url: `${SITE.url}/mortgages/${p.slug}` }} />
     </>
   );
 }
@@ -70,7 +70,7 @@ function CountryPage({ slug, c }: { slug: string; c: (typeof COUNTRIES)[number] 
     <>
       <PageHero crumbs={[{ name: 'Mortgages', href: '/mortgages' }, { name: 'Non-resident', href: '/mortgages/non-resident-dubai' }, { name: c.name, href: `/mortgages/${slug}` }]}
         eyebrow={`Non-resident · ${c.name}`} title={`Dubai mortgages for ${c.demonym} non-residents: ${c.ltv} LTV, documents & credit bureau`}
-        capsule={`${c.demonym} buyers living in ${c.name} can finance UAE property at up to ${c.ltv} LTV. Banks convert income at a ${c.fx.split('·')[1]?.trim() ?? ''} FX haircut, verify salary with ${c.salaried.toLowerCase()} and check credit through ${c.bureau}. Most-active lenders: ${c.banks}. Closing can be fully remote by video PoA.`}>
+        capsule={`For buyers based in ${c.name}, UAE lenders will typically finance ${c.ltv.replace(/^Up to /i, 'up to ')} of a property’s value (each bank sets its own limit). Income is converted with a ${c.fx.split('·')[1]?.trim() ?? ''} currency discount, salary is checked against ${c.salaried.toLowerCase()} and your credit record comes from ${c.bureau}. Lenders most active with ${c.demonym} buyers: ${c.banks}. You can complete without travelling, using a video power of attorney.`}>
         <div className="mt-8 flex flex-wrap gap-3"><Link href="/contact" className="btn btn-primary">Check my eligibility</Link><Link href="/calculators/non-resident-rental-coverage" className="btn btn-ghost">Rental coverage simulator</Link></div>
       </PageHero>
       <Section title={`What ${c.demonym} applicants need`}>
@@ -81,8 +81,8 @@ function CountryPage({ slug, c }: { slug: string; c: (typeof COUNTRIES)[number] 
       <Section title="Model the investment"><div className="rounded-card border border-line p-5 sm:p-8"><Calculator slug="non-resident-rental-coverage" /></div></Section>
       <Section tone="mist" title="Frequently asked">
         <div className="max-w-3xl"><FaqList faqs={[
-          { q: `Can ${c.demonym} citizens buy freehold property in Dubai?`, a: 'Yes. Foreign nationals can own freehold title in designated areas across Dubai, Abu Dhabi and the Northern Emirates.' },
-          { q: 'Do I need to visit the UAE to close?', a: 'No. Form F is signed through Dubai REST OTP and the transfer is completed by an attorney under a 15-minute Dubai Courts video Power of Attorney.' },
+          { q: `Can ${c.demonym} citizens buy freehold property in Dubai?`, a: 'Yes. Foreign buyers can hold freehold title in designated areas of Dubai, Abu Dhabi and the Northern Emirates.' },
+          { q: 'Do I need to visit the UAE to close?', a: 'No. Form F can be signed online through Dubai REST, and someone holding a power of attorney from a short Dubai Courts video session can attend the transfer for you.' },
           { q: `How is ${c.name} income converted?`, a: `Banks convert at the current rate less a ${c.fx.split('·')[1]?.trim() ?? 'variable'} haircut to buffer currency moves.` },
         ]} /></div>
       </Section>

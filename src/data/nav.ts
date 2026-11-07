@@ -30,7 +30,7 @@ export const NAV: NavItem[] = [
         { label: 'Plot & construction', href: '/mortgages/land-plot-construction' },
       ] },
     ],
-    feature: { title: 'Know your budget first', body: 'See your borrowing power and upfront costs before you view a property.', href: '/calculators/dbr-borrowing-power', cta: 'Check eligibility' },
+    feature: { title: 'Know your budget first', body: 'Find out what you can borrow and what you must bring before you start viewing.', href: '/calculators/dbr-borrowing-power', cta: 'Check eligibility' },
   },
   {
     label: 'Bank rates', href: '/rates',
@@ -48,7 +48,7 @@ export const NAV: NavItem[] = [
         { label: 'Conventional vs Islamic', href: '/rates/compare/conventional-vs-islamic-mortgage-uae-math' },
       ] },
     ],
-    feature: { title: 'More than a fixed rate', body: 'Compare the revert margin, floor rate and fees as well.', href: '/rates/uae-mortgage-rates-eibor-revert-bible', cta: 'See all 24 banks' },
+    feature: { title: 'More than a fixed rate', body: 'Check what the rate becomes after the fix, the minimum and the fees.', href: '/rates/uae-mortgage-rates-eibor-revert-bible', cta: 'See all 24 banks' },
   },
   {
     label: 'Tools', href: '/calculators',
@@ -92,7 +92,7 @@ export const NAV: NavItem[] = [
         { label: 'EIBOR tracker', href: '/rates/eibor-live-tracker' },
       ] },
     ],
-    feature: { title: 'Is your fixed rate ending?', body: 'Compare your revert rate with switching costs before it resets.', href: '/calculators/buyout-refinance-savings', cta: 'Calculate savings' },
+    feature: { title: 'Is your fixed rate ending?', body: 'Set the rate you are about to move to against the cost of switching.', href: '/calculators/buyout-refinance-savings', cta: 'Calculate savings' },
   },
   {
     label: 'Business property', href: '/advisory/commercial-property-finance',

@@ -182,7 +182,7 @@ export function LinkGrid({ links, cols = 3 }: { links: { title: string; body?: s
   );
 }
 
-export function CtaBand({ title = 'Your next move starts here.', body = 'Understand your mortgage options, prepare your documents and plan your budget.' }: { title?: string; body?: string }) {
+export function CtaBand({ title = 'Your next move starts here.', body = 'Explore your mortgage options, get your documents ready and plan a realistic budget.' }: { title?: string; body?: string }) {
   return (
     <section className="bg-white py-16">
       <div className="wrap">

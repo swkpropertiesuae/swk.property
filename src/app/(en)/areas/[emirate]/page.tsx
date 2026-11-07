@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ emirate: stri
   return (
     <>
       <PageHero crumbs={[{ name: 'Areas', href: '/areas' }, { name: e.name, href: `/areas/${key}` }]} eyebrow="Areas" title={`${e.name} freehold communities: prices, yields & EMI coverage`}
-        capsule={`Indicative price per square foot, gross rental yield and typical unit price for ${list.length} freehold communities in ${e.name}, sorted by yield. Each community page models resident and investor mortgages against typical rent. Transactions are registered with the ${e.regulator}.`} />
+        capsule={`${list.length} freehold areas in ${e.name}, ranked by gross yield, with a guide price per square foot and a typical unit price. Open any area to compare a resident’s and an investor’s repayment with the usual rent. Sales are recorded by the ${e.regulator}.`} />
       <Section title={`${list.length} communities`}>
         <div className="overflow-x-auto rounded-card border border-line">
           <table className="table-bw min-w-[640px]">

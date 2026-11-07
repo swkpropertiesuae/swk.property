@@ -35,8 +35,8 @@ export default async function Page({ params }: { params: Promise<{ developer: st
   const siblings = projectsOf(p.dev).filter((x) => x.slug !== p.slug).slice(0, 6);
   const crumbs = [{ name: 'Off-plan handover', href: '/handover' }, ...(d.hub ? [{ name: d.name, href: `/handover/${d.slug}` }] : []), { name: p.name, href: `/handover/${d.slug}/${p.slug}` }];
   const capsule = r
-    ? `${p.name} by ${d.name} in ${p.community} hands over ${p.window} on a ${p.plan} plan, leaving ${p.balancePct}% due at completion. Launched around ${aedM(p.launch!)}, units now value near ${aedM(p.value!)}. ${p.apl} banks hold it on their APL; at ${REG.ltv.expat.first}% LTV (expat first home) a buyer could borrow ${aed(r.loanCap)} and release up to ${aed(r.cashOut)}.`
-    : `${p.name} by ${d.name} in ${p.community} is scheduled for handover in ${p.window}. At completion, banks on ${d.name}’s Approved Project List can finance the remaining developer balance at up to ${REG.ltv.expat.first}% LTV for an expat first home, with no 4% DLD fee because Oqood was paid at launch. Our desk confirms tower-level APL coverage before your handover notice.`;
+    ? `${d.name}’s ${p.name} in ${p.community} is due ${p.window}. Buyers on the ${p.plan} plan still owe ${p.balancePct}% at completion. Units launched at about ${aedM(p.launch!)} and are now valued near ${aedM(p.value!)}. ${p.apl} lenders have approved the project. With a ${REG.ltv.expat.first}% loan on an expatriate’s first home, that valuation supports borrowing of ${aed(r.loanCap)}, freeing up to ${aed(r.cashOut)} after the developer is paid.`
+    : `${d.name} expects to hand over ${p.name} in ${p.community} in ${p.window}. Lenders that have approved ${d.name} projects can then fund what you still owe, up to ${REG.ltv.expat.first}% of value on an expatriate’s first home. The 4% DLD fee is not charged again because it was paid with the Oqood. We check each bank’s approval for your building before the completion notice arrives.`;
   return (
     <>
       <PageHero crumbs={crumbs} eyebrow={`${d.name} · ${p.community}`} title={`${p.name} handover mortgage: APL banks, payment plan & cash-out`} capsule={capsule}>
@@ -58,7 +58,7 @@ export default async function Page({ params }: { params: Promise<{ developer: st
             </Link>
           ))}
         </div>
-        <p className="mt-6 text-sm text-slate">APL status is tower-specific and changes; we confirm with each bank before submission.</p>
+        <p className="mt-6 text-sm text-slate">Bank approval is given tower by tower and can change, so we check with each lender before applying.</p>
       </Section>
       <Section title="Your handover cash-out">
         <div className="rounded-card border border-line p-5 sm:p-8">
@@ -66,12 +66,12 @@ export default async function Page({ params }: { params: Promise<{ developer: st
         </div>
       </Section>
       <Section tone="mist" title="FAQ"><div className="max-w-3xl"><FaqList faqs={[
-        { q: `When should I apply for my ${p.name} handover mortgage?`, a: 'Start 60–90 days before the expected completion notice so pre-approval, valuation and the developer NOC are ready when the final payment is called.' },
-        { q: 'Do I pay the 4% DLD fee again at handover?', a: 'No. The 4% was paid with the Oqood at launch; at handover you pay mortgage registration (0.25% + AED 290), the AED 580 title deed, AED 4,200 trustee and AED 3,150 valuation.' },
-        { q: 'What if the valuation comes in below my purchase price?', a: 'The loan is based on the lower of price or valuation for a purchase; our appeal desk and backup bank route help close the gap.' },
+        { q: `When should I apply for my ${p.name} handover mortgage?`, a: 'Begin two to three months before the completion notice is due, so pre-approval, valuation and the developer NOC are all in place when the final payment falls due.' },
+        { q: 'Do I pay the 4% DLD fee again at handover?', a: 'No. The 4% transfer fee was paid when the Oqood was registered. At handover you pay mortgage registration, the title deed fee, the trustee fee and the valuation.' },
+        { q: 'What if the valuation comes in below my purchase price?', a: 'For a purchase, banks lend on the lower of the price and the valuation. A valuation review or a second lender can help cover a shortfall.' },
       ]} /></div></Section>
       {siblings.length > 0 && <Section title={`More ${d.name} projects`}><LinkGrid links={siblings.map((x) => ({ title: x.name, body: `${x.community} · ${x.window}`, href: `/handover/${x.dev}/${x.slug}` }))} /></Section>}
-      <CtaBand title="Handover notice arrived?" body="Ask an advisor about project eligibility, your payment plan and the documents needed for a lender review." />
+      <CtaBand title="Handover notice arrived?" body="Talk to an advisor about whether banks accept this project, your payment plan and what to prepare for the lender." />
     </>
   );
 }

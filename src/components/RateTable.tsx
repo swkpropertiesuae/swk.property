@@ -6,7 +6,7 @@ import { BENCH } from '@/data/site';
 export default function RateTable({ banks = BANKS, limit }: { banks?: Bank[]; limit?: number }) {
   const rows = limit ? banks.slice(0, limit) : banks;
   return (
-    <div className="overflow-x-auto rounded-card border border-line bg-white"><p className="px-4 py-3 text-xs text-slate border-b border-line">Illustrative comparison data. Confirm current pricing and eligibility with the lender.</p>
+    <div className="overflow-x-auto rounded-card border border-line bg-white"><p className="px-4 py-3 text-xs text-slate border-b border-line">Comparison figures are indicative. Check current pricing and eligibility with the lender.</p>
       <table className="table-bw min-w-[880px]">
         <caption className="sr-only">Illustrative UAE mortgage rates by bank</caption>
         <thead>
