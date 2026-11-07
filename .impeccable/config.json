@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-07T04:46:03.914Z",
+        "reason": "Brand kit v1.0 design-tokens.json specifies Inter as UI font"
+      },
+      {
+        "rule": "overused-font",
+        "value": "plus jakarta sans",
+        "createdAt": "2026-11-07T04:46:03.924Z",
+        "reason": "Market Bible Module 14.1 specifies Plus Jakarta Sans for headings"
+      }
+    ]
+  }
+}
