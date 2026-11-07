@@ -1,6 +1,14 @@
-/** Static export: every route is pre-rendered HTML (no 0% / AED 0 hydration states). */
+/** Static marketing pages plus a server route for the official public benchmark feed. */
 export default {
-  output: 'export',
+  distDir: process.env.NODE_ENV === 'development' ? '.next-dev' : '.next',
   trailingSlash: false,
   images: { unoptimized: true },
+  async headers() {
+    return [{ source:'/:path*', headers:[
+      { key:'X-Content-Type-Options', value:'nosniff' },
+      { key:'Referrer-Policy', value:'strict-origin-when-cross-origin' },
+      ...(process.env.NODE_ENV === 'development' ? [] : [{ key:'X-Frame-Options', value:'SAMEORIGIN' }]),
+      { key:'Permissions-Policy', value:'camera=(), microphone=(), geolocation=()' },
+    ] }];
+  },
 };

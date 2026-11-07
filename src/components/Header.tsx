@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
+import { AlertCenter } from '@/components/StartupExperience';
 import { NAV } from '@/data/nav';
 
 export default function Header() {
@@ -39,6 +40,7 @@ export default function Header() {
             </button>
           ))}
         </nav>
+        <AlertCenter />
         <div className="hidden items-center gap-2 lg:flex">
           <Link href="/ar" className="hidden rounded-full px-3 py-2 xl:inline text-sm font-medium text-slate hover:text-navy" lang="ar">العربية</Link>
 

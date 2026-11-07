@@ -1,0 +1,601 @@
+{
+  "status": "snapshot",
+  "source": "https://centralbank.ae/en/forex-eibor/eibor-rates/",
+  "retrievedAt": "2026-11-07T06:42:07.308303+00:00",
+  "latest": {
+    "overnight": 3.66539,
+    "oneMonth": 4.1425,
+    "threeMonth": 4.20677,
+    "sixMonth": 4.68714,
+    "oneYear": 4.80361,
+    "date": "2026-11-06",
+    "valueDate": "2026-11-10"
+  },
+  "history": [
+    {
+      "overnight": 3.58117,
+      "oneMonth": 3.77938,
+      "threeMonth": 3.87313,
+      "sixMonth": 4.00521,
+      "oneYear": 4.25902,
+      "date": "2026-08-07",
+      "valueDate": "2026-08-11"
+    },
+    {
+      "overnight": 3.65096,
+      "oneMonth": 3.78166,
+      "threeMonth": 3.92566,
+      "sixMonth": 4.0125,
+      "oneYear": 4.26438,
+      "date": "2026-08-10",
+      "valueDate": "2026-08-12"
+    },
+    {
+      "overnight": 3.5576,
+      "oneMonth": 3.78288,
+      "threeMonth": 3.88794,
+      "sixMonth": 4.075,
+      "oneYear": 4.26102,
+      "date": "2026-08-11",
+      "valueDate": "2026-08-13"
+    },
+    {
+      "overnight": 3.47912,
+      "oneMonth": 3.75331,
+      "threeMonth": 3.84875,
+      "sixMonth": 4.0875,
+      "oneYear": 4.37409,
+      "date": "2026-08-12",
+      "valueDate": "2026-08-14"
+    },
+    {
+      "overnight": 3.44007,
+      "oneMonth": 3.75491,
+      "threeMonth": 3.93732,
+      "sixMonth": 4.075,
+      "oneYear": 4.27122,
+      "date": "2026-08-13",
+      "valueDate": "2026-08-17"
+    },
+    {
+      "overnight": 3.43915,
+      "oneMonth": 3.75042,
+      "threeMonth": 3.94565,
+      "sixMonth": 4.0125,
+      "oneYear": 4.29689,
+      "date": "2026-08-14",
+      "valueDate": "2026-08-18"
+    },
+    {
+      "overnight": 3.63236,
+      "oneMonth": 3.74749,
+      "threeMonth": 3.95729,
+      "sixMonth": 4.0625,
+      "oneYear": 4.14769,
+      "date": "2026-08-17",
+      "valueDate": "2026-08-19"
+    },
+    {
+      "overnight": 3.68168,
+      "oneMonth": 3.75083,
+      "threeMonth": 3.95189,
+      "sixMonth": 3.92996,
+      "oneYear": 4.19044,
+      "date": "2026-08-18",
+      "valueDate": "2026-08-20"
+    },
+    {
+      "overnight": 3.50447,
+      "oneMonth": 3.74753,
+      "threeMonth": 3.9081,
+      "sixMonth": 3.91218,
+      "oneYear": 4.21626,
+      "date": "2026-08-19",
+      "valueDate": "2026-08-21"
+    },
+    {
+      "overnight": 3.49412,
+      "oneMonth": 3.74173,
+      "threeMonth": 3.8218,
+      "sixMonth": 4.0015,
+      "oneYear": 4.22519,
+      "date": "2026-08-20",
+      "valueDate": "2026-08-24"
+    },
+    {
+      "overnight": 3.51964,
+      "oneMonth": 3.73703,
+      "threeMonth": 3.87949,
+      "sixMonth": 3.95296,
+      "oneYear": 4.23697,
+      "date": "2026-08-21",
+      "valueDate": "2026-08-25"
+    },
+    {
+      "overnight": 3.62877,
+      "oneMonth": 3.74201,
+      "threeMonth": 3.84014,
+      "sixMonth": 3.95837,
+      "oneYear": 4.24142,
+      "date": "2026-08-24",
+      "valueDate": "2026-08-26"
+    },
+    {
+      "overnight": 3.53107,
+      "oneMonth": 3.75168,
+      "threeMonth": 3.8722,
+      "sixMonth": 4.00502,
+      "oneYear": 4.25115,
+      "date": "2026-08-25",
+      "valueDate": "2026-08-27"
+    },
+    {
+      "overnight": 3.4,
+      "oneMonth": 3.74721,
+      "threeMonth": 3.97268,
+      "sixMonth": 4.0069,
+      "oneYear": 4.20867,
+      "date": "2026-08-26",
+      "valueDate": "2026-08-31"
+    },
+    {
+      "overnight": 3.40838,
+      "oneMonth": 3.7406,
+      "threeMonth": 3.86499,
+      "sixMonth": 4.02048,
+      "oneYear": 4.47101,
+      "date": "2026-08-27",
+      "valueDate": "2026-09-01"
+    },
+    {
+      "overnight": 3.47247,
+      "oneMonth": 3.72311,
+      "threeMonth": 3.85065,
+      "sixMonth": 4.01691,
+      "oneYear": 4.35724,
+      "date": "2026-08-31",
+      "valueDate": "2026-09-02"
+    },
+    {
+      "overnight": 3.47764,
+      "oneMonth": 3.7643,
+      "threeMonth": 3.98628,
+      "sixMonth": 4.05652,
+      "oneYear": 4.39436,
+      "date": "2026-09-01",
+      "valueDate": "2026-09-03"
+    },
+    {
+      "overnight": 3.37331,
+      "oneMonth": 3.79229,
+      "threeMonth": 4.05241,
+      "sixMonth": 4.18294,
+      "oneYear": 4.34888,
+      "date": "2026-09-02",
+      "valueDate": "2026-09-04"
+    },
+    {
+      "overnight": 3.34498,
+      "oneMonth": 3.80937,
+      "threeMonth": 3.99665,
+      "sixMonth": 4.10624,
+      "oneYear": 4.3375,
+      "date": "2026-09-03",
+      "valueDate": "2026-09-07"
+    },
+    {
+      "overnight": 3.45708,
+      "oneMonth": 3.82047,
+      "threeMonth": 3.9631,
+      "sixMonth": 4.0952,
+      "oneYear": 4.34267,
+      "date": "2026-09-04",
+      "valueDate": "2026-09-08"
+    },
+    {
+      "overnight": 3.49178,
+      "oneMonth": 3.81133,
+      "threeMonth": 3.8974,
+      "sixMonth": 4.08526,
+      "oneYear": 4.33881,
+      "date": "2026-09-07",
+      "valueDate": "2026-09-09"
+    },
+    {
+      "overnight": 3.50377,
+      "oneMonth": 3.84393,
+      "threeMonth": 3.9625,
+      "sixMonth": 4.30337,
+      "oneYear": 4.40903,
+      "date": "2026-09-08",
+      "valueDate": "2026-09-10"
+    },
+    {
+      "overnight": 3.32368,
+      "oneMonth": 3.86958,
+      "threeMonth": 4.12642,
+      "sixMonth": 4.1892,
+      "oneYear": 4.49753,
+      "date": "2026-09-09",
+      "valueDate": "2026-09-11"
+    },
+    {
+      "overnight": 3.37437,
+      "oneMonth": 3.86365,
+      "threeMonth": 4.16474,
+      "sixMonth": 4.10247,
+      "oneYear": 4.74915,
+      "date": "2026-09-10",
+      "valueDate": "2026-09-14"
+    },
+    {
+      "overnight": 3.3924,
+      "oneMonth": 3.87552,
+      "threeMonth": 4.17454,
+      "sixMonth": 4.22437,
+      "oneYear": 4.6787,
+      "date": "2026-09-11",
+      "valueDate": "2026-09-15"
+    },
+    {
+      "overnight": 3.45736,
+      "oneMonth": 3.89683,
+      "threeMonth": 4.14009,
+      "sixMonth": 4.16047,
+      "oneYear": 4.68595,
+      "date": "2026-09-14",
+      "valueDate": "2026-09-16"
+    },
+    {
+      "overnight": 3.44324,
+      "oneMonth": 3.93971,
+      "threeMonth": 4.1786,
+      "sixMonth": 4.20451,
+      "oneYear": 4.69958,
+      "date": "2026-09-15",
+      "valueDate": "2026-09-17"
+    },
+    {
+      "overnight": 3.40735,
+      "oneMonth": 3.99246,
+      "threeMonth": 4.12877,
+      "sixMonth": 4.20398,
+      "oneYear": 4.81103,
+      "date": "2026-09-16",
+      "valueDate": "2026-09-18"
+    },
+    {
+      "overnight": 3.65485,
+      "oneMonth": 4.00416,
+      "threeMonth": 4.21459,
+      "sixMonth": 4.2477,
+      "oneYear": 4.95447,
+      "date": "2026-09-17",
+      "valueDate": "2026-09-21"
+    },
+    {
+      "overnight": 3.66339,
+      "oneMonth": 4.0104,
+      "threeMonth": 4.35869,
+      "sixMonth": 4.26411,
+      "oneYear": 4.93574,
+      "date": "2026-09-18",
+      "valueDate": "2026-09-22"
+    },
+    {
+      "overnight": 3.64361,
+      "oneMonth": 4.01357,
+      "threeMonth": 4.3995,
+      "sixMonth": 4.27658,
+      "oneYear": 4.93765,
+      "date": "2026-09-21",
+      "valueDate": "2026-09-23"
+    },
+    {
+      "overnight": 3.7079,
+      "oneMonth": 4.01772,
+      "threeMonth": 4.37157,
+      "sixMonth": 4.42339,
+      "oneYear": 5.02713,
+      "date": "2026-09-22",
+      "valueDate": "2026-09-24"
+    },
+    {
+      "overnight": 3.61646,
+      "oneMonth": 4.01962,
+      "threeMonth": 4.27595,
+      "sixMonth": 4.45203,
+      "oneYear": 5.04931,
+      "date": "2026-09-23",
+      "valueDate": "2026-09-25"
+    },
+    {
+      "overnight": 3.70055,
+      "oneMonth": 4.04198,
+      "threeMonth": 4.19735,
+      "sixMonth": 4.42568,
+      "oneYear": 5.11675,
+      "date": "2026-09-24",
+      "valueDate": "2026-09-28"
+    },
+    {
+      "overnight": 3.75175,
+      "oneMonth": 4.05995,
+      "threeMonth": 4.34524,
+      "sixMonth": 4.44327,
+      "oneYear": 5.10903,
+      "date": "2026-09-25",
+      "valueDate": "2026-09-29"
+    },
+    {
+      "overnight": 3.71028,
+      "oneMonth": 4.0681,
+      "threeMonth": 4.30575,
+      "sixMonth": 4.4845,
+      "oneYear": 5.08182,
+      "date": "2026-09-28",
+      "valueDate": "2026-09-30"
+    },
+    {
+      "overnight": 3.72138,
+      "oneMonth": 4.08079,
+      "threeMonth": 4.34274,
+      "sixMonth": 4.58888,
+      "oneYear": 5.10969,
+      "date": "2026-09-29",
+      "valueDate": "2026-10-01"
+    },
+    {
+      "overnight": 3.69647,
+      "oneMonth": 4.08584,
+      "threeMonth": 4.31829,
+      "sixMonth": 4.60149,
+      "oneYear": 5.09259,
+      "date": "2026-09-30",
+      "valueDate": "2026-10-02"
+    },
+    {
+      "overnight": 3.70923,
+      "oneMonth": 4.0304,
+      "threeMonth": 4.38905,
+      "sixMonth": 4.58991,
+      "oneYear": 5.09535,
+      "date": "2026-10-01",
+      "valueDate": "2026-10-05"
+    },
+    {
+      "overnight": 3.66293,
+      "oneMonth": 4.08501,
+      "threeMonth": 4.22276,
+      "sixMonth": 4.41732,
+      "oneYear": 5.06789,
+      "date": "2026-10-02",
+      "valueDate": "2026-10-06"
+    },
+    {
+      "overnight": 3.7063,
+      "oneMonth": 4.08608,
+      "threeMonth": 4.29833,
+      "sixMonth": 4.3901,
+      "oneYear": 5.04644,
+      "date": "2026-10-05",
+      "valueDate": "2026-10-07"
+    },
+    {
+      "overnight": 3.62627,
+      "oneMonth": 4.08567,
+      "threeMonth": 4.32047,
+      "sixMonth": 4.38051,
+      "oneYear": 5.0625,
+      "date": "2026-10-06",
+      "valueDate": "2026-10-08"
+    },
+    {
+      "overnight": 3.69275,
+      "oneMonth": 4.09248,
+      "threeMonth": 4.37044,
+      "sixMonth": 4.41254,
+      "oneYear": 4.9325,
+      "date": "2026-10-07",
+      "valueDate": "2026-10-09"
+    },
+    {
+      "overnight": 3.63143,
+      "oneMonth": 4.09239,
+      "threeMonth": 4.39404,
+      "sixMonth": 4.40748,
+      "oneYear": 4.9205,
+      "date": "2026-10-08",
+      "valueDate": "2026-10-12"
+    },
+    {
+      "overnight": 3.66263,
+      "oneMonth": 4.09496,
+      "threeMonth": 4.19178,
+      "sixMonth": 4.5493,
+      "oneYear": 4.83806,
+      "date": "2026-10-09",
+      "valueDate": "2026-10-13"
+    },
+    {
+      "overnight": 3.68593,
+      "oneMonth": 4.0679,
+      "threeMonth": 4.16715,
+      "sixMonth": 4.54322,
+      "oneYear": 4.90737,
+      "date": "2026-10-12",
+      "valueDate": "2026-10-14"
+    },
+    {
+      "overnight": 3.54325,
+      "oneMonth": 4.07423,
+      "threeMonth": 4.44348,
+      "sixMonth": 4.61651,
+      "oneYear": 4.99523,
+      "date": "2026-10-13",
+      "valueDate": "2026-10-15"
+    },
+    {
+      "overnight": 3.54049,
+      "oneMonth": 4.08371,
+      "threeMonth": 4.27253,
+      "sixMonth": 4.45602,
+      "oneYear": 4.9407,
+      "date": "2026-10-14",
+      "valueDate": "2026-10-16"
+    },
+    {
+      "overnight": 3.59,
+      "oneMonth": 4.06989,
+      "threeMonth": 4.35288,
+      "sixMonth": 4.42757,
+      "oneYear": 5.055,
+      "date": "2026-10-15",
+      "valueDate": "2026-10-19"
+    },
+    {
+      "overnight": 3.53227,
+      "oneMonth": 4.09702,
+      "threeMonth": 4.205,
+      "sixMonth": 4.45624,
+      "oneYear": 4.97869,
+      "date": "2026-10-16",
+      "valueDate": "2026-10-20"
+    },
+    {
+      "overnight": 3.65747,
+      "oneMonth": 4.09752,
+      "threeMonth": 4.20902,
+      "sixMonth": 4.44853,
+      "oneYear": 4.93162,
+      "date": "2026-10-19",
+      "valueDate": "2026-10-21"
+    },
+    {
+      "overnight": 3.59504,
+      "oneMonth": 4.15177,
+      "threeMonth": 4.30328,
+      "sixMonth": 4.42,
+      "oneYear": 4.84237,
+      "date": "2026-10-20",
+      "valueDate": "2026-10-22"
+    },
+    {
+      "overnight": 3.59056,
+      "oneMonth": 4.14908,
+      "threeMonth": 4.42735,
+      "sixMonth": 4.59472,
+      "oneYear": 4.94393,
+      "date": "2026-10-21",
+      "valueDate": "2026-10-23"
+    },
+    {
+      "overnight": 3.66882,
+      "oneMonth": 4.15047,
+      "threeMonth": 4.44967,
+      "sixMonth": 4.66292,
+      "oneYear": 4.84655,
+      "date": "2026-10-22",
+      "valueDate": "2026-10-26"
+    },
+    {
+      "overnight": 3.59372,
+      "oneMonth": 4.14458,
+      "threeMonth": 4.2262,
+      "sixMonth": 4.56543,
+      "oneYear": 4.72222,
+      "date": "2026-10-23",
+      "valueDate": "2026-10-27"
+    },
+    {
+      "overnight": 3.65297,
+      "oneMonth": 4.14043,
+      "threeMonth": 4.1529,
+      "sixMonth": 4.51017,
+      "oneYear": 4.66578,
+      "date": "2026-10-26",
+      "valueDate": "2026-10-28"
+    },
+    {
+      "overnight": 3.59348,
+      "oneMonth": 4.13951,
+      "threeMonth": 4.31653,
+      "sixMonth": 4.44914,
+      "oneYear": 4.63753,
+      "date": "2026-10-27",
+      "valueDate": "2026-10-29"
+    },
+    {
+      "overnight": 3.6072,
+      "oneMonth": 4.09378,
+      "threeMonth": 4.31471,
+      "sixMonth": 4.78987,
+      "oneYear": 4.91104,
+      "date": "2026-10-28",
+      "valueDate": "2026-10-30"
+    },
+    {
+      "overnight": 3.67645,
+      "oneMonth": 4.0845,
+      "threeMonth": 4.29872,
+      "sixMonth": 4.63532,
+      "oneYear": 5.02834,
+      "date": "2026-10-29",
+      "valueDate": "2026-11-02"
+    },
+    {
+      "overnight": 3.67674,
+      "oneMonth": 4.07982,
+      "threeMonth": 4.34017,
+      "sixMonth": 4.70211,
+      "oneYear": 4.86684,
+      "date": "2026-10-30",
+      "valueDate": "2026-11-03"
+    },
+    {
+      "overnight": 3.8699,
+      "oneMonth": 4.0886,
+      "threeMonth": 4.32406,
+      "sixMonth": 4.646,
+      "oneYear": 5.22261,
+      "date": "2026-11-02",
+      "valueDate": "2026-11-04"
+    },
+    {
+      "overnight": 3.67665,
+      "oneMonth": 3.9859,
+      "threeMonth": 4.27717,
+      "sixMonth": 4.56578,
+      "oneYear": 5.13614,
+      "date": "2026-11-03",
+      "valueDate": "2026-11-05"
+    },
+    {
+      "overnight": 3.62958,
+      "oneMonth": 4.06526,
+      "threeMonth": 4.31606,
+      "sixMonth": 4.81051,
+      "oneYear": 5.12466,
+      "date": "2026-11-04",
+      "valueDate": "2026-11-06"
+    },
+    {
+      "overnight": 3.64063,
+      "oneMonth": 4.15389,
+      "threeMonth": 4.27826,
+      "sixMonth": 4.72056,
+      "oneYear": 4.96333,
+      "date": "2026-11-05",
+      "valueDate": "2026-11-09"
+    },
+    {
+      "overnight": 3.66539,
+      "oneMonth": 4.1425,
+      "threeMonth": 4.20677,
+      "sixMonth": 4.68714,
+      "oneYear": 4.80361,
+      "date": "2026-11-06",
+      "valueDate": "2026-11-10"
+    }
+  ]
+}

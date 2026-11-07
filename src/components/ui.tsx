@@ -231,7 +231,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="wrap space-y-3 py-6 text-xs text-white/50">
-          <p>{DISCLOSURE_FULL}</p><p>Property images are AI-generated concept residences, not advertised listings.</p>
+          <p>{DISCLOSURE_FULL}</p><p>Concept residence and advisor images are AI-generated. Named project renders are credited to their developers.</p>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p>© 2026 {SITE.legalName}. All rights reserved.</p>
             <p className="flex gap-4"><Link href="/privacy-and-cbuae-disclosure" className="ulink">Privacy & CBUAE disclosure</Link><Link href="/ar" lang="ar" className="ulink">العربية</Link></p>
@@ -250,7 +250,7 @@ export function orgSchema() {
     name: SITE.name,
     url: SITE.url,
     logo: `${SITE.url}/brand/logo-primary.svg`,
-    image: `${SITE.url}/images/dubai-waterfront-1280.webp`,
+    image: `${SITE.url}/brand/materials/betterway-banner.png`,
     ...(SITE.phone ? { telephone: SITE.phone } : {}),
     email: SITE.email,
     address: { '@type': 'PostalAddress', streetAddress: `${SITE.address.building}, ${SITE.address.plot}, ${SITE.address.street}`, addressLocality: SITE.address.district, addressRegion: 'Dubai', addressCountry: 'AE' },

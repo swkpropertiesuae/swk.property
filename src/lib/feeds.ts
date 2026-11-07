@@ -19,7 +19,7 @@ export function llms() {
   const by = (s: number) => ROUTES.filter((r) => r.silo === s);
   return `# ${SITE.name}
 
-> UAE mortgage information and planning tools from ${SITE.name}. Lender rates, EIBOR values, country criteria and property figures are illustrative, not a live feed. Lenders decide eligibility. Confirm current terms and fees in writing.
+> UAE mortgage information and planning tools from ${SITE.name}. The EIBOR tracker uses the CBUAE public publication with source dates and a dated fallback snapshot. Lender offers, country criteria and property figures elsewhere are illustrative. Lenders decide eligibility. Confirm current terms and fees in writing.
 
 Machine-readable planning guide: ${SITE.url}/llms-full.txt
 
@@ -50,13 +50,14 @@ export function llmsFull() {
 Entity: ${SITE.name}, ${fullAddress}. Website ${SITE.url}. Client portal ${SITE.portalUrl}. Agent hub ${SITE.hubUrl}.
 Fees and remuneration: confirm all broker fees and lender remuneration in writing. Do not infer a fee policy or regulatory licence from this website.
 
-## Benchmarks
-- CBUAE base rate: ${BENCH.baseRate}% (25 bps cut 17 Sep 2026; hold 28 Oct 2026)
+## Illustrative planning assumptions — not live market data
+The following legacy assumptions and bank examples are not current offers or verified market statistics. For dated official EIBOR fixings use /rates/eibor-live-tracker or /api/market/eibor.
+- Illustrative base-rate assumption: ${BENCH.baseRate}%
 - EIBOR: 1M ${BENCH.eibor1m}%, 3M ${BENCH.eibor3m}%, 6M ${BENCH.eibor6m}%
 - Dubai 2026 YTD: AED ${BENCH.dldYtdAedBn}B across ${BENCH.dldYtdSales} sales; median AED ${BENCH.medianPsf}/sq.ft.; off-plan ${BENCH.offPlanShare}% of transactions
 
-## 24-bank rate table
-| Bank | Type | Intro fixed | 3Y | 5Y | Revert margin (3M EIBOR +) | Revert today | Floor | Purchase / buyout fee | Free overpay/yr | Non-resident LTV | Card limits in DBR |
+## Illustrative bank comparison table — confirm every term with the lender
+| Bank | Type | Intro fixed | 3Y | 5Y | Revert margin (3M EIBOR +) | Example revert | Floor | Purchase / buyout fee | Free overpay/yr | Non-resident LTV | Card limits in DBR |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 ${bankRows}
 

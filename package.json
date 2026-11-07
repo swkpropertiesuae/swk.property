@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev-preview.mjs",
     "build": "next build",
-    "start": "npx serve out",
+    "start": "next start",
     "test": "node --experimental-strip-types --import ./scripts/alias.mjs --test src/lib/*.test.ts",
     "lint": "next lint"
   },
