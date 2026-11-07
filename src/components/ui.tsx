@@ -96,7 +96,6 @@ export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, upd
         <Crumbs items={crumbs} />
         <div className={`mt-6 grid gap-10 ${side ? 'lg:grid-cols-[minmax(0,1fr)_250px] lg:items-center' : ''}`}>
           <div>
-            {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
             <h1 className="max-w-3xl text-[2rem] font-semibold leading-[1.16] sm:text-[2.5rem] lg:text-[2.75rem]">
               {head}
               {sub && <span className="mt-3 block font-sans text-lg font-medium leading-snug tracking-normal text-slate sm:text-xl">{sub}</span>}
@@ -123,7 +122,6 @@ export function Section({ id, title, eyebrow, intro, children, tone = 'white', a
       <MotionReveal className="wrap">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-3xl">
-            {eyebrow && <p className={`eyebrow mb-3 ${tone === 'navy' ? '!text-mint' : ''}`}>{eyebrow}</p>}
             <h2 className={`h2 ${tone === 'navy' ? '!text-white' : ''}`}>{title}</h2>
             {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'navy' ? 'text-white/70' : 'text-slate'}`}>{intro}</p>}
           </div>
@@ -214,7 +212,7 @@ export function Footer() {
     <footer className="bg-navy text-white/75">
       <div className="wrap grid gap-10 py-14 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
         <div>
-          <img src="/brand/logo-white.svg" alt="Betterway Mortgage" width={180} height={54} className="h-11 w-auto" />
+          <img src="/brand/logo-white-full.svg" alt="Betterway Mortgage" width={1295} height={358} className="h-auto w-[248px]" />
           <p className="mt-5 flex gap-2 text-sm"><MapPin size={16} className="mt-0.5 shrink-0 text-mint" />{fullAddress}</p>
           <p className="mt-3 text-sm">{SITE.phone && <><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a> · </>}<a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></p>
           <p className="mt-1 text-sm">{SITE.hours}</p>

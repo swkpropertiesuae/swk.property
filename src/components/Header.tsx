@@ -28,7 +28,7 @@ export default function Header() {
     <header ref={ref} className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
       <div className="wrap flex h-[72px] items-center justify-between gap-4">
         <Link href="/" aria-label="Betterway Mortgages home" className="shrink-0">
-          <img src="/brand/logo-primary.svg" alt="Betterway Mortgage" width={168} height={50} className="h-10 w-auto sm:h-11" />
+          <img src="/brand/logo-wordmark.svg" alt="Betterway Mortgage" width={1295} height={358} className="h-9 w-auto sm:h-10" fetchPriority="high" />
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
           {NAV.map((n) => (

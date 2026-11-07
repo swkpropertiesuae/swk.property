@@ -34,6 +34,9 @@
   html[lang='ar'] :is(h1, h2, h3, h4) { font-family: var(--font-arabic); letter-spacing: 0; }
   p { text-wrap: pretty; }
   ::selection { background: var(--color-teal); color: white; }
+  html { accent-color: var(--color-teal); caret-color: var(--color-teal); scrollbar-color: color-mix(in srgb, var(--color-navy) 35%, transparent) transparent; text-rendering: optimizeLegibility; }
+  body { font-optical-sizing: auto; }
+  a { text-underline-offset: 0.2em; }
   :focus-visible { outline: 2px solid var(--color-teal); outline-offset: 2px; border-radius: 6px; }
 }
 
@@ -73,7 +76,6 @@
   .range::-webkit-slider-thumb { appearance: none; width: 22px; height: 22px; border-radius: 50%; background: white; border: 6px solid var(--color-teal); box-shadow: 0 1px 4px rgb(0 0 0 / 0.2); }
   .range::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: white; border: 6px solid var(--color-teal); }
 
-  .grid-bg { background-image: linear-gradient(to right, rgb(8 29 55 / 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgb(8 29 55 / 0.05) 1px, transparent 1px); background-size: 48px 48px; }
 }
 
 @keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }

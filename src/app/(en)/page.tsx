@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <>
       <StartupHero />
-      <section className="bg-white py-12 lg:py-16"><div className="wrap market-intro"><div><p className="eyebrow">The market, with context</p><h2 className="mt-4">Published benchmarks.<br />A clearer starting point.</h2><p>Follow the latest public EIBOR fixing, then compare the full terms of your mortgage offer.</p></div><LiveBenchmark /></div></section>
+      <section className="bg-white py-12 lg:py-16"><div className="wrap market-intro"><div><h2 className="mt-4">Published benchmarks.<br />A clearer starting point.</h2><p>Follow the latest public EIBOR fixing, then compare the full terms of your mortgage offer.</p></div><LiveBenchmark /></div></section>
 
       <section className="border-y border-line bg-white" aria-label="Mortgage planning essentials">
         <div className="wrap grid gap-0 divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
@@ -79,7 +79,7 @@ export default function Home() {
         <div className="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <MotionReveal><Photo name="advisor-consultation" alt="Concept image: an advisor reviewing a mortgage offer with a client" className="aspect-[1376/768] shadow-[0_40px_80px_-40px_rgb(8_29_55/0.5)]" /></MotionReveal>
           <div>
-            <p className="eyebrow mb-3">Talk it through</p>
+            
             <h2 className="h2">Read the offer before you sign.</h2>
             <p className="mt-4 text-lg leading-relaxed text-slate">Go through the fixed period, revert margin, floor rate, fees and insurance with an advisor, line by line.</p>
             <Link href="/contact" className="btn btn-primary mt-8">Book a consultation <ArrowRight size={15} /></Link>
@@ -90,7 +90,7 @@ export default function Home() {
       <section className="journey-section">
         <div className="wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-20">
           <MotionReveal className="journey-image"><img src="/images/dubai-interior-1280.webp" srcSet="/images/dubai-interior-720.webp 720w, /images/dubai-interior-1280.webp 1280w" sizes="(min-width:1024px) 46vw, 100vw" width={1280} height={720} loading="lazy" alt="Conceptual Dubai apartment with a bright waterfront outlook" /></MotionReveal>
-          <div><p className="eyebrow !text-mint">From enquiry to keys</p><h2 className="h2 mt-4 !text-white">Know what comes next.</h2><ol className="journey-steps">{[['Set your budget', 'Check income, deposit and purchase costs.'], ['Compare your options', 'Review rates, fees and lender requirements.'], ['Apply for pre-approval', 'Submit documents for the bank’s assessment.'], ['Value, finalise, transfer', 'Complete valuation, final approval and registration.']].map(([t, b], i) => <li key={t}><span>{String(i + 1).padStart(2, '0')}</span><div><h3>{t}</h3><p>{b}</p></div></li>)}</ol><Link href="/guides/complete-dld-trustee-transfer-day-checklist" className="inline-flex items-center gap-2 text-sm font-semibold text-mint">Your transfer-day checklist <ArrowRight size={15} /></Link></div>
+          <div><h2 className="h2 mt-4 !text-white">Know what comes next.</h2><ol className="journey-steps">{[['Set your budget', 'Check income, deposit and purchase costs.'], ['Compare your options', 'Review rates, fees and lender requirements.'], ['Apply for pre-approval', 'Submit documents for the bank’s assessment.'], ['Value, finalise, transfer', 'Complete valuation, final approval and registration.']].map(([t, b], i) => <li key={t}><span>{String(i + 1).padStart(2, '0')}</span><div><h3>{t}</h3><p>{b}</p></div></li>)}</ol><Link href="/guides/complete-dld-trustee-transfer-day-checklist" className="inline-flex items-center gap-2 text-sm font-semibold text-mint">Your transfer-day checklist <ArrowRight size={15} /></Link></div>
         </div>
       </section>
 

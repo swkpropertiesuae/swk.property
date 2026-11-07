@@ -14,8 +14,7 @@ export function ArHero({ crumbs, eyebrow, title, capsule, en, children }: { crum
           <ol className="flex flex-wrap gap-1.5">{all.map(([n, h], i) => <li key={h} className="flex gap-1.5">{i > 0 && <span className="text-line">/</span>}{i < all.length - 1 ? <Link href={h} className="hover:text-teal">{n}</Link> : <span aria-current="page" className="text-navy">{n}</span>}</li>)}</ol>
         </nav>
         <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: all.map(([n, h], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE.url + h })) }} />
-        {eyebrow && <p className="eyebrow mt-6 !tracking-normal">{eyebrow}</p>}
-        <h1 className="mt-3 max-w-4xl text-[2rem] font-bold leading-snug sm:text-[2.6rem]">{title}</h1>
+        <h1 className="mt-6 max-w-4xl text-[2rem] font-bold leading-snug sm:text-[2.6rem]">{title}</h1>
         <div className="mt-6 max-w-3xl border-s-4 border-teal bg-white p-5 shadow-sm" data-capsule>
           <p className="text-[16px] leading-loose text-ink">{capsule}</p>
           <p className="mt-3 text-xs text-slate">{AR_UI.updated}</p>
