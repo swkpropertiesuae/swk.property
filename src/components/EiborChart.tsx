@@ -16,13 +16,13 @@ export default function EiborChart() {
       <div className="mb-3 flex flex-wrap gap-4 text-sm">
         {series.map((s) => <span key={s.k} className="flex items-center gap-2"><span className={`h-0.5 w-5 ${s.k === 'm3' ? 'bg-teal' : s.k === 'm6' ? 'bg-navy' : 'bg-slate'}`} />{s.name} <b className="num">{last[s.k].toFixed(2)}%</b></span>)}
       </div>
-      <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`EIBOR over 12 months; 3M EIBOR now ${last.m3}%`}>
+      <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`Illustrative EIBOR scenarios; example 3M EIBOR ${last.m3}%`}>
         {ticks.map((t) => <g key={t}><line x1={P.l} x2={W - P.r} y1={y(t)} y2={y(t)} className="stroke-line" /><text x={P.l - 8} y={y(t) + 4} textAnchor="end" className="fill-slate font-mono text-[11px]">{t.toFixed(2)}</text></g>)}
         {EIBOR_SERIES.map((d, i) => i % 2 === 1 && <text key={d.m} x={x(i)} y={H - 10} textAnchor="middle" className="fill-slate text-[11px]">{d.m}</text>)}
         {series.map((s) => <path key={s.k} d={line(s.k)} fill="none" strokeWidth={s.w} strokeLinejoin="round" strokeLinecap="round" className={s.cls} />)}
         <circle cx={x(EIBOR_SERIES.length - 1)} cy={y(last.m3)} r={5} className="fill-teal" />
       </svg>
-      <figcaption className="mt-2 text-xs text-slate">Monthly averages, % p.a. Indicative; the bank’s offer letter is binding.</figcaption>
+      <figcaption className="mt-2 text-xs text-slate">Illustrative series, % p.a. Not historical observations or a live feed. Check CBUAE for published EIBOR.</figcaption>
     </figure>
   );
 }

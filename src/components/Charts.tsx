@@ -70,9 +70,9 @@ export function OfferDashboard() {
         {['Offers', 'Documents', 'Valuation', 'Transfer'].map((t, i) => <span key={t} className={`rounded px-2 py-1 ${i === 0 ? 'bg-white/15 text-white' : ''}`}>{t}</span>)}
       </aside>
       <div className="flex min-w-0 flex-1 flex-col gap-2 p-3">
-        <div className="flex items-center justify-between"><b className="text-[12px] text-navy sm:text-[13px]">Your offer comparison</b><span className="rounded-full bg-teal-50 px-2 py-0.5 text-teal">24 banks</span></div>
+        <div className="flex items-center justify-between"><b className="text-[12px] text-navy sm:text-[13px]">Example offer comparison</b><span className="rounded-full bg-teal-50 px-2 py-0.5 text-teal">24 banks</span></div>
         <div className="grid grid-cols-3 gap-1.5">
-          {[['Best 5-yr cost', top.b.short], ['3M EIBOR', '4.45%'], ['Client fee', 'AED 0']].map(([k, v]) => <div key={k} className="rounded bg-mist p-1.5"><div className="text-slate">{k}</div><div className="num font-semibold text-navy">{v}</div></div>)}
+          {[['Best 5-yr cost', top.b.short], ['3M EIBOR', '4.45%'], ['Lowest floor', '1.99%']].map(([k, v]) => <div key={k} className="rounded bg-mist p-1.5"><div className="text-slate">{k}</div><div className="num font-semibold text-navy">{v}</div></div>)}
         </div>
         <div className="min-h-0 flex-1 rounded border border-line p-2"><CostBars limit={7} compact /></div>
       </div>

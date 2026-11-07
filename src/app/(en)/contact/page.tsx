@@ -4,15 +4,15 @@ import { PageHero, Section } from '@/components/ui';
 import { SlotPicker, LeadForm } from '@/components/client';
 import { SITE, fullAddress, waLink } from '@/data/site';
 
-export const metadata: Metadata = { title: 'Contact & Visit — Al Nasr Plaza, Oud Metha', description: 'Visit Betterway Mortgages at Al Nasr Plaza, Oud Metha Road, Dubai, book a consultation slot or message the WhatsApp desk.', alternates: { canonical: '/contact' } };
+export const metadata: Metadata = { title: 'Contact & Visit — Al Nasr Plaza, Oud Metha', description: 'Visit Betterway Mortgages at Al Nasr Plaza, Oud Metha Road, Dubai, book a consultation slot or message the Email an advisor.', alternates: { canonical: '/contact' } };
 
 export default function Page() {
   const q = encodeURIComponent(`${SITE.address.building}, ${SITE.address.street}, ${SITE.address.district}, Dubai`);
   return (
     <>
-      <PageHero crumbs={[{ name: 'Contact', href: '/contact' }]} eyebrow="Contact" title="Visit us at Al Nasr Plaza, Oud Metha—or start on WhatsApp"
-        capsule={`Betterway Mortgages is at ${fullAddress}. Book a free consultation, message us on WhatsApp, or send your details for a 48-hour pre-approval from two banks.`} updated={false} />
-      <Section title="Book, message or send your profile">
+      <PageHero crumbs={[{ name: 'Contact', href: '/contact' }]} eyebrow="Contact" title="Let’s plan your mortgage."
+        capsule={`Betterway Mortgages is at ${fullAddress}. Request a consultation or send an enquiry about your mortgage options.`} updated={false} />
+      <Section title="Speak to an advisor">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <div className="space-y-6">
             <SlotPicker />
@@ -22,7 +22,7 @@ export default function Page() {
               <p className="flex gap-3"><Mail className="shrink-0 text-teal" size={20} /><a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></p>
               <p className="flex gap-3"><Clock className="shrink-0 text-teal" size={20} />{SITE.hours}</p>
               <div className="flex flex-wrap gap-3 pt-2">
-                <a className="btn btn-primary" href={waLink()} rel="noopener"><MessageCircle size={16} /> WhatsApp desk</a>
+                <a className="btn btn-primary" href={waLink()} rel="noopener"><MessageCircle size={16} /> Email an advisor</a>
                 <a className="btn btn-ghost" href={`https://www.google.com/maps/dir/?api=1&destination=${q}`} rel="noopener">Get directions</a>
               </div>
             </div>

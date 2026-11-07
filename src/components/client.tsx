@@ -24,12 +24,13 @@ export function SlotPicker() {
   const [pick, setPick] = useState<string | null>(null);
   return (
     <div className="card">
-      <p className="flex items-center gap-2 font-semibold text-navy"><CalendarClock size={18} className="text-teal" /> Next available consultations (GST)</p>
+      <p className="flex items-center gap-2 font-semibold text-navy"><CalendarClock size={18} className="text-teal" /> Request a consultation (GST)</p>
       <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {slots.map((s) => <button key={s.iso} type="button" className={`chip ${pick === s.label ? 'chip-on' : ''}`} onClick={() => setPick(s.label)}>{s.label}</button>)}
       </div>
-      <a href={waLink(`Hi Betterway, I'd like to book ${pick ?? 'the next available slot'} at Al Nasr Plaza.`)} rel="noopener" className="btn btn-primary mt-5 w-full">
-        <MessageCircle size={16} /> {pick ? `Book ${pick}` : 'Book the next slot'}
+      <p className="mt-3 text-xs text-slate">Choose a preferred time. An advisor will confirm availability.</p>
+      <a href={waLink(`Hi Betterway, I'd like to book ${pick ?? 'a suitable consultation time'} at Al Nasr Plaza.`)} rel="noopener" className="btn btn-primary mt-5 w-full">
+        <MessageCircle size={16} /> {pick ? `Request ${pick}` : 'Request a time'}
       </a>
     </div>
   );
@@ -41,9 +42,9 @@ export function LeadForm({ topic = 'Mortgage enquiry' }: { topic?: string }) {
   const msg = `${topic}\nName: ${f.name}\nPhone: ${f.phone}\nResidency: ${f.residency}\nGoal: ${f.goal}\nProperty value: ${f.price || 'TBC'}`;
   const field = 'mt-1.5 w-full rounded-btn border border-line bg-white px-3.5 py-3 text-[15px] text-ink outline-none focus:border-teal';
   return (
-    <form className="card grid gap-4" onSubmit={(e) => { e.preventDefault(); window.open(waLink(msg), '_blank', 'noopener'); }}>
+    <form className="card grid gap-4" onSubmit={(e) => { e.preventDefault(); window.location.href = waLink(msg); }}>
       <label className="text-sm font-medium text-navy">Full name<input required autoComplete="name" className={field} value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} /></label>
-      <label className="text-sm font-medium text-navy">Mobile / WhatsApp<input required type="tel" autoComplete="tel" inputMode="tel" className={field} value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} /></label>
+      <label className="text-sm font-medium text-navy">Mobile number<input required type="tel" autoComplete="tel" inputMode="tel" className={field} value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} /></label>
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="text-sm font-medium text-navy">Residency
           <select className={field} value={f.residency} onChange={(e) => setF({ ...f, residency: e.target.value })}>{['Expat resident', 'UAE National', 'GCC National', 'Non-resident'].map((o) => <option key={o}>{o}</option>)}</select>
@@ -53,8 +54,8 @@ export function LeadForm({ topic = 'Mortgage enquiry' }: { topic?: string }) {
         </label>
       </div>
       <label className="text-sm font-medium text-navy">Approximate property value (AED)<input inputMode="numeric" className={field} value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} /></label>
-      <button className="btn btn-primary">Send to an underwriter</button>
-      <p className="text-xs text-slate">Opens WhatsApp with your details pre-filled. Prefer e-mail? <a className="text-teal underline" href={`mailto:${SITE.email}?subject=${encodeURIComponent(topic)}&body=${encodeURIComponent(msg)}`}>Send by e-mail</a>.</p>
+      <button className="btn btn-primary">Prepare my enquiry</button>
+      <p className="text-xs text-slate">Opens your email app with these details. Nothing is sent until you send the email. <a className="text-teal underline" href={`mailto:${SITE.email}?subject=${encodeURIComponent(topic)}&body=${encodeURIComponent(msg)}`}>Open email draft</a>.</p>
     </form>
   );
 }

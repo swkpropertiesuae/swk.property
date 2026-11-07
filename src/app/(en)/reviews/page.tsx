@@ -4,7 +4,7 @@ import { PageHero, Section, CtaBand, aed } from '@/components/ui';
 import { Filter } from '@/components/client';
 import { buyoutSavings, handoverRelease, borrowingPower } from '@/lib/math';
 
-export const metadata: Metadata = { title: 'Client Reviews & Case Studies', description: 'Verified Betterway client reviews and worked case studies by profile: non-resident, self-employed, off-plan handover and buyout.', alternates: { canonical: '/reviews' } };
+export const metadata: Metadata = { title: 'Client Reviews & Case Studies', description: 'Illustrative mortgage scenarios by profile: non-resident, self-employed, off-plan handover and buyout.', alternates: { canonical: '/reviews' } };
 
 const bo = buyoutSavings({ balance: 1_800_000, currentRate: 6.1, newRate: 3.99, yearsLeft: 21 });
 const ho = handoverRelease(2_000_000, 20, 2_800_000, 80);
@@ -18,19 +18,19 @@ const CASES = [
   { tags: ['Self-employed'], title: 'Freezone owner on a low salary draw', body: 'Example: an owner draws AED 15,000 salary from a DMCC company earning AED 1.2M profit a year. Banks that count company profit can assess income near AED 100,000 a month.', href: '/mortgages/self-employed' },
   { tags: ['Resident'], title: 'Unused credit cards blocking approval', body: `AED 38,000 salary with AED 120,000 of card limits. Closing two unused cards raised the maximum loan from ${aed(cards.maxLoan)} to ${aed(noCards.maxLoan)}.`, href: '/calculators/dbr-borrowing-power' },
   { tags: ['Non-resident'], title: 'UK buyer closing without flying in', body: 'Example: P60, SA302 and an Experian report, income counted at a 15% GBP haircut, 60% LTV, Form F signed by Dubai REST OTP and a 15-minute video PoA.', href: '/mortgages/non-resident-uk' },
-  { tags: ['Non-resident', 'Golden Visa'], title: 'Golden Visa on day one', body: 'Example: an AED 2.1M apartment bought with 20% down qualifies at title deed under February 2026 rules, with no paid-equity wait.', href: '/mortgages/golden-visa-mortgage' },
+  { tags: ['Non-resident', 'Golden Visa'], title: 'Planning property finance and residency', body: 'A buyer considers an AED 2.1M apartment. Mortgage eligibility and residency eligibility require separate checks with the lender and relevant authority.', href: '/mortgages/golden-visa-mortgage' },
 ];
 
 export default function Page() {
   return (
     <>
-      <PageHero crumbs={[{ name: 'Reviews', href: '/reviews' }]} eyebrow="Proof" title="Verified client reviews and worked case studies"
-        capsule="Betterway links only to verified Google reviews and publishes example scenarios that show the formulas behind each outcome. Filter by non-resident, self-employed, handover or buyout." />
+      <PageHero crumbs={[{ name: 'Reviews', href: '/reviews' }]} eyebrow="Proof" title="Mortgage examples, explained."
+        capsule="These are illustrative planning scenarios, not customer testimonials or promised outcomes. Filter by non-resident, self-employed, handover or buyout." />
       <Section title="Google reviews">
         {/* Client slot: embed the verified Google Business Profile reviews widget for Al Nasr Plaza here. */}
         <div className="card flex flex-wrap items-center justify-between gap-4">
-          <p className="max-w-xl text-slate">Read verified client reviews on our Google Business Profile for Al Nasr Plaza, Oud Metha.</p>
-          <a href="https://www.google.com/maps/search/Betterway+Mortgages+Al+Nasr+Plaza" rel="noopener" className="btn btn-ghost">Read reviews on Google</a>
+          <p className="max-w-xl text-slate">Look up Betterway Mortgages on Google Maps. Check the business identity and source of each review.</p>
+          <a href="https://www.google.com/maps/search/Betterway+Mortgages+Al+Nasr+Plaza" rel="noopener" className="btn btn-ghost">Find Betterway on Google</a>
         </div>
       </Section>
       <Section tone="mist" title="Example scenarios by profile">

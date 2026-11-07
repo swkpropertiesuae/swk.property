@@ -1,5 +1,5 @@
 'use client';
-// "Ease AI Pro" co-pilot shell. Answers here are deterministic (lib/math) per Module 6: never freehand math.
+// "Mortgage assistant" co-pilot shell. Answers here are deterministic (lib/math) per Module 6: never freehand math.
 // shortcut: canned intents only; wire to the LLM + RAG backend (Module 6 system prompt) when the API is ready.
 import { useState } from 'react';
 import Link from 'next/link';
@@ -20,21 +20,21 @@ const INTENTS: { chip: string; answer: () => Msg }[] = [
     const r = borrowingPower({ salary: 35_000, existingEmis: 0, cardLimits: 50_000, years: 25 });
     return { from: 'bot', text: `With AED 50k of card limits, 50% DBR leaves ${aed(r.available)}/mo for your EMI → max loan about ${aed(r.maxLoan)}. Closing those cards adds about ${aed(borrowingPower({ salary: 35_000, existingEmis: 0, cardLimits: 0, years: 25 }).maxLoan - r.maxLoan)}.`, link: { href: '/calculators/dbr-borrowing-power', label: 'Run my own numbers' } };
   } },
-  { chip: 'Is switching banks worth it?', answer: () => ({ from: 'bot', text: `CBUAE caps the exit fee at 1% or AED 10,000 + VAT (max ${aed(earlySettlementFee(1e9))}). On AED 1.5M, cutting 6.2% to 3.99% saves about ${aed(emi(1.5e6, 6.2, 20) - emi(1.5e6, 3.99, 20))}/mo—break-even in a few weeks.`, link: { href: '/calculators/buyout-refinance-savings', label: 'Check my buyout' } }) },
-  { chip: 'Golden Visa with a mortgage?', answer: () => ({ from: 'bot', text: 'Since Feb 2026 a mortgaged property valued at AED 2M+ qualifies for the 10-year Golden Visa—no AED 1M paid-equity rule. You need a bank NOC (AED 0–525). Fees run AED 9,421–10,111 for the investor.', link: { href: '/mortgages/golden-visa-mortgage', label: 'Golden Visa guide' } }) },
+  { chip: 'Is switching banks worth it?', answer: () => ({ from: 'bot', text: `CBUAE caps the exit fee at 1% or AED 10,000 + VAT (max ${aed(earlySettlementFee(1e9))}). On AED 1.5M, cutting 6.2% to 3.99% saves about ${aed(emi(1.5e6, 6.2, 20) - emi(1.5e6, 3.99, 20))}/mo before switching costs. Check valuation, registration, processing fees and any clawbacks before deciding.`, link: { href: '/calculators/buyout-refinance-savings', label: 'Check my buyout' } }) },
+  { chip: 'Golden Visa with a mortgage?', answer: () => ({ from: 'bot', text: 'A mortgage does not automatically qualify you for a Golden Visa. Property value, ownership evidence, lender documents and current authority requirements all matter. Confirm your case with DLD or the relevant immigration authority before buying.', link: { href: '/mortgages/golden-visa-mortgage', label: 'Golden Visa guide' } }) },
 ];
 
 export default function CoPilot() {
   const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState<Msg[]>([{ from: 'bot', text: 'Hi, I’m Ease AI Pro. I run exact CBUAE and DLD math—pick a question or message an underwriter on WhatsApp.' }]);
+  const [msgs, setMsgs] = useState<Msg[]>([{ from: 'bot', text: 'Choose a question for an illustrative calculation, or ask an advisor. This guide uses preset answers and does not assess eligibility.' }]);
   const ask = (i: (typeof INTENTS)[number]) => setMsgs((m) => [...m, { from: 'me', text: i.chip }, i.answer()]);
 
   return (
     <div className="fixed bottom-4 end-4 z-50">
       {open && (
-        <div role="dialog" aria-label="Ease AI Pro mortgage co-pilot" className="mb-3 flex h-[min(560px,80dvh)] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-card border border-line bg-white shadow-2xl">
+        <div role="dialog" aria-label="Mortgage assistant mortgage co-pilot" className="mb-3 flex h-[min(560px,80dvh)] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-card border border-line bg-white shadow-2xl">
           <div className="flex items-center justify-between bg-navy px-5 py-4 text-white">
-            <p className="flex items-center gap-2 font-semibold"><Sparkles size={16} className="text-mint" /> Ease AI Pro</p>
+            <p className="flex items-center gap-2 font-semibold"><Sparkles size={16} className="text-mint" /> Mortgage assistant</p>
             <button type="button" onClick={() => setOpen(false)} aria-label="Close co-pilot"><X size={18} /></button>
           </div>
           <div className="flex-1 space-y-3 overflow-y-auto p-4 text-sm">
@@ -49,12 +49,12 @@ export default function CoPilot() {
             <div className="mb-3 flex flex-wrap gap-2">
               {INTENTS.map((i) => <button key={i.chip} type="button" className="chip !text-xs" onClick={() => ask(i)}>{i.chip}</button>)}
             </div>
-            <a href={waLink('Hi Betterway, I have a mortgage question.')} rel="noopener" className="btn btn-primary w-full"><MessageCircle size={16} /> Continue on WhatsApp <Send size={14} /></a>
+            <a href={waLink('Hi Betterway, I have a mortgage question.')} rel="noopener" className="btn btn-primary w-full"><MessageCircle size={16} /> Ask an advisor <Send size={14} /></a>
           </div>
         </div>
       )}
       <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="btn btn-dark ms-auto flex !rounded-full shadow-lg ring-1 ring-white/25">
-        <Sparkles size={16} className="text-mint" /> Ask Ease AI
+        <Sparkles size={16} className="text-mint" /> Mortgage help
       </button>
     </div>
   );

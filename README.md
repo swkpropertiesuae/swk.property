@@ -1,3 +1,5 @@
+> **7 Nov 2026 visual/content refresh:** See [the refresh notes](docs/FINTECH_REFRESH.md) for current behavior, validation and remaining data/integration limits. This supersedes older marketing and live-feature descriptions below.
+
 # Betterway Mortgages — betterwaymortgages.com
 
 The 360-page site from the *360-Page Master Sitemap & 3-Wave Deployment Blueprint*. It is built with Next.js 15 (App Router) and Tailwind v4, and statically exported. Every page is pre-rendered HTML, so no page shows a 0% rate or an AED 0 result while it loads. Brand tokens come from Brand Kit v1.0: teal `#007D78`, navy `#081D37`, mist `#F2F7F6`.

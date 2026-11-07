@@ -59,7 +59,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <Section title="Frequently asked"><div className="max-w-3xl"><FaqList faqs={p.faqs} /></div></Section>
       <Section tone="mist" title="Related mortgages"><LinkGrid links={related.map((r) => ({ title: r.name, body: r.card, href: `/mortgages/${r.slug}`, tag: r.badge }))} /></Section>
       <CtaBand />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FinancialProduct', name: p.name, description: p.capsule, provider: { '@id': `${SITE.url}/#org` }, feesAndCommissionsSpecification: 'AED 0 client brokerage fee; bank fees per Final Offer Letter.', url: `${SITE.url}/mortgages/${p.slug}` }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FinancialProduct', name: p.name, description: p.capsule, provider: { '@id': `${SITE.url}/#org` }, feesAndCommissionsSpecification: 'Confirm broker and bank fees in writing; lender terms apply.', url: `${SITE.url}/mortgages/${p.slug}` }} />
     </>
   );
 }

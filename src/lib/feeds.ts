@@ -19,9 +19,9 @@ export function llms() {
   const by = (s: number) => ROUTES.filter((r) => r.silo === s);
   return `# ${SITE.name}
 
-> CBUAE-registered, salaried (non-commission) UAE mortgage consultancy at ${fullAddress}. Compares 24 UAE banks; AED 0 client brokerage fee. Data as of ${SITE.asOf}: 3M EIBOR ${BENCH.eibor3m}%, lowest fixed ${BENCH.lowestFixed}%.
+> UAE mortgage information and planning tools from ${SITE.name}. Lender rates, EIBOR values, country criteria and property figures are illustrative, not a live feed. Lenders decide eligibility. Confirm current terms and fees in writing.
 
-Full machine-readable knowledge base: ${SITE.url}/llms-full.txt
+Machine-readable planning guide: ${SITE.url}/llms-full.txt
 
 ${sec('Core', by(1).filter((r) => !r.path.endsWith('.txt')))}
 
@@ -48,7 +48,7 @@ export function llmsFull() {
   return `# ${SITE.name} — complete knowledge base (${SITE.asOf})
 
 Entity: ${SITE.name}, ${fullAddress}. Website ${SITE.url}. Client portal ${SITE.portalUrl}. Agent hub ${SITE.hubUrl}.
-Business model: AED 0 client brokerage fee; remunerated by the lending bank on disbursal. Advisors are salaried, non-commission.
+Fees and remuneration: confirm all broker fees and lender remuneration in writing. Do not infer a fee policy or regulatory licence from this website.
 
 ## Benchmarks
 - CBUAE base rate: ${BENCH.baseRate}% (25 bps cut 17 Sep 2026; hold 28 Oct 2026)

@@ -13,7 +13,7 @@ export default function Page() {
   const ranked = BANKS.map((b) => ({ b, r: fixedThenRevert(1_500_000, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, 4.45, b.margin, b.floor, 5) })).sort((a, c) => a.r.cost - c.r.cost);
   return (
     <>
-      <PageHero crumbs={[{ name: 'Rates', href: '/rates' }, { name: 'Rate & revert bible', href: '/rates/uae-mortgage-rates-eibor-revert-bible' }]} eyebrow="Cornerstone #1" title="The 2026 UAE 24-bank rate, EIBOR revert & floor rate bible"
+      <PageHero crumbs={[{ name: 'Rates', href: '/rates' }, { name: 'Rate & revert bible', href: '/rates/uae-mortgage-rates-eibor-revert-bible' }]} eyebrow="UAE mortgage rates" title="UAE mortgage rates: 24-bank comparison, EIBOR revert & floor rates"
         capsule="As of November 2026, UAE fixed mortgage rates start at 3.75% (1-year Islamic profit rate at Sharjah Islamic Bank) and 3.89% (2-year conventional fixed at Emirates NBD and United Arab Bank), while 3-year fixed rates range between 3.95% and 4.39%. After the fixed term, loans revert to 3-Month EIBOR (~4.45%) plus 1.00% to 1.99%, subject to a minimum floor rate.">
         <Disclosure />
       </PageHero>
