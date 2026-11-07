@@ -14,7 +14,7 @@ export default function Page() {
           <div className="prose-bw">
             <p>Most UAE mortgage advice is paid per approval, often at rates that differ by bank. That quietly pushes buyers toward whichever lender pays most. Betterway’s underwriters are salaried: their pay does not change with the bank you pick.</p>
             <p>We publish every bank’s introductory rate, EIBOR revert margin, minimum floor and overpayment allowance, and we show upfront costs without a sign-up wall. If a bank down-values your home, a backup bank with a different valuer panel is already working on your file.</p>
-            <p>We sit in Oud Metha, ten minutes from DLD’s head office and the main trustee offices, so documents and manager’s cheques move the same day.</p>
+            <p>Our office is at Al Nasr Plaza, Oud Metha. Visit us, or close the whole mortgage remotely.</p>
           </div>
           <Facts facts={[['Banks compared', '24'], ['Client fee', 'AED 0'], ['Pre-approval SLA', '48 hours'], ['Advisor pay', 'Salaried'], ['Languages', 'English · العربية'], ['Office', 'Al Nasr Plaza']]} />
         </div>

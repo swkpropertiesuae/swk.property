@@ -31,7 +31,7 @@ export default async function Page({ params }: { params: Promise<{ emirate: stri
         capsule={`${c.name} trades at around AED ${c.psf.toLocaleString('en-US')} per sq.ft. with gross rental yields near ${c.yieldPct}%. A typical ${c.stock === 'Apartments' ? 'apartment' : 'home'} at ${aedM(c.typical)} costs about ${aed(k.res)} a month at 80% LTV and 3.99%, against typical rent of ${aed(k.rentMo)}—${Math.round(k.resCov * 100)}% coverage. Developers include ${c.devs}.`} />
       <Section title={`${c.name} market snapshot`}>
         <Facts facts={[['Price per sq.ft.', `AED ${c.psf.toLocaleString('en-US')}`], ['Gross yield', `${c.yieldPct}%`], ['Typical unit', aedM(c.typical)], ['Typical rent / yr', aed(c.rent)], ['Cash to close (20%)', aed(k.cash)], ['Registry', e.regulator]]} />
-        <p className="mt-4 text-xs text-slate">Indicative figures, refreshed monthly from registered transactions.</p>
+        <p className="mt-4 text-xs text-slate">Indicative figures. Ask us for the latest registered sales in this community.</p>
       </Section>
       <Section tone="mist" title="Does rent cover the mortgage?">
         <div className="grid gap-4 md:grid-cols-3">

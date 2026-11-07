@@ -15,7 +15,7 @@ export function SlotPicker() {
     while (out.length < 6) {
       d.setMinutes(d.getMinutes() + 30);
       const h = d.getHours();
-      if (d.getDay() === 0 || h < 9 || h >= 19) { if (h >= 19 || d.getDay() === 0) { d.setDate(d.getDate() + 1); } d.setHours(9, 0, 0, 0); continue; }
+      if (d.getDay() === 0 || h < 9 || h >= 19) { if (h >= 19 || d.getDay() === 0) { d.setDate(d.getDate() + 1); } d.setHours(8, 30, 0, 0); /* loop adds 30 min: first slot 9:00 */ continue; }
       const day = d.toDateString() === gst.toDateString() ? 'Today' : d.toLocaleDateString('en-GB', { weekday: 'short' });
       out.push({ label: `${day} ${d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`, iso: d.toISOString() });
     }

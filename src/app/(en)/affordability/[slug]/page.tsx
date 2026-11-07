@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     const s = a.amount;
     const clean = borrowingPower({ salary: s, existingEmis: 0, cardLimits: 0, years: 25 });
     const typical = borrowingPower({ salary: s, existingEmis: s * 0.1, cardLimits: s * 2, years: 25 });
-    const maxPrice = Math.min(clean.maxLoan / 0.8, clean.maxLoan > 4_000_000 ? clean.maxLoan / 0.7 : Infinity);
+    const maxPrice = clean.maxLoan / 0.8 <= 5_000_000 ? clean.maxLoan / 0.8 : clean.maxLoan / 0.7; // CBUAE: 80% LTV up to AED 5M, 70% above
     const fits = COMMUNITIES.filter((c) => c.typical * 1e6 <= maxPrice).sort((x, y) => y.typical - x.typical).slice(0, 8);
     return (
       <>

@@ -17,11 +17,11 @@ export const SITE = {
     countryCode: 'AE',
   },
   // TODO: replace with the real desk numbers, licence and e-mail before launch.
-  phone: '+971 4 000 0000',
-  phoneHref: 'tel:+97140000000',
+  phone: '', // e.g. '+971 4 123 4567'; hidden site-wide while empty
+  phoneHref: '',
   whatsapp: '971500000000',
   email: 'hello@betterwaymortgages.com',
-  licence: 'DED / RERA licence no. — to be inserted',
+  licence: '', // e.g. 'DED licence no. 123456'; hidden while empty
   hours: 'Mon–Sat 09:00–19:00 GST',
   asOf: 'November 2026',
   asOfISO: '2026-11-07',

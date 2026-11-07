@@ -15,25 +15,25 @@ const noCards = borrowingPower({ salary: 38_000, existingEmis: 0, cardLimits: 0,
 const CASES = [
   { tags: ['Buyout'], title: 'Revert shock on a Marina apartment', body: `AED 1.8M balance reverting to 6.10%. Switch to a 3.99% 3-year fixed: ${aed(bo.monthly)}/month lower, switch costs ${aed(bo.switchCost)} recovered in ${bo.breakEvenMonths} months.`, href: '/calculators/buyout-refinance-savings' },
   { tags: ['Handover'], title: '80/20 handover with valuation uplift', body: `Bought at AED 2.0M, valued AED 2.8M at handover. 80% LTV gives ${aed(ho.loanCap)}: AED 400,000 to the developer and up to ${aed(ho.cashOut)} released, subject to DBR.`, href: '/calculators/handover-equity-release' },
-  { tags: ['Self-employed'], title: 'Freezone owner on a low salary draw', body: 'Owner drawing AED 15,000 salary from a DMCC company netting AED 1.2M a year. Presenting net profit plus depreciation by shareholding lifted assessed income to AED 95,000/month.', href: '/mortgages/self-employed' },
+  { tags: ['Self-employed'], title: 'Freezone owner on a low salary draw', body: 'Example: an owner draws AED 15,000 salary from a DMCC company earning AED 1.2M profit a year. Banks that count company profit can assess income near AED 100,000 a month.', href: '/mortgages/self-employed' },
   { tags: ['Resident'], title: 'Unused credit cards blocking approval', body: `AED 38,000 salary with AED 120,000 of card limits. Closing two unused cards raised the maximum loan from ${aed(cards.maxLoan)} to ${aed(noCards.maxLoan)}.`, href: '/calculators/dbr-borrowing-power' },
-  { tags: ['Non-resident'], title: 'UK buyer closing without flying in', body: 'P60, SA302 and an Experian report at a 15% GBP haircut, 60% LTV from Mashreq, Form F via Dubai REST OTP and a 15-minute video PoA.', href: '/mortgages/non-resident-uk' },
-  { tags: ['Non-resident', 'Golden Visa'], title: 'Golden Visa on day one', body: 'AED 2.1M Business Bay apartment with 20% down. Under February 2026 rules the bank NOC was issued at title, no paid-equity wait.', href: '/mortgages/golden-visa-mortgage' },
+  { tags: ['Non-resident'], title: 'UK buyer closing without flying in', body: 'Example: P60, SA302 and an Experian report, income counted at a 15% GBP haircut, 60% LTV, Form F signed by Dubai REST OTP and a 15-minute video PoA.', href: '/mortgages/non-resident-uk' },
+  { tags: ['Non-resident', 'Golden Visa'], title: 'Golden Visa on day one', body: 'Example: an AED 2.1M apartment bought with 20% down qualifies at title deed under February 2026 rules, with no paid-equity wait.', href: '/mortgages/golden-visa-mortgage' },
 ];
 
 export default function Page() {
   return (
     <>
       <PageHero crumbs={[{ name: 'Reviews', href: '/reviews' }]} eyebrow="Proof" title="Verified client reviews and worked case studies"
-        capsule="Betterway publishes only verified Google reviews, tagged by advisor and community, alongside worked case studies that show the exact formulas behind each outcome. Filter by non-resident, self-employed, handover or buyout to see the cases closest to yours." />
+        capsule="Betterway links only to verified Google reviews and publishes example scenarios that show the formulas behind each outcome. Filter by non-resident, self-employed, handover or buyout." />
       <Section title="Google reviews">
         {/* Client slot: embed the verified Google Business Profile reviews widget for Al Nasr Plaza here. */}
         <div className="card flex flex-wrap items-center justify-between gap-4">
-          <p className="max-w-xl text-slate">Reviews are pulled live from our Google Business Profile at Al Nasr Plaza, Oud Metha—every review is from a real client, never edited.</p>
+          <p className="max-w-xl text-slate">Read verified client reviews on our Google Business Profile for Al Nasr Plaza, Oud Metha.</p>
           <a href="https://www.google.com/maps/search/Betterway+Mortgages+Al+Nasr+Plaza" rel="noopener" className="btn btn-ghost">Read reviews on Google</a>
         </div>
       </Section>
-      <Section tone="mist" title="Worked case studies by profile">
+      <Section tone="mist" title="Example scenarios by profile">
         <Filter tags={['Resident', 'Non-resident', 'Self-employed', 'Handover', 'Buyout', 'Golden Visa']} items={CASES.map((c) => ({ tags: c.tags, node: (
           <Link key={c.title} href={c.href} className="card">
             <span className="flex gap-2">{c.tags.map((t) => <span key={t} className="tag">{t}</span>)}</span>

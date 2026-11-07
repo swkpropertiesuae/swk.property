@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'CBUAE-registered Dubai mortgage consultancy at Al Nasr Plaza, Oud Metha. Salaried underwriters compare 24 UAE banks side by side at zero brokerage cost.',
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: '/favicon.ico' }], apple: '/apple-touch-icon.png' },
   manifest: '/site.webmanifest',
-  openGraph: { type: 'website', siteName: SITE.name, images: ['/og.png'], locale: 'en_AE' },
+  openGraph: { type: 'website', siteName: SITE.name, images: ['/og-hero.png'], locale: 'en_AE' },
   twitter: { card: 'summary_large_image' },
   alternates: { languages: { 'en-AE': '/', 'ar-AE': '/ar' } },
 };

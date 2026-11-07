@@ -11,14 +11,14 @@ export default function Page() {
   return (
     <>
       <PageHero crumbs={[{ name: 'Contact', href: '/contact' }]} eyebrow="Contact" title="Visit us at Al Nasr Plaza, Oud Metha—or start on WhatsApp"
-        capsule={`Betterway Mortgages is at ${fullAddress}, beside Oud Metha Metro and ten minutes from the Dubai Land Department head office. Book a slot for a free consultation, message the WhatsApp desk, or send your profile for a 48-hour dual-bank pre-approval.`} updated={false} />
+        capsule={`Betterway Mortgages is at ${fullAddress}. Book a free consultation, message us on WhatsApp, or send your details for a 48-hour pre-approval from two banks.`} updated={false} />
       <Section title="Book, message or send your profile">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <div className="space-y-6">
             <SlotPicker />
             <div className="card space-y-4 text-[15px]">
               <p className="flex gap-3"><MapPin className="shrink-0 text-teal" size={20} />{fullAddress}</p>
-              <p className="flex gap-3"><Phone className="shrink-0 text-teal" size={20} /><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a></p>
+              {SITE.phone && <p className="flex gap-3"><Phone className="shrink-0 text-teal" size={20} /><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a></p>}
               <p className="flex gap-3"><Mail className="shrink-0 text-teal" size={20} /><a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></p>
               <p className="flex gap-3"><Clock className="shrink-0 text-teal" size={20} />{SITE.hours}</p>
               <div className="flex flex-wrap gap-3 pt-2">

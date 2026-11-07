@@ -10,7 +10,7 @@ const SILOS = ['Core & AI endpoints', 'Mortgage products', 'Calculators & tools'
 export default function Page() {
   return (
     <>
-      <PageHero crumbs={[{ name: 'Sitemap', href: '/sitemap' }]} title="Sitemap" capsule={`All ${ROUTES.length} pages of betterwaymortgages.com across 12 sections.`} updated={false} />
+      <PageHero crumbs={[{ name: 'Sitemap', href: '/sitemap' }]} title="Sitemap" aside={false} capsule={`All ${ROUTES.length} pages of betterwaymortgages.com across 12 sections.`} updated={false} />
       {SILOS.map((s, i) => (
         <Section key={s} tone={i % 2 ? 'mist' : 'white'} title={`${s} (${ROUTES.filter((r) => r.silo === i + 1).length})`}>
           <ul className="columns-1 gap-8 text-sm sm:columns-2 lg:columns-3">

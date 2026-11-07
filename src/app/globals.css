@@ -76,6 +76,9 @@
   .grid-bg { background-image: linear-gradient(to right, rgb(8 29 55 / 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgb(8 29 55 / 0.05) 1px, transparent 1px); background-size: 48px 48px; }
 }
 
+@keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+.float { animation: floaty 6s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

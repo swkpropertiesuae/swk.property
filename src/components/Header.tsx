@@ -72,7 +72,7 @@ export default function Header() {
               {active.cols.length < 3 && <div />}
               <div className="rounded-card bg-navy p-6 text-white">
                 <p className="font-display text-lg font-semibold">{active.feature?.title ?? `3M EIBOR ${BENCH.eibor3m}%`}</p>
-                <p className="mt-2 text-sm text-white/70">{active.feature?.body ?? 'Every calculator opens with real numbers—no sign-up, no AED 0 screens.'}</p>
+                <p className="mt-2 text-sm text-white/70">{active.feature?.body ?? 'Every calculator is free to use, with no sign-up.'}</p>
                 <Link href={active.feature?.href ?? active.href} className="btn btn-light mt-5 !py-2">{active.feature?.cta ?? `All ${active.label.toLowerCase()}`} <ArrowRight size={15} /></Link>
               </div>
             </div>

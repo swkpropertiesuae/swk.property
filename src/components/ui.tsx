@@ -60,26 +60,56 @@ export function Crumbs({ items }: { items: { name: string; href: string }[] }) {
 }
 
 /** Standard page header: breadcrumbs, H1, 50-word AEO citation capsule, actions. */
-export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, updated = true }: {
-  crumbs: { name: string; href: string }[]; eyebrow?: string; title: string; capsule?: string; children?: ReactNode; aside?: ReactNode; updated?: boolean;
-}) {
+/** Small static phone shown beside inner-page headers: live benchmarks + primary action. */
+export function MiniPhone() {
   return (
-    <section className="border-b border-line bg-mist">
-      <div className="wrap py-10 lg:py-14">
+    <div className="float relative mx-auto hidden w-[250px] rounded-[2.6rem] bg-[#0b1220] p-[9px] shadow-[0_40px_80px_-30px_rgb(8_29_55/0.5),inset_0_0_0_2px_#2a3446] lg:block" aria-hidden="true">
+      <div className="relative overflow-hidden rounded-[2.1rem] bg-white px-5 pb-6 pt-11">
+        <span className="absolute start-1/2 top-2.5 h-[22px] w-[80px] -translate-x-1/2 rounded-full bg-[#0b1220] rtl:translate-x-1/2" />
+        <div className="flex items-center gap-2"><img src="/brand/symbol-teal.svg" alt="" width={20} height={20} className="h-5 w-5" /><span className="text-[13px] font-semibold text-navy">Betterway</span></div>
+        <div className="mt-4 rounded-2xl bg-navy p-4 text-white">
+          <p className="text-[11px] text-white/60">Fixed from</p>
+          <p className="num text-[26px] font-semibold">{BENCH.lowestFixed}%</p>
+        </div>
+        <div className="mt-2 space-y-1.5 text-[11px]">
+          {[['3M EIBOR', `${BENCH.eibor3m}%`], ['Banks compared', '24'], ['Client fee', 'AED 0'], ['Pre-approval', '48 hours']].map(([a, b]) => (
+            <div key={a} className="flex justify-between rounded-lg bg-mist px-3 py-2"><span className="text-slate">{a}</span><span className="num font-semibold text-navy">{b}</span></div>
+          ))}
+        </div>
+        <div className="mt-3 rounded-btn bg-teal py-2.5 text-center text-[12px] font-semibold text-white">Get pre-approved</div>
+      </div>
+    </div>
+  );
+}
+
+/** Standard page header. A "Short title: keyword detail" string renders as a short H1 with the detail as a subline inside the H1. */
+export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, updated = true }: {
+  crumbs: { name: string; href: string }[]; eyebrow?: string; title: string; capsule?: string; children?: ReactNode; aside?: ReactNode | false; updated?: boolean;
+}) {
+  const cut = title.indexOf(': ');
+  const [head, sub] = cut > 0 ? [title.slice(0, cut), title.slice(cut + 2)] : [title, ''];
+  const side = aside === undefined ? <MiniPhone /> : aside;
+  return (
+    <section className="relative overflow-hidden border-b border-line bg-mist">
+      <div className="pointer-events-none absolute -end-32 -top-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgb(0_125_120/0.14),transparent_65%)]" aria-hidden="true" />
+      <div className="wrap relative py-10 lg:py-14">
         <Crumbs items={crumbs} />
-        <div className={`mt-6 grid gap-10 ${aside ? 'lg:grid-cols-[1.25fr_1fr] lg:items-start' : ''}`}>
+        <div className={`mt-6 grid gap-10 ${side ? 'lg:grid-cols-[1fr_300px] lg:items-center' : ''}`}>
           <div>
             {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-            <h1 className="h1 max-w-4xl !text-[2rem] sm:!text-[2.6rem] lg:!text-[3rem]">{title}</h1>
+            <h1 className="max-w-3xl text-[2rem] font-bold leading-[1.1] sm:text-[2.6rem] lg:text-[3rem]">
+              {head}
+              {sub && <span className="mt-3 block font-sans text-lg font-medium leading-snug tracking-normal text-slate sm:text-xl">{sub}</span>}
+            </h1>
             {capsule && (
-              <div className="mt-6 max-w-3xl border-s-4 border-teal bg-white p-5 shadow-sm" data-capsule>
+              <div className="mt-6 max-w-2xl border-s-2 border-teal ps-4" data-capsule>
                 <p className="text-[15px] leading-relaxed text-ink">{capsule}</p>
-                {updated && <p className="mt-3 text-xs text-slate">Reviewed by the Betterway underwriting desk · Updated {SITE.asOf}</p>}
+                {updated && <p className="mt-2 text-xs text-slate">Updated {SITE.asOf}</p>}
               </div>
             )}
             {children}
           </div>
-          {aside}
+          {side}
         </div>
       </div>
     </section>
@@ -153,7 +183,7 @@ export function LinkGrid({ links, cols = 3 }: { links: { title: string; body?: s
   );
 }
 
-export function CtaBand({ title = 'Compare all 24 banks with one application', body = 'A salaried underwriter at Al Nasr Plaza builds your side-by-side offer matrix—rates, revert margins, floors and fees—at zero brokerage cost to you.' }: { title?: string; body?: string }) {
+export function CtaBand({ title = 'Compare all 24 banks with one application', body = 'Rates, revert margins, floors and fees from every bank, in one table. AED 0 to you.' }: { title?: string; body?: string }) {
   return (
     <section className="bg-white py-16">
       <div className="wrap">
@@ -186,9 +216,9 @@ export function Footer() {
         <div>
           <img src="/brand/logo-white.svg" alt="Betterway Mortgage" width={180} height={54} className="h-11 w-auto" />
           <p className="mt-5 flex gap-2 text-sm"><MapPin size={16} className="mt-0.5 shrink-0 text-mint" />{fullAddress}</p>
-          <p className="mt-3 text-sm"><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a> · <a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></p>
+          <p className="mt-3 text-sm">{SITE.phone && <><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a> · </>}<a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></p>
           <p className="mt-1 text-sm">{SITE.hours}</p>
-          <p className="mt-4 text-xs text-white/50">{SITE.licence}</p>
+          {SITE.licence && <p className="mt-4 text-xs text-white/50">{SITE.licence}</p>}
         </div>
         {FOOT.map((g) => (
           <div key={g.title}>
@@ -220,8 +250,8 @@ export function orgSchema() {
     name: SITE.name,
     url: SITE.url,
     logo: `${SITE.url}/brand/logo-primary.svg`,
-    image: `${SITE.url}/og.png`,
-    telephone: SITE.phone,
+    image: `${SITE.url}/og-hero.png`,
+    ...(SITE.phone ? { telephone: SITE.phone } : {}),
     email: SITE.email,
     priceRange: 'AED 0 client fee',
     address: { '@type': 'PostalAddress', streetAddress: `${SITE.address.building}, ${SITE.address.plot}, ${SITE.address.street}`, addressLocality: SITE.address.district, addressRegion: 'Dubai', addressCountry: 'AE' },

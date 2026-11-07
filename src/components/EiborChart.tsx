@@ -22,7 +22,7 @@ export default function EiborChart() {
         {series.map((s) => <path key={s.k} d={line(s.k)} fill="none" strokeWidth={s.w} strokeLinejoin="round" strokeLinecap="round" className={s.cls} />)}
         <circle cx={x(EIBOR_SERIES.length - 1)} cy={y(last.m3)} r={5} className="fill-teal" />
       </svg>
-      <figcaption className="mt-2 text-xs text-slate">Monthly fixings, % p.a. Indicative series; connect the CBUAE daily fixing feed for live values.</figcaption>
+      <figcaption className="mt-2 text-xs text-slate">Monthly averages, % p.a. Indicative; the bank’s offer letter is binding.</figcaption>
     </figure>
   );
 }

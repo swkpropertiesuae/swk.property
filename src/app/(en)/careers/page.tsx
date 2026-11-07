@@ -15,7 +15,7 @@ export default function Page() {
   return (
     <>
       <PageHero crumbs={[{ name: 'Careers', href: '/careers' }]} eyebrow="Careers" title="Underwrite for the client, on a salary"
-        capsule="Betterway hires salaried mortgage underwriters and RERA progression managers in Dubai. Pay is fixed, not per approval or per bank, so advice follows the client’s five-year cost. Roles are based at Al Nasr Plaza, Oud Metha, with hybrid days for portal-based work." updated={false} />
+        capsule="Betterway hires salaried mortgage underwriters and RERA progression managers in Dubai. Pay is fixed, not per approval or per bank, so advice follows the client’s five-year cost. Roles are based at Al Nasr Plaza, Oud Metha." updated={false} />
       <Section title="Open roles">
         <div className="divide-y divide-line rounded-card border border-line">
           {ROLES.map(([t, d, b]) => (

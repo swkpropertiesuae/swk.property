@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: Promise<{ developer: st
       <PageHero crumbs={[{ name: 'Off-plan handover', href: '/handover' }, { name: d.name, href: `/handover/${d.slug}` }]} eyebrow="Developer APL hub" title={`${d.name} handover mortgages: APL banks, NOCs & projects`}
         capsule={`${d.blurb} Developer NOCs typically take ${d.nocDays}; payments run through ${d.escrow.toLowerCase()}. Betterway tracks ${projects.length} ${d.name} projects and confirms tower-level APL coverage before each buyer’s completion notice.`} />
       <Section title="Developer facts">
-        <Facts facts={[['Projects tracked', String(projects.length)], ['APL bank range', apl.length ? `${Math.min(...apl)}–${Math.max(...apl)} banks` : 'Being mapped'], ['NOC turnaround', d.nocDays], ['Escrow', d.escrow], ['Under-construction LTV', '50% max'], ['Handover LTV', '80% resident · 85% National']]} />
+        <Facts facts={[['Projects tracked', String(projects.length)], ['APL bank range', apl.length ? `${Math.min(...apl)}–${Math.max(...apl)} banks` : 'On request'], ['NOC turnaround', d.nocDays], ['Escrow', d.escrow], ['Under-construction LTV', '50% max'], ['Handover LTV', '80% resident · 85% National']]} />
       </Section>
       {banks.length > 0 && (
         <Section tone="mist" title={`Most active lenders on ${d.name}`}>
@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: Promise<{ developer: st
         </Section>
       )}
       <Section title={`${d.name} projects`}>
-        <LinkGrid links={projects.map((p) => ({ title: p.name, body: `${p.community} · ${p.window}${p.plan ? ` · ${p.plan}` : ''}${p.value ? ` · now ~${aedM(p.value)}` : ''}`, href: `/handover/${d.slug}/${p.slug}`, tag: p.apl ? `${p.apl} banks` : 'APL mapping' }))} />
+        <LinkGrid links={projects.map((p) => ({ title: p.name, body: `${p.community} · ${p.window}${p.plan ? ` · ${p.plan}` : ''}${p.value ? ` · now ~${aedM(p.value)}` : ''}`, href: `/handover/${d.slug}/${p.slug}`, tag: p.apl ? `${p.apl} banks` : 'Handover 2027–28' }))} />
       </Section>
       <CtaBand />
     </>

@@ -44,8 +44,8 @@ export default async function Page({ params }: { params: Promise<{ developer: st
       <Section title="Project numbers">
         <Facts facts={[
           ['Developer', d.name], ['Community', p.community], ['Handover window', p.window],
-          ['Payment plan', p.plan ?? 'Confirm with desk'], ['Launch price', p.launch ? aedM(p.launch) : 'Pending brief'], ['2026 valuation', p.value ? aedM(p.value) : 'Pending brief'],
-          ['APL banks', p.apl ? String(p.apl) : 'Being mapped'], ['Developer NOC', d.nocDays], ['Escrow', d.escrow],
+          ['Payment plan', p.plan ?? 'On request'], ['Launch price', p.launch ? aedM(p.launch) : 'On request'], ['2026 valuation', p.value ? aedM(p.value) : 'On request'],
+          ['APL banks', p.apl ? String(p.apl) : 'On request'], ['Developer NOC', d.nocDays], ['Escrow', d.escrow],
         ]} />
       </Section>
       <Section tone="mist" title="Banks that approve this project">

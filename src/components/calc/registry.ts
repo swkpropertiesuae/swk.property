@@ -139,11 +139,11 @@ export const CALCS: Record<string, CalcDef> = {
     },
   },
   'non-resident-rental-coverage': {
-    inputs: [price(1_800_000), { k: 'ltv', label: l('LTV', 'نسبة التمويل'), def: 60, min: 40, max: 65, step: 5, unit: '%' }, rate(4.49), years(), { k: 'yield', label: l('Gross rental yield', 'العائد الإيجاري'), def: 6.5, min: 3, max: 10, step: 0.1, unit: '%' }, { k: 'sc', label: l('Service charge / sq.ft.', 'رسوم الخدمة'), def: 18, min: 5, max: 40, step: 1, unit: 'AED' }],
+    inputs: [price(1_800_000), { k: 'ltv', label: l('LTV', 'نسبة التمويل'), def: 60, min: 40, max: 65, step: 5, unit: '%' }, rate(4.49), years(), { k: 'yield', label: l('Gross rental yield', 'العائد الإيجاري'), def: 6.5, min: 3, max: 10, step: 0.1, unit: '%' }, { k: 'sc', label: l('Service charge / sq.ft.', 'رسوم الخدمة'), def: 18, min: 5, max: 40, step: 1, unit: 'AED' }, { k: 'psf', label: l('Price per sq.ft.', 'السعر للقدم المربعة'), def: 1700, min: 600, max: 5000, step: 50, unit: 'AED' }],
     compute: (v) => {
       const loan = v.price * (v.ltv / 100);
       const e = M.emi(loan, v.rate, v.years);
-      const sqft = v.price / 1700;
+      const sqft = v.price / v.psf;
       const net = (v.price * (v.yield / 100) - sqft * v.sc) * 0.95 / 12;
       const c = M.cashToClose({ price: v.price, downPct: 100 - v.ltv });
       return {

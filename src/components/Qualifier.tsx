@@ -17,7 +17,12 @@ export default function Qualifier() {
   const [ans, setAns] = useState<string[]>([]);
   const done = step >= STEPS.length;
   const nr = ans[1] === 'Non-resident';
-  const matches = BANKS.filter((b) => (nr ? b.nrLtv : true)).length;
+  const big = ans[3] === 'Above AED 5M';
+  const selfEmp = ans[2] === 'Self-employed' || ans[2] === 'Both';
+  const SELF = ['rakbank', 'rakislamic', 'mashreq', 'cbd', 'emirates-nbd', 'dib', 'fab']; // Market Bible 14.2 #5
+  const banks = BANKS.filter((b) => (!nr || b.nrLtv) && (!selfEmp || SELF.includes(b.key)) && (ans[0] !== 'Switch bank' || b.feeBuyout === '0%'));
+  const ltv = nr ? Math.max(...banks.map((b) => b.nrLtv ?? 0)) : ans[1] === 'UAE National' ? (big ? 75 : 85) : big ? 70 : 80;
+  const from = banks.length ? Math.min(...banks.map((b) => b.intro)) : null;
 
   return (
     <div className="rounded-card border border-line bg-white p-5 shadow-[0_20px_60px_-30px_rgb(8_29_55/0.45)] sm:p-6">
@@ -41,10 +46,15 @@ export default function Qualifier() {
         </fieldset>
       ) : (
         <div>
-          <p className="font-display text-lg font-semibold text-navy">{matches} banks match your profile</p>
+          <p className="font-display text-lg font-semibold text-navy">{banks.length} banks match your profile</p>
           <p className="mt-2 text-sm text-slate">{ans.join(' · ')}</p>
-          <p className="mt-3 text-sm text-slate">Indicative pricing from <b className="num text-navy">{nr ? '4.09%' : '3.75%'}</b>. Send your profile and an underwriter returns your 24-bank rate & revert matrix on WhatsApp.</p>
-          <a href={waLink(`Hi Betterway — rate check: ${ans.join(', ')}. Please send my 24-bank matrix.`)} rel="noopener" className="btn btn-primary mt-5 w-full"><MessageCircle size={16} /> Get my bank matrix on WhatsApp</a>
+          <dl className="mt-4 grid grid-cols-2 gap-2 text-sm">
+            <div className="rounded-btn bg-mist p-3"><dt className="text-slate">Max loan-to-value</dt><dd className="num text-lg font-semibold text-navy">{ltv}%</dd></div>
+            <div className="rounded-btn bg-mist p-3"><dt className="text-slate">Rates from</dt><dd className="num text-lg font-semibold text-navy">{from ? `${from.toFixed(2)}%` : '—'}</dd></div>
+          </dl>
+          {ans[0] === 'Off-plan handover' && <p className="mt-3 text-sm text-slate">Final number depends on which banks list your tower. We check that first.</p>}
+          {ans[0] === 'Switch bank' && <p className="mt-3 text-sm text-slate">Shown: banks with no buyout fee. Exit fee at your bank is capped at AED 10,500.</p>}
+          <a href={waLink(`Hi Betterway — rate check: ${ans.join(', ')}. Please send my bank options.`)} rel="noopener" className="btn btn-primary mt-5 w-full"><MessageCircle size={16} /> Get my bank list on WhatsApp</a>
           <button type="button" onClick={() => { setStep(0); setAns([]); }} className="mt-3 w-full text-sm text-slate hover:text-navy">Start again <ArrowRight size={13} className="inline" /></button>
         </div>
       )}

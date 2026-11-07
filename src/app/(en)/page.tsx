@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight, Check, X as XIcon, MessageCircle, ShieldCheck, Building2, Users, Clock3 } from 'lucide-react';
 import Qualifier from '@/components/Qualifier';
+import PhoneHero from '@/components/PhoneHero';
 import Calculator from '@/components/calc/Calculator';
 import RateTable from '@/components/RateTable';
 import { Section, Disclosure, FaqList, CtaBand, LinkGrid, aed } from '@/components/ui';
@@ -15,13 +16,13 @@ const lowestIntro = (t: '1Y' | '2Y') => Math.min(...BANKS.filter((b) => b.introT
 const STAGES = ['Profile & documents', 'Dual-bank pre-approval', 'Valuation', 'Final Offer Letter', 'DLD transfer & keys'];
 
 const PAINS = [
-  ['Bank-bundled life insurance', 'Assigning an external policy cuts cover from ~0.65% to ~0.26% a year—AED 80,200+ on a AED 2M loan.', '/tools/life-insurance-assignment-audit'],
-  ['10% Form F deposit at risk', 'Pre-MOU desktop valuation plus copy-paste valuation and FOL protection clauses.', '/tools/form-f-clause-generator'],
-  ['Down-valuation shock', 'Valuer-panel arbitrage and two parallel pre-approvals with different valuers.', '/advisory/property-valuation-appeal-desk'],
-  ['Seller liability letter expiry', 'A 15-day countdown in your client portal keeps mortgage-to-mortgage transfers on time.', '/guides/mortgage-to-mortgage-transfer-seller-liability-letter'],
-  ['Self-employed rejections', 'Corporate net profit, depreciation and drawings presented to banks that accept them.', '/mortgages/self-employed'],
-  ['The 36-month clawback', 'Net refinance savings after the CBUAE exit cap and fee-waiver clawbacks.', '/guides/3-year-clawback-clause-on-uae-mortgage-buyouts'],
-  ['Joint owners without a will', 'DIFC single-property wills registered at closing so nothing is frozen.', '/advisory/difc-wills-and-estate-planning'],
+  ['Bank-bundled life insurance', 'Your own policy instead of the bank’s: ~0.26% a year vs ~0.65%. AED 80,000+ saved on AED 2M.', '/tools/life-insurance-assignment-audit'],
+  ['10% Form F deposit at risk', 'Valuation checked before you sign, plus clauses that return your deposit if finance fails.', '/tools/form-f-clause-generator'],
+  ['Down-valuation shock', 'Two banks, two different valuers, applied for in parallel.', '/advisory/property-valuation-appeal-desk'],
+  ['Seller liability letter expiry', 'We track the 15-day validity so the transfer closes before it expires.', '/guides/mortgage-to-mortgage-transfer-seller-liability-letter'],
+  ['Self-employed rejections', 'Company profit counted as income, at banks that accept it.', '/mortgages/self-employed'],
+  ['The 36-month clawback', 'Your real saving after exit fees and waived-fee clawbacks.', '/guides/3-year-clawback-clause-on-uae-mortgage-buyouts'],
+  ['Joint owners without a will', 'A DIFC will registered at closing, so the home is never frozen.', '/advisory/difc-wills-and-estate-planning'],
 ] as const;
 
 const FAQS = [
@@ -47,18 +48,22 @@ export default function Home() {
       {/* HERO: split SSR hero — copy + qualifier, live benchmarks rendered server-side */}
       <section className="relative overflow-hidden bg-mist">
         <div className="grid-bg pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true" />
-        <div className="wrap relative grid min-h-[calc(100svh-108px)] items-center gap-10 py-12 lg:grid-cols-[1.2fr_1fr] lg:py-16">
+        <div className="pointer-events-none absolute -end-40 -top-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgb(0_125_120/0.18),transparent_65%)]" aria-hidden="true" />
+        <div className="wrap relative grid min-h-[calc(100svh-108px)] items-center gap-12 py-12 lg:grid-cols-[1.1fr_1fr] lg:py-16">
           <div>
-            <p className="tag mb-5"><ShieldCheck size={13} className="me-1" /> CBUAE-registered · 0% client fee</p>
-            <h1 className="h1">Compare 24 UAE banks with one application. Fixed from <span className="text-teal">3.75%*</span></h1>
-            <p className="lead mt-6 max-w-2xl">Buying your first Dubai home, financing an off-plan handover or switching banks to cut your payment—our salaried underwriters at Al Nasr Plaza negotiate every offer side by side, at zero brokerage cost to you.</p>
+            <p className="tag mb-5"><ShieldCheck size={13} className="me-1" /> CBUAE-registered · AED 0 client fee</p>
+            <h1 className="h1">Compare 24 UAE banks.<br />Fixed from <span className="text-teal">3.75%*</span></h1>
+            <p className="lead mt-6 max-w-xl">One application. Every Dubai mortgage offer side by side. Salaried advisors, never paid by the bank you pick.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="btn btn-primary">Get pre-approved in 48h <ArrowRight size={16} /></Link>
               <Link href="/calculators/mortgage-calculator" className="btn btn-ghost">Calculate my payment</Link>
             </div>
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate">
+              {['Expats & UAE Nationals', 'Non-residents', 'Off-plan handover', 'Switch bank'].map((t) => <li key={t} className="flex items-center gap-1.5"><Check size={15} className="text-teal" />{t}</li>)}
+            </ul>
             <Disclosure />
           </div>
-          <Qualifier />
+          <PhoneHero />
         </div>
       </section>
 
@@ -74,7 +79,17 @@ export default function Home() {
         </div>
       </section>
 
-      <Section eyebrow="Our panel" title="24 UAE lenders, one side-by-side offer" intro="Conventional, Islamic and non-bank lenders—every retail mortgage desk in the country, compared on rate, revert margin, floor and fees.">
+      <Section tone="mist" eyebrow="30-second rate check" title="See which banks will lend to you">
+        <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">
+          <div className="space-y-4 text-lg text-slate">
+            <p>Four questions. No documents, no sign-up.</p>
+            <p>Your answers set the rules banks apply to you: the loan-to-value cap, which lenders accept your income, and whether your project is on their approved list.</p>
+          </div>
+          <Qualifier />
+        </div>
+      </Section>
+
+      <Section eyebrow="Our panel" title="24 UAE banks, one offer table" intro="Conventional, Islamic and non-bank lenders, compared on rate, revert margin, floor and fees.">
         <ul className="flex flex-wrap gap-2">
           {BANKS.map((b) => <li key={b.slug}><Link href={`/rates/${b.slug}`} className="chip inline-block">{b.name}</Link></li>)}
         </ul>
@@ -92,7 +107,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="mist" eyebrow="Mortgages" title="Eight ways we finance UAE property" action={{ label: 'All 14 products', href: '/mortgages' }}>
+      <Section tone="mist" eyebrow="Mortgages" title="Mortgages for every buyer" action={{ label: 'All 14 products', href: '/mortgages' }}>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PRODUCTS.filter((p) => p.core).map((p) => (
             <Link key={p.slug} href={`/mortgages/${p.slug}`} className="card group flex flex-col">
@@ -105,15 +120,15 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="calculator" eyebrow="Ungated calculator" title="Your payment and every dirham of upfront cost" intro="No email wall. Defaults load a real AED 2M purchase so you never see an AED 0 screen.">
+      <Section id="calculator" eyebrow="Ungated calculator" title="Monthly payment and upfront cost" intro="No sign-up. Change any number.">
         <div className="rounded-card border border-line bg-white p-5 sm:p-8"><Calculator slug="mortgage-calculator" /></div>
       </Section>
 
-      <Section tone="mist" eyebrow="Rate & revert bible" title="The rate after your fixed period matters more" intro="Teaser rates revert to 3M EIBOR plus a margin of 1.00% to 1.99%. On AED 1.5M, the gap between DIB’s +1.00% and a +1.75% margin is about AED 155,000 of lifetime interest." action={{ label: 'See all 24 banks', href: '/rates/uae-mortgage-rates-eibor-revert-bible' }}>
+      <Section tone="mist" eyebrow="Rate & revert bible" title="Look past the fixed rate" intro="After 1–5 years, every loan moves to 3M EIBOR + a margin of 1.00% to 1.99%. On AED 1.5M, that margin gap is worth about AED 155,000." action={{ label: 'See all 24 banks', href: '/rates/uae-mortgage-rates-eibor-revert-bible' }}>
         <RateTable limit={8} banks={[...BANKS].sort((a, b) => a.intro - b.intro)} />
       </Section>
 
-      <Section eyebrow="Betterway vs going direct" title="One salaried desk instead of one bank’s salesperson">
+      <Section eyebrow="Betterway vs going direct" title="Why not go direct to a bank?">
         <div className="overflow-x-auto rounded-card border border-line">
           <table className="table-bw min-w-[640px]">
             <thead><tr><th scope="col">What you get</th><th scope="col">Betterway</th><th scope="col">Going direct to one bank</th></tr></thead>
@@ -127,7 +142,7 @@ export default function Home() {
         <Link href="/why-betterway-vs-direct-bank" className="btn btn-ghost mt-6">Read the full comparison <ArrowRight size={15} /></Link>
       </Section>
 
-      <Section tone="navy" eyebrow="Client portal" title="Track your mortgage like a delivery" intro="Every client gets a live tracker, an OCR document vault and a countdown on every deadline—Form F, valuation and the seller’s liability letter.">
+      <Section tone="navy" eyebrow="Client portal" title="Track every step online" intro="See each stage, upload documents and watch every deadline, from Form F to keys.">
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
           <div className="rounded-card bg-white p-6 text-ink">
             <div className="flex items-center justify-between"><p className="font-semibold text-navy">Villa 14, Dubai Hills · AED 3.2M</p><span className="tag">Stage 3 of 5</span></div>
@@ -147,14 +162,14 @@ export default function Home() {
           </div>
           <div className="flex flex-col justify-center">
             <ul className="space-y-4 text-white/80">
-              {['1-tap UAE PASS login, WhatsApp OTP for non-residents', 'Documents sent on WhatsApp are classified and checked automatically', 'Primary and backup bank submitted in parallel', 'Exact manager’s-cheque split 72 hours before transfer'].map((t) => <li key={t} className="flex gap-3"><Check size={18} className="mt-0.5 shrink-0 text-mint" />{t}</li>)}
+              {['Sign in with UAE PASS, or a WhatsApp code from abroad', 'Send documents on WhatsApp, we file them for you', 'Two banks working on your file at once', 'Exact cheque amounts 72 hours before transfer'].map((t) => <li key={t} className="flex gap-3"><Check size={18} className="mt-0.5 shrink-0 text-mint" />{t}</li>)}
             </ul>
             <Link href="/portal/login" className="btn btn-light mt-8 self-start">Open the client portal <ArrowRight size={15} /></Link>
           </div>
         </div>
       </Section>
 
-      <Section eyebrow="CBUAE rules, in plain numbers" title="LTV caps and the real cash to close">
+      <Section eyebrow="CBUAE rules, in plain numbers" title="How much you can borrow, and the cash you need">
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="overflow-hidden rounded-card border border-line">
             <table className="table-bw">
@@ -177,7 +192,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="mist" eyebrow="What others miss" title="Seven costly gaps we close for every client">
+      <Section tone="mist" eyebrow="Protection" title="Seven costly mistakes we prevent">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PAINS.map(([t, b, h], i) => (
             <Link key={t} href={h} className="card group">
@@ -193,7 +208,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section eyebrow="Explore" title="Built for every buyer, project and community">
+      <Section eyebrow="Explore" title="Find your exact situation">
         <LinkGrid cols={3} links={[
           { title: 'Off-plan handover finance', body: '80 projects and 14 developer APL hubs—check which banks approve your tower.', href: '/handover/dubai-off-plan-handover-mortgage-guide', tag: '80 projects' },
           { title: 'Non-resident by country', body: '25 country pages mapping tax proofs, credit bureaux and FX haircuts.', href: '/mortgages/non-resident-dubai', tag: '25 countries' },
@@ -204,7 +219,7 @@ export default function Home() {
         ]} />
       </Section>
 
-      <Section tone="mist" eyebrow="FAQ" title="Questions buyers ask first">
+      <Section tone="mist" eyebrow="FAQ" title="Common questions">
         <div className="max-w-3xl"><FaqList faqs={FAQS} /></div>
       </Section>
 

@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <AppShell title="Partner Hub" sub="hub.betterwaymortgages.com" nav={HUB_NAV} active="/partners">
       <h1 className="font-display text-3xl font-bold">Refer mortgage clients. Get paid within 24 hours of transfer.</h1>
-      <p className="mt-3 max-w-2xl text-slate">Banks pay brokerages 0.65%–1.00% of the loan, 30–60 days after disbursal. We advance your share from our treasury float within 24 hours of DLD transfer.</p>
+      <p className="mt-3 max-w-2xl text-slate">Banks take 30–60 days to pay referral fees. We pay your share within 24 hours of DLD transfer.</p>
       <div className="mt-8 overflow-x-auto rounded-card border border-line bg-white">
         <table className="table-bw min-w-[640px]"><thead><tr><th>Tier</th><th>Qualification (rolling 12 months)</th><th>Your split</th><th>AED 2M loan</th><th>AED 5M loan</th><th>Settlement</th></tr></thead>
           <tbody className="num">{TIERS.map(([t, q, s, sla]) => <tr key={t}><th scope="row" className="font-sans text-navy">{t}</th><td className="font-sans">{q}</td><td className="text-teal">{s}%</td><td>{aed(2e6 * 0.008 * s / 100)}</td><td>{aed(5e6 * 0.008 * s / 100)}</td><td className="font-sans">{sla}</td></tr>)}</tbody>
