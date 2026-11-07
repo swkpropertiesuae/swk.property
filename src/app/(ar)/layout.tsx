@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: { default: 'بيترواي للتمويل العقاري — قارن 24 بنكاً في الإمارات', template: '%s | بيترواي للتمويل العقاري' },
   description: 'استشارات تمويل عقاري في النصر بلازا، عود ميثاء، دبي. قارن خيارات التمويل وافهم التكاليف قبل التقديم.',
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: '/favicon.ico' }], apple: '/apple-touch-icon.png' },
-  openGraph: { locale: 'ar_AE', images: ['/og-hero.png'] },
+  openGraph: { locale: 'ar_AE', images: ['/images/dubai-waterfront-1280.webp'] },
 };
 export const viewport: Viewport = { themeColor: '#007D78' };
 

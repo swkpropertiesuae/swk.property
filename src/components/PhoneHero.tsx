@@ -12,10 +12,12 @@ const money = (n: number) => Math.round(n).toLocaleString('en-US');
 /** Code-rendered iPhone mockups: sharp at every size, with genuine calculator values. */
 export default function PhoneHero() {
   const ref = useRef<HTMLDivElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
   const inView = useInView(ref, { amount: 0.15 });
   const reducedMotion = useReducedMotion();
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [scene, setScene] = useState<'home' | 'skyline'>('home');
   const [view, setView] = useState<'payment' | 'upfront'>('payment');
   useEffect(() => {
     const onVisibility = () => setVisible(!document.hidden);
@@ -24,13 +26,20 @@ export default function PhoneHero() {
     return () => document.removeEventListener('visibilitychange', onVisibility);
   }, []);
   const moving = inView && visible && !paused && !reducedMotion;
+  useEffect(() => {
+    if (!video.current) return;
+    if (moving && scene === 'skyline') video.current.play().catch(() => {});
+    else video.current.pause();
+  }, [moving, scene]);
 
   return (
     <div ref={ref} className={`hero-visual ${moving ? 'is-moving' : ''}`} aria-label="Illustrative mortgage planning on mobile">
       <div className="hero-photo">
+        {scene === 'skyline' && <video ref={video} className="hero-skyline" muted loop playsInline preload="none" poster="/video/hero-dubai.jpg" aria-hidden="true" tabIndex={-1}><source src="/video/hero-dubai.webm" type="video/webm" /><source src="/video/hero-dubai.mp4" type="video/mp4" /></video>}
         <img src="/images/dubai-waterfront-1280.webp" srcSet="/images/dubai-waterfront-720.webp 720w, /images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w" sizes="(min-width: 1024px) 52vw, 100vw" width={1672} height={941} alt="Conceptual Dubai waterfront home in warm morning light" fetchPriority="high" decoding="async" />
 
       </div>
+      <div className="scene-controls" role="group" aria-label="Hero backdrop"><button type="button" aria-pressed={scene === 'home'} onClick={() => setScene('home')}>Residence</button><button type="button" aria-pressed={scene === 'skyline'} onClick={() => setScene('skyline')}>Skyline</button></div>
       <div className="visual-caption"><span className="h-1.5 w-1.5 rounded-full bg-mint" /> A clearer way home.</div>
 
       <div className="iphone iphone-back" aria-hidden="true">

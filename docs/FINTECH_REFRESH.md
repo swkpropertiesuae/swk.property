@@ -7,6 +7,7 @@
 - Rebuilt the English homepage around a concise three-line headline, a focused mortgage enquiry and the existing calculator.
 - Added two architectural concept images as responsive WebP assets. The largest hero asset is 328 KB; the mobile hero asset is 73 KB. The supporting image loads lazily.
 - Replaced the original phones with detailed code-rendered iPhone mockups. Monthly and upfront views use `emi` and `cashToClose`, matching the working calculator: AED 8,437/month and AED 534,220 upfront for an AED 2M property, 20% down, 3.99% and 25 years.
+- Preserved concurrent skyline video work as an optional Residence/Skyline hero backdrop. The same pause control governs the video and phones; it is fetched only when selected. Existing explainer assets remain in the repository, but the explainer is not promoted because its rendered text repeats unsubstantiated fee/approval claims.
 - Added controlled device float, heading entrances, section movement, hover feedback and existing animated navigation. Device motion stops outside the viewport, when the tab is hidden, or when paused. Reduced-motion preferences disable animation.
 - Simplified navigation and shared page headings, cards, product summaries, FAQs and conversion copy.
 - Removed unsupported registration, advisor-pay, guaranteed timeline, deposit-protection, automatic Golden Visa and universal zero-fee claims from prominent pages and machine-readable descriptions.

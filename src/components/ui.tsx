@@ -250,7 +250,7 @@ export function orgSchema() {
     name: SITE.name,
     url: SITE.url,
     logo: `${SITE.url}/brand/logo-primary.svg`,
-    image: `${SITE.url}/og-hero.png`,
+    image: `${SITE.url}/images/dubai-waterfront-1280.webp`,
     ...(SITE.phone ? { telephone: SITE.phone } : {}),
     email: SITE.email,
     address: { '@type': 'PostalAddress', streetAddress: `${SITE.address.building}, ${SITE.address.plot}, ${SITE.address.street}`, addressLocality: SITE.address.district, addressRegion: 'Dubai', addressCountry: 'AE' },

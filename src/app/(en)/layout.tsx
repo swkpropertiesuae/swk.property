@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'Dubai mortgage advice for residents, non-residents and investors. Compare UAE mortgage rates, calculate payments and understand upfront costs.',
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: '/favicon.ico' }], apple: '/apple-touch-icon.png' },
   manifest: '/site.webmanifest',
-  openGraph: { type: 'website', siteName: SITE.name, images: ['/og-hero.png'], locale: 'en_AE' },
+  openGraph: { type: 'website', siteName: SITE.name, images: ['/images/dubai-waterfront-1280.webp'], locale: 'en_AE' },
   twitter: { card: 'summary_large_image' },
   alternates: { languages: { 'en-AE': '/', 'ar-AE': '/ar' } },
 };
