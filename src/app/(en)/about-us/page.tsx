@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { PageHero, Section, Facts, CtaBand, LinkGrid } from '@/components/ui';
 import { fullAddress } from '@/data/site';
+import { Photo } from '@/components/media';
 
 export const metadata: Metadata = { title: 'About Betterway Mortgages — Al Nasr Plaza, Oud Metha', description: 'A salaried, non-commission UAE mortgage consultancy at Al Nasr Plaza, Oud Metha, Dubai, comparing 24 banks at zero client brokerage fee.', alternates: { canonical: '/about-us' } };
 
 export default function Page() {
   return (
     <>
-      <PageHero crumbs={[{ name: 'About us', href: '/about-us' }]} eyebrow="About Betterway" title="A mortgage desk built around your five-year cost, not a bank’s target"
+      <PageHero crumbs={[{ name: 'About us', href: '/about-us' }]} eyebrow="About Betterway" title="A mortgage desk built around your five-year cost, not a bank’s target" aside={<Photo name="advisor-consultation" priority sizes="(min-width: 1024px) 300px, 100vw" alt="A Betterway advisor reviewing an offer letter with a client" className="hidden aspect-[4/5] lg:block" />}
         capsule={`Betterway Mortgages is a Dubai mortgage consultancy headquartered at ${fullAddress}. Salaried, non-commission underwriters compare all 24 UAE retail mortgage lenders on rate, revert margin, floor and fees. Clients pay no brokerage fee; the lending bank remunerates Betterway on disbursal.`} />
       <Section title="Our salaried, non-commission charter">
         <div className="grid gap-10 lg:grid-cols-2">

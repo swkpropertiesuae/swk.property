@@ -1,0 +1,71 @@
+<!doctype html>
+<!-- "Fixed vs revert" explainer, 21 s @ 1920x1080. Figures from lib/math fixedThenRevert on AED 1.5M / 25 yrs, 3M EIBOR 4.45%. -->
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Jakarta;src:url(../../node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2) format('woff2');font-weight:200 800}
+@font-face{font-family:Inter;src:url(../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2) format('woff2');font-weight:100 900}
+@font-face{font-family:Mono;src:url(../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2) format('woff2');font-weight:100 800}
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#F2F7F6;font-family:Inter,sans-serif;color:#081D37}
+.scene{position:absolute;inset:0;opacity:0}.abs{position:absolute}
+.h{font-family:Jakarta;font-weight:800;letter-spacing:-.03em;line-height:1.04}.num{font-family:Mono}
+.card{background:#fff;border:1px solid #DBE5E3;border-radius:28px;box-shadow:0 30px 60px -30px rgba(8,29,55,.35)}
+.grid{background-image:linear-gradient(to right,rgba(8,29,55,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(8,29,55,.05) 1px,transparent 1px);background-size:64px 64px}
+</style></head><body>
+<div class="scene grid" id="s1"><div id="t1" class="abs h" style="left:0;right:0;top:400px;text-align:center;font-size:104px">The lowest rate<br>isn’t the cheapest loan.</div></div>
+
+<div class="scene" id="s2" style="background:#fff">
+  <div class="abs h" style="left:120px;top:90px;font-size:68px">After the fixed period, rates reset.</div>
+  <div class="abs" style="left:120px;top:180px;font-size:30px;color:#51616E">AED 1.5M loan · new rate = 3M EIBOR 4.45% + bank margin</div>
+  <svg class="abs" style="left:120px;top:250px" width="1680" height="720" viewBox="0 0 1680 720">
+    <g id="axes"></g>
+    <path id="la" fill="none" stroke="#B45309" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+    <path id="lb" fill="none" stroke="#007D78" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+  </svg>
+  <div id="ta" class="abs card" style="left:1290px;top:300px;padding:26px 34px;font-size:30px;opacity:0"><b>Bank A</b> · teaser 3.75%<br><span class="num" style="color:#B45309;font-size:44px;font-weight:700">→ 6.20%</span></div>
+  <div id="tb" class="abs card" style="left:1290px;top:540px;padding:26px 34px;font-size:30px;opacity:0"><b>Bank B</b> · fixed 3.99%<br><span class="num" style="color:#007D78;font-size:44px;font-weight:700">→ 5.45%</span></div>
+</div>
+
+<div class="scene grid" id="s3">
+  <div class="abs h" style="left:0;right:0;top:130px;text-align:center;font-size:76px">Interest paid in 5 years</div>
+  <div class="abs card" style="left:220px;top:300px;width:680px;padding:56px"><div style="font-size:32px;color:#51616E">Bank A · lowest teaser</div><div id="ca" class="num" style="margin-top:12px;font-size:84px;font-weight:700;color:#B45309">AED 404,463</div><div style="margin-top:16px;font-size:28px;color:#51616E">EMI rises to AED 9,775</div></div>
+  <div class="abs card" style="left:1020px;top:300px;width:680px;padding:56px"><div style="font-size:32px;color:#51616E">Bank B · lower margin</div><div id="cb" class="num" style="margin-top:12px;font-size:84px;font-weight:700;color:#007D78">AED 364,812</div><div style="margin-top:16px;font-size:28px;color:#51616E">EMI rises to AED 9,125</div></div>
+  <div id="save" class="abs" style="left:0;right:0;top:760px;text-align:center"><span class="h" style="display:inline-block;padding:26px 48px;border-radius:99px;background:#007D78;color:#fff;font-size:60px">Bank B saves AED 39,651</span></div>
+</div>
+
+<div class="scene" id="s4" style="background:#081D37;color:#fff">
+  <img class="abs" src="../../public/brand/logo-white.svg" style="left:120px;top:160px;width:400px">
+  <div id="t4" class="abs h" style="left:120px;top:380px;font-size:100px;color:#fff">We rank all 24 banks<br>on <span style="color:#6FE3C9">5-year cost</span>.</div>
+  <div class="abs num" style="left:120px;top:740px;font-size:42px;color:#6FE3C9">betterwaymortgages.com</div>
+  <div class="abs" style="left:120px;bottom:56px;font-size:20px;color:rgba(255,255,255,.5)">Illustrative: Sharjah Islamic Bank (A) and Dubai Islamic Bank (B), November 2026 rate cards. Subject to bank approval.</div>
+</div>
+<script>
+const $ = (i) => document.getElementById(i), cl = (x) => Math.max(0, Math.min(1, x)), seg = (t, a, b) => cl((t - a) / (b - a)), eo = (x) => 1 - Math.pow(1 - x, 3);
+const W = 1000, X = (y) => 90 + (y / 5) * W, Y = (r) => 40 + ((6.6 - r) / (6.6 - 3.4)) * 600;
+let ax = '';
+for (const r of [3.5, 4.5, 5.5, 6.5]) ax += `<line x1="90" x2="${90 + W}" y1="${Y(r)}" y2="${Y(r)}" stroke="#DBE5E3" stroke-width="2"/><text x="70" y="${Y(r) + 10}" text-anchor="end" font-family="Mono" font-size="26" fill="#51616E">${r.toFixed(1)}%</text>`;
+for (let y = 0; y <= 5; y++) ax += `<text x="${X(y)}" y="700" text-anchor="middle" font-size="26" fill="#51616E">${y ? 'Year ' + y : 'Start'}</text>`;
+$('axes').innerHTML = ax;
+const pts = (intro, rev) => [[X(0), Y(intro)], [X(1), Y(intro)], [X(1), Y(rev)], [X(5), Y(rev)]];
+const partial = (p, k) => { // polyline drawn to fraction k of its length
+  const L = []; let tot = 0; for (let i = 1; i < p.length; i++) { const d = Math.hypot(p[i][0] - p[i - 1][0], p[i][1] - p[i - 1][1]); L.push(d); tot += d; }
+  let left = k * tot, s = `M${p[0][0]},${p[0][1]}`;
+  for (let i = 1; i < p.length && left > 0; i++) { const f = Math.min(1, left / L[i - 1]); s += ` L${p[i - 1][0] + (p[i][0] - p[i - 1][0]) * f},${p[i - 1][1] + (p[i][1] - p[i - 1][1]) * f}`; left -= L[i - 1]; }
+  return s; };
+const A = pts(3.75, 6.20), B = pts(3.99, 5.45);
+const SC = [['s1', 0, 4], ['s2', 4, 12], ['s3', 12, 17.5], ['s4', 17.5, 21]];
+const fmt = (n) => 'AED ' + Math.round(n).toLocaleString('en-US');
+function render(t) {
+  for (const [id, a, b] of SC) $(id).style.opacity = id === 's1' ? (1 - seg(t, b - .4, b)) * eo(seg(t, 0, .5)) : id === 's4' ? seg(t, a, a + .4) : Math.min(seg(t, a, a + .4), 1 - seg(t, b - .4, b));
+  $('t1').style.transform = `translateY(${(1 - eo(seg(t, .2, 1.2))) * 40}px)`;
+  const l = t - 4;
+  $('la').setAttribute('d', partial(A, eo(seg(l, .6, 4))));
+  $('lb').setAttribute('d', partial(B, eo(seg(l, 1, 4.4))));
+  $('ta').style.opacity = eo(seg(l, 3.6, 4.2)); $('tb').style.opacity = eo(seg(l, 4.1, 4.7));
+  const m = t - 12;
+  $('ca').textContent = fmt(404463 * eo(seg(m, .4, 2))); $('cb').textContent = fmt(364812 * eo(seg(m, .6, 2.2)));
+  $('save').style.opacity = eo(seg(m, 2.4, 3)); $('save').style.transform = `scale(${.9 + .1 * eo(seg(m, 2.4, 3))})`;
+  $('t4').style.transform = `translateY(${(1 - eo(seg(t - 17.5, .3, 1.2))) * 30}px)`;
+}
+window.render = render; render(0);
+</script></body></html>

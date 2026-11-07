@@ -12,6 +12,11 @@ export default function ToolPage({ t }: { t: ToolMeta }) {
       <section className="bg-white py-12">
         <div className="wrap"><div className="rounded-card border border-line p-5 sm:p-8"><Calculator slug={t.slug} /></div></div>
       </section>
+      {t.slug === 'fixed-to-revert-analyzer' && (
+        <Section title="Fixed vs revert in 20 seconds">
+          <div className="max-w-4xl"><video className="w-full rounded-card border border-line bg-navy" controls playsInline preload="none" poster="/video/fixed-vs-revert.jpg"><source src="/video/fixed-vs-revert.mp4" type="video/mp4" /></video></div>
+        </Section>
+      )}
       <Section tone="mist" title="How the numbers are calculated">
         <ol className="grid gap-4 md:grid-cols-3">
           {t.method.map((m, i) => <li key={m} className="card"><span className="num text-sm text-teal">0{i + 1}</span><p className="mt-2 text-[15px] text-ink">{m}</p></li>)}

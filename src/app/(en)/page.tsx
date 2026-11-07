@@ -1,7 +1,10 @@
 import Link from 'next/link';
-import { ArrowRight, Check, X as XIcon, MessageCircle, ShieldCheck, Building2, Users, Clock3 } from 'lucide-react';
+import { ArrowRight, PlayCircle, Check, X as XIcon, MessageCircle, ShieldCheck, Building2, Users, Clock3 } from 'lucide-react';
 import Qualifier from '@/components/Qualifier';
 import PhoneHero from '@/components/PhoneHero';
+import LogoMarquee from '@/components/LogoMarquee';
+import { Photo, Laptop } from '@/components/media';
+import { OfferDashboard, RatePath } from '@/components/Charts';
 import Calculator from '@/components/calc/Calculator';
 import RateTable from '@/components/RateTable';
 import { Section, Disclosure, FaqList, CtaBand, LinkGrid, aed } from '@/components/ui';
@@ -106,23 +109,32 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section eyebrow="Our panel" title="24 UAE banks, one offer table" intro="Conventional, Islamic and non-bank lenders, compared on rate, revert margin, floor and fees.">
-        <ul className="flex flex-wrap gap-2">
-          {BANKS.map((b) => <li key={b.slug}><Link href={`/rates/${b.slug}`} className="chip inline-block">{b.name}</Link></li>)}
-        </ul>
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {[[Users, 'Salaried advisors', 'Paid the same whichever bank you choose.'], [Clock3, '48-hour pre-approval', 'Two banks in parallel, different valuer panels.'], [Building2, 'Al Nasr Plaza, Oud Metha', 'Walk in, or close remotely by video PoA.']].map(([Icon, t, b]) => {
-            const I = Icon as typeof Users;
-            return (
-              <div key={t as string} className="card">
-                <I className="text-teal" size={22} />
-                <p className="mt-4 font-display text-lg font-semibold text-navy">{t as string}</p>
-                <p className="mt-1 text-sm text-slate">{b as string}</p>
-              </div>
-            );
-          })}
+      <section aria-labelledby="panel-h" className="bg-white py-16 lg:py-20">
+        <div className="wrap">
+          <p className="eyebrow mb-3">Our panel</p>
+          <h2 id="panel-h" className="h2">24 UAE banks, one offer table</h2>
+          <p className="mt-4 max-w-3xl text-lg text-slate">Conventional, Islamic and non-bank lenders, compared on rate, revert margin, floor and fees.</p>
         </div>
-      </Section>
+        <div className="mt-10"><LogoMarquee label="UAE banks on our panel" items={BANKS.map((b) => ({ id: b.key, label: b.name, href: `/rates/${b.slug}` }))} /></div>
+      </section>
+
+      <section className="bg-white pb-16 lg:pb-24">
+        <div className="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <Photo name="advisor-consultation" alt="A Betterway mortgage advisor walks a client through a bank offer letter at the Oud Metha office" className="aspect-[1376/768] shadow-[0_40px_80px_-40px_rgb(8_29_55/0.5)]" />
+          <div>
+            <p className="eyebrow mb-3">Advisors on your side</p>
+            <h2 className="h2">A salaried advisor reads every line with you</h2>
+            <p className="mt-4 text-lg text-slate">We check the revert margin, floor rate, fees and life cover in each offer letter before you sign.</p>
+            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              {[[Users, 'Salaried', 'Same pay, any bank.'], [Clock3, '48 hours', 'Two-bank pre-approval.'], [Building2, 'Oud Metha', 'Visit, or close remotely.']].map(([Icon, t, b]) => {
+                const I = Icon as typeof Users;
+                return <div key={t as string}><I className="text-teal" size={22} /><p className="mt-3 font-display font-semibold text-navy">{t as string}</p><p className="text-sm text-slate">{b as string}</p></div>;
+              })}
+            </div>
+            <Link href="/contact" className="btn btn-primary mt-8">Book a free consultation <ArrowRight size={15} /></Link>
+          </div>
+        </div>
+      </section>
 
       <Section tone="mist" eyebrow="Mortgages" title="Mortgages for every buyer" action={{ label: 'All 14 products', href: '/mortgages' }}>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -142,6 +154,15 @@ export default function Home() {
       </Section>
 
       <Section tone="mist" eyebrow="Rate & revert bible" title="Look past the fixed rate" intro="After 1–5 years, every loan moves to 3M EIBOR + a margin of 1.00% to 1.99%. On AED 1.5M, that margin gap is worth about AED 155,000." action={{ label: 'See all 24 banks', href: '/rates/uae-mortgage-rates-eibor-revert-bible' }}>
+        <div className="mb-12 grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
+          <Laptop className="drop-shadow-[0_40px_50px_rgb(8_29_55/0.25)]"><OfferDashboard /></Laptop>
+          <div className="card">
+            <p className="font-display text-lg font-semibold text-navy">Teaser rate vs real cost</p>
+            <p className="mt-1 text-sm text-slate">Two banks, AED 1.5M, five years.</p>
+            <div className="mt-4"><RatePath /></div>
+            <Link href="/rates/uae-mortgage-rates-eibor-revert-bible#revert-video" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-teal"><PlayCircle size={18} /> Watch the 20-second explainer</Link>
+          </div>
+        </div>
         <RateTable limit={8} banks={[...BANKS].sort((a, b) => a.intro - b.intro)} />
       </Section>
 
