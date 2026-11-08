@@ -52,6 +52,6 @@ const LITERAL_OK = /banks\.ts$|countries\.ts$|portal[\\/]|StartupExperience|CoPi
 const BANK_LINE = /HSBC|Mashreq|Emirates NBD|ADCB|FAB|CBD|Amlak|non-resident|Non-resident|P60|غير المقيمين/;
 test('resident LTV caps are never hard-coded outside regulation.ts', () => {
   const hits = SRC.filter((f) => !LITERAL_OK.test(f)).flatMap((f) => readFileSync(f, 'utf8').split('\n').flatMap((l, i) =>
-    /\b(85|80|75|70|65|60)% (LTV|من قيمة)/.test(l) && !BANK_LINE.test(l) ? [`${f}:${i + 1}`] : []));
+    (/\b(85|80|75|70|65|60)% (LTV|من قيمة)/.test(l) || /(تمويل|حتى) (85|80|75|70|65|60)%/.test(l)) && !BANK_LINE.test(l) ? [`${f}:${i + 1}`] : []));
   assert.deepEqual(hits, []);
 });

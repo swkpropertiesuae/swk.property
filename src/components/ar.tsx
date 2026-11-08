@@ -20,7 +20,7 @@ export function ArHero({ crumbs, eyebrow, title, capsule, en, children }: { crum
           <p className="mt-3 text-xs text-slate">{AR_UI.updated}</p>
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
-          <a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="btn btn-primary"><MessageCircle size={16} /> {AR_UI.cta}</a>
+          <a href={waLink('مرحباً، أود التحدث مع مستشار بيترواي بشأن تمويل عقاري.')} rel="noopener" className="btn btn-primary"><MessageCircle size={16} /> {AR_UI.cta}</a>
           {en && <Link href={en} lang="en" className="btn btn-ghost">English version</Link>}
           {children}
         </div>

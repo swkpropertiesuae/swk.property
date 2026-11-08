@@ -7,5 +7,5 @@ export function coverage(c: Community) {
   const price = c.typical * 1e6;
   const res = emi(price * REG.ltv.expat.first / 100, 3.99, 25), inv = emi(price * REG.ltv.expat.subsequent / 100, 4.29, 25);
   const rentMo = c.rent / 12;
-  return { price, res, inv, rentMo, resCov: rentMo / res, invCov: rentMo / inv, cash: cashToClose({ price, downPct: 20 }).total };
+  return { price, res, inv, rentMo, resCov: rentMo / res, invCov: rentMo / inv, cash: cashToClose({ price, downPct: 100 - REG.ltv.expat.first }).total };
 }
