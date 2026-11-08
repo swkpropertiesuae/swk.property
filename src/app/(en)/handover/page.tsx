@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <>
       <PageHero crumbs={[{ name: 'Off-plan handover', href: '/handover' }]} eyebrow="Off-plan" title="80 handover projects, 14 developer APL hubs"
-        capsule="Betterway tracks 80 UAE off-plan projects completing between Q4 2026 and 2028, with payment plan, launch price versus 2026 valuation and the number of banks holding each project on their Approved Project List. Find your project to see eligible banks and your handover cash-out." >
+        capsule="We follow 80 UAE off-plan projects due between Q4 2026 and 2028, showing each one’s payment plan, launch price against a 2026 valuation and how many banks have approved it. Open your project to see which lenders cover it and what a handover cash-out might look like." >
         <div className="mt-8"><Link href="/handover/dubai-off-plan-handover-mortgage-guide" className="btn btn-primary">Read the handover guide</Link></div>
       </PageHero>
       {DEVELOPERS.filter((d) => PROJECTS.some((p) => p.dev === d.slug)).map((d, i) => (

@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ developer: st
   return (
     <>
       <PageHero crumbs={[{ name: 'Off-plan handover', href: '/handover' }, { name: d.name, href: `/handover/${d.slug}` }]} eyebrow="Developer APL hub" title={`${d.name} handover mortgages: APL banks, NOCs & projects`}
-        capsule={`${d.blurb} Developer NOCs typically take ${d.nocDays}; payments run through ${d.escrow.toLowerCase()}. Betterway tracks ${projects.length} ${d.name} projects and confirms tower-level APL coverage before each buyer’s completion notice.`} />
+        capsule={`${d.blurb} Allow ${d.nocDays} for a developer NOC. Payments go through ${d.escrow.toLowerCase()}. We follow ${projects.length} ${d.name} projects and check which banks cover each building before completion notices go out.`} />
       <Section title="Developer facts">
         <Facts facts={[['Projects tracked', String(projects.length)], ['APL bank range', apl.length ? `${Math.min(...apl)}–${Math.max(...apl)} banks` : 'On request'], ['NOC turnaround', d.nocDays], ['Escrow', d.escrow], ['Under-construction LTV', '50% max'], ['Handover LTV', '80% resident · 85% National']]} />
       </Section>

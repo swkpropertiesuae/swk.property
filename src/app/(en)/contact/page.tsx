@@ -4,7 +4,7 @@ import { PageHero, Section } from '@/components/ui';
 import { SlotPicker, LeadForm } from '@/components/client';
 import { SITE, fullAddress, waLink } from '@/data/site';
 
-export const metadata: Metadata = { title: 'Contact & Visit — Al Nasr Plaza, Oud Metha', description: 'Visit Betterway Mortgages at Al Nasr Plaza, Oud Metha Road, Dubai, book a consultation slot or message the Email an advisor.', alternates: { canonical: '/contact' } };
+export const metadata: Metadata = { title: 'Contact & Visit — Al Nasr Plaza, Oud Metha', description: 'Find Betterway Mortgages at Al Nasr Plaza on Oud Metha Road, Dubai. Book a slot or email an advisor.', alternates: { canonical: '/contact' } };
 
 export default function Page() {
   const q = encodeURIComponent(`${SITE.address.building}, ${SITE.address.street}, ${SITE.address.district}, Dubai`);

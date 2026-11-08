@@ -1,6 +1,8 @@
 // Declarative calculator definitions: inputs + pure compute. One renderer (Calculator.tsx) draws all of them in EN or AR.
 import * as M from '@/lib/math';
+import { REG } from '@/data/regulation';
 import { BANKS } from '@/data/banks';
+import { BENCH } from '@/data/site';
 
 export type L = { en: string; ar: string };
 export type Input = { k: string; label: L; def: number; min: number; max: number; step: number; unit: 'AED' | '%' | 'yrs' | '' ; options?: { v: number; label: L }[] };
@@ -53,7 +55,7 @@ export const CALCS: Record<string, CalcDef> = {
           { label: l('50% DBR capacity / month', 'سعة عبء الدين 50%'), v: r.capacity, f: 'aed' },
           { label: l('Credit card hit / month', 'خصم البطاقات الائتمانية'), v: r.cardHit, f: 'aed' },
           { label: l('Available for mortgage EMI', 'المتاح لقسط التمويل'), v: r.available, f: 'aed' },
-          { label: l('Max property at 80% LTV', 'أقصى سعر عقار بنسبة 80%'), v: r.maxLoan / 0.8, f: 'aed', strong: true },
+          { label: l(`Max property at ${REG.ltv.expat.first}% LTV (expat first home)`, `أقصى سعر عقار بنسبة ${REG.ltv.expat.first}%`), v: r.maxLoan / (REG.ltv.expat.first / 100), f: 'aed', strong: true },
           { label: l('Extra loan if cards closed', 'تمويل إضافي عند إغلاق البطاقات'), v: Math.max(0, noCards.maxLoan - r.maxLoan), f: 'aed' },
         ],
         note: l('Stress rate 6.5% · capped at 7× annual income. Banks vary.', 'معدل اختبار 6.5% · بحد أقصى 7 أضعاف الدخل السنوي.'),
@@ -61,7 +63,7 @@ export const CALCS: Record<string, CalcDef> = {
     },
   },
   'fixed-to-revert-analyzer': {
-    inputs: [{ k: 'loan', label: l('Loan amount', 'مبلغ التمويل'), def: 1_500_000, min: 300_000, max: 20_000_000, step: 50_000, unit: 'AED' }, years(), { k: 'eibor', label: l('3M EIBOR assumption', '3 أشهر إيبور'), def: 4.45, min: 2, max: 7, step: 0.05, unit: '%' }],
+    inputs: [{ k: 'loan', label: l('Loan amount', 'مبلغ التمويل'), def: 1_500_000, min: 300_000, max: 20_000_000, step: 50_000, unit: 'AED' }, years(), { k: 'eibor', label: l('3M EIBOR assumption', '3 أشهر إيبور'), def: +BENCH.eibor3m.toFixed(2), min: 2, max: 7, step: 0.05, unit: '%' }],
     compute: (v) => {
       const res = BANKS.map((b) => {
         const fy = b.introTerm === '1Y' ? 1 : 2;

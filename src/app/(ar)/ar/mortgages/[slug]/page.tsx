@@ -25,9 +25,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <ArHero crumbs={[[AR_UI.mortgages, '/ar#mortgages'], [p.ar, `/ar/mortgages/${slug}`]]} eyebrow={p.ar} title={a.title} capsule={a.capsule} en={`/mortgages/${slug}`} />
-      <ArSection title="أبرز المزايا"><ul className="grid gap-3 sm:grid-cols-2">{a.points.map((x) => <li key={x} className="flex gap-3 text-[17px]"><Check className="mt-1 shrink-0 text-teal" size={18} />{x}</li>)}</ul></ArSection>
-      <ArSection tone="mist" title="احسب أرقامك"><div className="rounded-card border border-line bg-white p-5 sm:p-8"><Calculator slug={calc} lang="ar" /></div></ArSection>
-      <ArSection title="منتجات أخرى"><ArLinks links={Object.keys(AR_PRODUCTS).filter((s) => s !== slug).slice(0, 8).map((s) => ({ title: PRODUCTS.find((x) => x.slug === s)!.ar, href: `/ar/mortgages/${s}` }))} /></ArSection>
+      <ArSection title="ما تحتاج معرفته"><ul className="grid gap-3 sm:grid-cols-2">{a.points.map((x) => <li key={x} className="flex gap-3 text-[17px]"><Check className="mt-1 shrink-0 text-teal" size={18} />{x}</li>)}</ul></ArSection>
+      <ArSection tone="mist" title="جرّب أرقامك"><div className="rounded-card border border-line bg-white p-5 sm:p-8"><Calculator slug={calc} lang="ar" /></div></ArSection>
+      <ArSection title="خيارات تمويل أخرى"><ArLinks links={Object.keys(AR_PRODUCTS).filter((s) => s !== slug).slice(0, 8).map((s) => ({ title: PRODUCTS.find((x) => x.slug === s)!.ar, href: `/ar/mortgages/${s}` }))} /></ArSection>
     </>
   );
 }

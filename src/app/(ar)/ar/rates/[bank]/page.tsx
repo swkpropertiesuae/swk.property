@@ -21,12 +21,12 @@ export default async function Page({ params }: { params: Promise<{ bank: string 
   return (
     <>
       <ArHero crumbs={[[AR_UI.rates, '/ar#rates'], [b.ar, `/ar/rates/${b.slug}`]]} eyebrow={`${AR_TYPE[b.type]} · ${b.name}`} title={`أسعار التمويل العقاري لدى ${b.ar} (نوفمبر 2026)`}
-        capsule={`يقدم ${b.ar} ${kind} ثابتاً يبدأ من ${b.intro}% لمدة ${b.introTerm === '1Y' ? 'سنة' : 'سنتين'}، و${b.fixed3}% لثلاث سنوات، و${b.fixed5}% لخمس سنوات. بعد الفترة الثابتة يتحول إلى إيبور 3 أشهر مضافاً إليه ${b.margin.toFixed(2)}% (أي ${revert(b).toFixed(2)}% حالياً) بحد أدنى ${b.floor}%، مع سداد جزئي مجاني حتى ${b.overpay}% سنوياً.`} en={`/rates/${b.slug}`} />
-      <ArSection title="ملخص الشروط">
+        capsule={`يثبّت ${b.ar} ${kind} عند ${b.intro}% ${b.introTerm === '1Y' ? 'لسنة واحدة' : 'لسنتين'}، أو ${b.fixed3}% لثلاث سنوات، أو ${b.fixed5}% لخمس. وعند انتهاء التثبيت تدفع إيبور لثلاثة أشهر زائد ${b.margin.toFixed(2)}%، أي ${revert(b).toFixed(2)}% بسعر إيبور اليوم، ولن ينخفض السعر عن ${b.floor}%. ويمكنك سداد ${b.overpay}% من الرصيد سنوياً دون رسوم.`} en={`/rates/${b.slug}`} />
+      <ArSection title="الشروط باختصار">
         <ArFacts facts={[['السعر الثابت الأولي', `${b.intro}%`], ['ثابت 3 سنوات', `${b.fixed3}%`], ['ثابت 5 سنوات', `${b.fixed5}%`], ['هامش ما بعد الفترة الثابتة', `+${b.margin.toFixed(2)}%`], ['الحد الأدنى للسعر', `${b.floor}%`], ['رسوم الشراء', b.feePurchase], ['السداد المبكر المجاني', `${b.overpay}%`], ['احتساب حدود البطاقات', `${b.ccFactor}%`], ['تمويل غير المقيمين', b.nrLtv ? `${b.nrLtv}%` : '—']]} />
       </ArSection>
-      <ArSection tone="mist" title="احسب القسط مع هذا البنك"><div className="rounded-card border border-line bg-white p-5 sm:p-8"><Calculator slug="mortgage-calculator" lang="ar" initial={{ rate: b.fixed3 }} /></div></ArSection>
-      <ArSection title="بنوك أخرى"><ArLinks links={BANKS.filter((x) => x.slug !== b.slug && x.type === b.type).slice(0, 4).map((x) => ({ title: x.ar, body: `من ${x.intro}%`, href: `/ar/rates/${x.slug}` }))} /></ArSection>
+      <ArSection tone="mist" title="قسطك مع هذا البنك"><div className="rounded-card border border-line bg-white p-5 sm:p-8"><Calculator slug="mortgage-calculator" lang="ar" initial={{ rate: b.fixed3 }} /></div></ArSection>
+      <ArSection title="بنوك مشابهة"><ArLinks links={BANKS.filter((x) => x.slug !== b.slug && x.type === b.type).slice(0, 4).map((x) => ({ title: x.ar, body: `من ${x.intro}%`, href: `/ar/rates/${x.slug}` }))} /></ArSection>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SOURCES, CHECKED_ON } from '@/data/regulation';
 import type { ReactNode } from 'react';
 import { ArrowRight, Info, MessageCircle, MapPin, ShieldCheck } from 'lucide-react';
 import { SITE, BENCH, DISCLOSURE_SHORT, DISCLOSURE_FULL, fullAddress, waLink } from '@/data/site';
@@ -181,7 +182,7 @@ export function LinkGrid({ links, cols = 3 }: { links: { title: string; body?: s
   );
 }
 
-export function CtaBand({ title = 'Your next move starts here.', body = 'Understand your mortgage options, prepare your documents and plan your budget.' }: { title?: string; body?: string }) {
+export function CtaBand({ title = 'Your next move starts here.', body = 'Explore your mortgage options, get your documents ready and plan a realistic budget.' }: { title?: string; body?: string }) {
   return (
     <section className="bg-white py-16">
       <div className="wrap">
@@ -255,4 +256,16 @@ export function orgSchema() {
     areaServed: ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ras Al Khaimah'],
     openingHours: 'Mo-Sa 09:00-19:00',
   };
+}
+
+export function Sources({ className = '' }: { className?: string }) {
+  return (
+    <aside className={`mt-8 max-w-3xl rounded-card border border-line p-5 text-sm text-slate ${className}`}>
+      <p className="font-semibold text-navy">Where these limits come from</p>
+      <p className="mt-1">Regulatory caps were checked on {CHECKED_ON}. Off-plan, non-resident and age limits are set by each bank and are not CBUAE rules.</p>
+      <ul className="mt-3 list-disc space-y-1 pl-5">
+        {Object.values(SOURCES).map((x) => <li key={x.url}><a className="underline underline-offset-2 hover:text-teal" href={x.url} rel="noopener" target="_blank">{x.name}</a></li>)}
+      </ul>
+    </aside>
+  );
 }

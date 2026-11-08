@@ -5,13 +5,14 @@ import { PageHero, Section, CtaBand, LinkGrid, aed } from '@/components/ui';
 import RateTable from '@/components/RateTable';
 import { COMPARISONS, type Comparison } from '@/data/compare';
 import { BANKS, bankBy, revert, pct, type Bank } from '@/data/banks';
+import { BENCH } from '@/data/site';
 import { fixedThenRevert, borrowingPower, emi, lifeInsurance } from '@/lib/math';
 
 export const dynamicParams = false;
 export const generateStaticParams = () => COMPARISONS.map((c) => ({ slug: c.slug }));
 const find = (s: string) => COMPARISONS.find((c) => c.slug === s);
 
-const cost5 = (b: Bank, loan = 1_500_000) => fixedThenRevert(loan, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, 4.45, b.margin, b.floor, 5).cost;
+const cost5 = (b: Bank, loan = 1_500_000) => fixedThenRevert(loan, 25, b.intro, b.introTerm === '1Y' ? 1 : 2, BENCH.eibor3m, b.margin, b.floor, 5).cost;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const c = find((await params).slug);
@@ -46,7 +47,7 @@ function BankPair({ c, crumbs }: { c: Comparison; crumbs: { name: string; href: 
   return (
     <>
       <PageHero crumbs={crumbs} eyebrow="Head-to-head" title={`${c.title}: which costs less over five years?`}
-        capsule={`On a AED 1.5M, 25-year loan, ${win.name} is cheaper over five years by about ${aed(diff)}. ${a.short} starts at ${a.intro}% and reverts to EIBOR + ${a.margin.toFixed(2)}% (floor ${a.floor}%); ${b.short} starts at ${b.intro}% and reverts to EIBOR + ${b.margin.toFixed(2)}% (floor ${b.floor}%).${angle}`} />
+        capsule={`Put the same AED 1.5M, 25-year loan through both and ${win.name} costs about ${aed(diff)} less over five years. ${a.short} opens at ${a.intro}% and then charges EIBOR plus ${a.margin.toFixed(2)}%, with ${a.floor}% as its minimum. ${b.short} opens at ${b.intro}%, then EIBOR plus ${b.margin.toFixed(2)}%, minimum ${b.floor}%.${angle}`} />
       <Section title="Side by side">
         <div className="overflow-x-auto rounded-card border border-line">
           <table className="table-bw min-w-[560px]">
@@ -65,7 +66,7 @@ function Topic({ c, crumbs }: { c: Comparison; crumbs: { name: string; href: str
     const best = (type: Bank['type']) => [...BANKS.filter((x) => x.type === type)].sort((x, y) => cost5(x) - cost5(y))[0];
     const i = best('Islamic'), v = best('Conventional');
     return (<>
-      <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`Islamic home finance is not automatically dearer. On AED 1.5M over five years, the best Islamic option (${i.name}) costs ${aed(cost5(i))} in profit versus ${aed(cost5(v))} interest at the best conventional bank (${v.name}). Islamic Ijara reprices off EIBOR like a variable mortgage; Murabaha fixes the total profit upfront.`} />
+      <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`Choosing Sharia-compliant finance does not have to cost more. Over five years on AED 1.5M, the cheapest Islamic lender (${i.name}) charges ${aed(cost5(i))} in profit, against ${aed(cost5(v))} in interest at the cheapest conventional one (${v.name}). Ijara moves with EIBOR much like a variable loan, while Murabaha sets the total profit at the start.`} />
       <Section title="Islamic lenders"><RateTable banks={BANKS.filter((x) => x.type === 'Islamic')} /></Section>
       <Section tone="mist" title="Conventional lenders"><RateTable banks={BANKS.filter((x) => x.type !== 'Islamic')} /></Section>
     </>);
@@ -74,7 +75,7 @@ function Topic({ c, crumbs }: { c: Comparison; crumbs: { name: string; href: str
     const loan = 2_000_000;
     const tiers = [['Lowest 2-year', Math.min(...BANKS.map((b) => b.intro))], ['Lowest 3-year', Math.min(...BANKS.map((b) => b.fixed3))], ['Lowest 5-year', Math.min(...BANKS.map((b) => b.fixed5))]] as const;
     return (<>
-      <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`In November 2026 the lowest UAE fixed rates are ${tiers[0][1]}% short-term, ${tiers[1][1]}% for 3 years and ${tiers[2][1]}% for 5 years. Longer fixes cost more today but remove revert risk; with 3M EIBOR at 4.45% and margins of +1.00% to +1.99%, reverting early can cost more than a 5-year fix.`} />
+      <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`The cheapest fixes we see in November 2026 are ${tiers[0][1]}% for one or two years, ${tiers[1][1]}% for three and ${tiers[2][1]}% for five. A longer fix costs a little more now but keeps you off the variable rate for longer. With three-month EIBOR at ${BENCH.eibor3m.toFixed(2)}% (CBUAE, ${BENCH.eiborDate}) and margins between +1.00% and +1.99%, moving onto the variable rate early can end up dearer than fixing for five years.`} />
       <Section title="Monthly payment on AED 2M (25 years)">
         <div className="grid gap-4 md:grid-cols-3">{tiers.map(([k, r]) => <div key={k} className="card"><p className="text-sm text-slate">{k} · {r}%</p><p className="num mt-1 text-2xl font-semibold text-navy">{aed(emi(loan, r, 25))}/mo</p></div>)}</div>
       </Section>
@@ -82,22 +83,22 @@ function Topic({ c, crumbs }: { c: Comparison; crumbs: { name: string; href: str
     </>);
   }
   if (t === 'salary-transfer') return (<>
-    <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule="Salary-transfer (STL) mortgages in the UAE are typically priced 0.10%–0.25% below non-salary-transfer (NSTL) versions of the same product, because the bank captures your salary account. On AED 2M over 25 years, a 0.25% gap is roughly AED 280 a month—worth it only if you are comfortable moving your salary." />
+    <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule="Banks often price a loan 0.10% to 0.25% lower if you move your salary to them (STL) than if you do not (NSTL), because they gain your main account. On AED 2M over 25 years, 0.25% is about AED 280 a month, so it only makes sense if you are happy to switch your salary." />
     <Section title="STL vs NSTL on AED 2M">
       <div className="grid gap-4 md:grid-cols-2">{[['Salary transfer', 3.99], ['Non-salary transfer', 4.24]].map(([k, r]) => <div key={k as string} className="card"><p className="text-sm text-slate">{k} · {r}%</p><p className="num mt-1 text-2xl font-semibold text-navy">{aed(emi(2_000_000, r as number, 25))}/mo</p></div>)}</div>
-      <p className="mt-6 max-w-3xl text-slate">Self-employed borrowers, those paid by overseas employers and people expecting to change jobs usually prefer NSTL to keep flexibility.</p>
+      <p className="mt-6 max-w-3xl text-slate">Business owners, people paid from abroad and anyone likely to change jobs soon often choose NSTL to stay flexible.</p>
     </Section>
   </>);
   if (t === 'cc-dbr') {
     const at = (f: 3 | 5) => borrowingPower({ salary: 40_000, existingEmis: 0, cardLimits: 150_000, ccFactor: f, years: 25 }).maxLoan;
     return (<>
-      <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`UAE banks count a share of your total credit card limits as monthly debt. Most use 5%; HSBC, ADCB and DIB use 3%. With AED 150,000 of limits on a AED 40,000 salary, that difference lifts maximum borrowing from ${aed(at(5))} to ${aed(at(3))}.`} />
+      <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`Lenders add a percentage of your card limits to your monthly debts, even unused ones. Most take 5%, while HSBC, ADCB and DIB take 3%. For someone earning AED 40,000 with AED 150,000 of limits, the lower figure raises the maximum loan from ${aed(at(5))} to ${aed(at(3))}.`} />
       <Section title="3% vs 5% banks"><RateTable banks={[...BANKS].sort((x, y) => x.ccFactor - y.ccFactor)} limit={10} /></Section>
     </>);
   }
   const li = lifeInsurance(2_000_000, 4.25, 15);
   return (<>
-    <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`${BANKS.filter((b) => b.externalLife).map((b) => b.short).join(', ')} accept an assigned external decreasing-term life policy instead of their bundled cover. On AED 2M over 15 years that saves about ${aed(li.saved)}—and lower monthly outgoings also help your DBR.`} />
+    <PageHero crumbs={crumbs} eyebrow="Comparison" title={c.title} capsule={`${BANKS.filter((b) => b.externalLife).map((b) => b.short).join(', ')} will let you assign your own decreasing-term life policy in place of the bank’s cover. Over 15 years on AED 2M, that can save around ${aed(li.saved)}, and the smaller monthly cost also leaves more room in the affordability test.`} />
     <Section title="Banks accepting external life insurance"><RateTable banks={BANKS.filter((b) => b.externalLife)} /></Section>
     <Section tone="mist" title="Audit your own policy"><Link className="btn btn-primary" href="/tools/life-insurance-assignment-audit">Open the life insurance auditor</Link></Section>
   </>);

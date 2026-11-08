@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <AppShell title="Client portal" sub="portal.betterwaymortgages.com" nav={PORTAL_NAV} active="/portal/homeowner-radar">
       <h1 className="mb-2 font-display text-2xl font-bold">Homeowner radar</h1>
-      <p className="mb-6 text-slate">We watch your fixed period, EIBOR and the panel so you never drift onto a revert rate.</p>
+      <p className="mb-6 text-slate">We keep an eye on your fixed-rate end date, EIBOR and lender pricing so you do not slip onto a higher variable rate unnoticed.</p>
       <div className="grid gap-4 sm:grid-cols-3">
         <Countdown label="Fixed period ends in" days={88} tone="warn" />
         <div className="card"><p className="text-sm text-slate">Your revert rate today</p><p className="num mt-1 text-3xl font-semibold text-navy">6.10%</p></div>

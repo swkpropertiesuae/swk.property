@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import { EARLY_SETTLEMENT_TEXT } from '@/data/regulation';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PageHero, Section, Facts, FaqList, CtaBand, LinkGrid, aed } from '@/components/ui';
 import Calculator from '@/components/calc/Calculator';
 import { BANKS, revert, pct } from '@/data/banks';
+import { BENCH } from '@/data/site';
 import { COMPARISONS } from '@/data/compare';
 import { fixedThenRevert, emi } from '@/lib/math';
 
@@ -20,15 +22,15 @@ export default async function Page({ params }: { params: Promise<{ bank: string 
   const b = find((await params).bank);
   if (!b) notFound();
   const fy = b.introTerm === '1Y' ? 1 : 2;
-  const r = fixedThenRevert(1_500_000, 25, b.intro, fy, 4.45, b.margin, b.floor, 5);
-  const rank = BANKS.map((x) => fixedThenRevert(1_500_000, 25, x.intro, x.introTerm === '1Y' ? 1 : 2, 4.45, x.margin, x.floor, 5).cost).sort((a, c) => a - c).indexOf(r.cost) + 1;
+  const r = fixedThenRevert(1_500_000, 25, b.intro, fy, BENCH.eibor3m, b.margin, b.floor, 5);
+  const rank = BANKS.map((x) => fixedThenRevert(1_500_000, 25, x.intro, x.introTerm === '1Y' ? 1 : 2, BENCH.eibor3m, x.margin, x.floor, 5).cost).sort((a, c) => a - c).indexOf(r.cost) + 1;
   const comps = COMPARISONS.filter((c) => c.a === b.key || c.b === b.key);
   const peers = BANKS.filter((x) => x.type === b.type && x.slug !== b.slug).slice(0, 4);
-  const lifeDiff = emi(2_000_000, revert(b), 20) - emi(2_000_000, 4.45 + 1.0, 20);
+  const lifeDiff = emi(2_000_000, revert(b), 20) - emi(2_000_000, BENCH.eibor3m + 1.0, 20);
   return (
     <>
       <PageHero crumbs={[{ name: 'Rates', href: '/rates' }, { name: b.name, href: `/rates/${b.slug}` }]} eyebrow={`${b.type} · ${b.hq}`} title={`${b.name} mortgage rates & credit policy (November 2026)`}
-        capsule={`${b.name} offers a ${b.intro}% ${b.introTerm === '1Y' ? '1-year' : '2-year'} fixed ${b.type === 'Islamic' ? 'profit rate' : 'rate'}, ${b.fixed3}% for 3 years and ${b.fixed5}% for 5 years. After the fixed period it reverts to 3-month EIBOR + ${b.margin.toFixed(2)}% (${pct(revert(b))} today) with a ${b.floor}% floor, allows ${b.overpay}% free annual overpayment and counts ${b.ccFactor}% of card limits toward DBR.`}>
+        capsule={`${b.name} fixes at ${b.intro}% for ${b.introTerm === '1Y' ? 'one year' : 'two years'}${b.type === 'Islamic' ? ' (profit rate)' : ''}, ${b.fixed3}% for three years or ${b.fixed5}% for five. When the fix ends, you pay three-month EIBOR plus ${b.margin.toFixed(2)}%, which is ${pct(revert(b))} at today’s EIBOR, and never less than ${b.floor}%. You can repay ${b.overpay}% a year without a fee, and ${b.ccFactor}% of your card limits is counted in the affordability test.`}>
         <div className="mt-8 flex flex-wrap gap-3"><Link href="/contact" className="btn btn-primary">Get a {b.short} offer via Betterway</Link><Link href="/rates/uae-mortgage-rates-eibor-revert-bible" className="btn btn-ghost">Compare all 24 banks</Link></div>
       </PageHero>
       <Section title={`${b.short} at a glance`}>
@@ -51,7 +53,7 @@ export default async function Page({ params }: { params: Promise<{ bank: string 
       <Section title="Model your own loan"><div className="rounded-card border border-line p-5 sm:p-8"><Calculator slug="mortgage-calculator" initial={{ rate: b.fixed3 }} /></div></Section>
       <Section tone="mist" title={`${b.short} FAQ`}><div className="max-w-3xl"><FaqList faqs={[
         { q: `Does ${b.name} lend to non-residents?`, a: b.nrLtv ? `Yes, up to ${b.nrLtv}% LTV subject to income and country criteria.` : `${b.name} currently lends to UAE residents only on our panel.` },
-        { q: `How much can I overpay with ${b.short}?`, a: `Up to ${b.overpay}% of the outstanding balance each year without a fee; above that the CBUAE cap of 1% or AED 10,000 applies.` },
+        { q: `How much can I overpay with ${b.short}?`, a: `Each year you can clear up to ${b.overpay}% of what you owe free of charge. Anything beyond that falls under the central bank limit: ${EARLY_SETTLEMENT_TEXT}.` },
         { q: `Is ${b.short} good after the fixed period?`, a: `Its revert is 3M EIBOR + ${b.margin.toFixed(2)}% with a ${b.floor}% floor—${b.margin <= 1.4 ? 'among the lowest on the panel' : b.margin >= 1.8 ? 'at the higher end of the panel, so plan a buyout before reversion' : 'mid-panel'}.` },
       ]} /></div></Section>
       {comps.length > 0 && <Section title="Head-to-head"><LinkGrid links={comps.map((c) => ({ title: c.title, href: `/rates/compare/${c.slug}` }))} /></Section>}

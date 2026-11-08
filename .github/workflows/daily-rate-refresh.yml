@@ -1,0 +1,20 @@
+# Rebuilds production every weekday morning (Dubai) so EIBOR-based figures on statically built pages
+# pick up the latest CBUAE fixing via the prebuild refresh. Commits nothing.
+# Setup: Vercel → Project → Settings → Git → Deploy Hooks → create one for "main",
+# then add it as the repository secret VERCEL_DEPLOY_HOOK_URL.
+name: Daily rate refresh
+on:
+  schedule:
+    - cron: '17 4 * * 1-5' # 08:17 GST, after the CBUAE morning fixing is published
+  workflow_dispatch:
+permissions: {}
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel production build
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "VERCEL_DEPLOY_HOOK_URL not set; skipping."; exit 0; fi
+          curl -fsS -X POST "$HOOK" > /dev/null && echo "Rebuild triggered."

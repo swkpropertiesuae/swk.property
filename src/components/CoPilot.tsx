@@ -14,19 +14,19 @@ type Msg = { from: 'bot' | 'me'; text: string; link?: { href: string; label: str
 const INTENTS: { chip: string; answer: () => Msg }[] = [
   { chip: 'Cash needed for a AED 2.5M home?', answer: () => {
     const c = cashToClose({ price: 2_500_000, downPct: 20 });
-    return { from: 'bot', text: `At 20% down: ${aed(c.down)} down payment + ${aed(c.dld)} DLD + ${aed(c.mortgageReg)} mortgage reg + AED 4,200 trustee + AED 3,150 valuation + ${aed(c.agencyFee)} agency = ${aed(c.total)} total. EMI at 3.99% / 25 yrs: ${aed(emi(c.loan, 3.99, 25))}/mo.`, link: { href: '/calculators/mortgage-calculator', label: 'Adjust in the calculator' } };
+    return { from: 'bot', text: `With 20% down you would need about ${aed(c.total)}: ${aed(c.down)} deposit, ${aed(c.dld)} DLD fee, ${aed(c.mortgageReg)} mortgage registration, ${aed(c.trustee)} trustee, ${aed(c.valuation)} valuation and ${aed(c.agencyFee)} agency. At 3.99% over 25 years the repayment is about ${aed(emi(c.loan, 3.99, 25))} a month.`, link: { href: '/calculators/mortgage-calculator', label: 'Adjust in the calculator' } };
   } },
   { chip: 'How much can I borrow on AED 35k salary?', answer: () => {
     const r = borrowingPower({ salary: 35_000, existingEmis: 0, cardLimits: 50_000, years: 25 });
-    return { from: 'bot', text: `With AED 50k of card limits, 50% DBR leaves ${aed(r.available)}/mo for your EMI → max loan about ${aed(r.maxLoan)}. Closing those cards adds about ${aed(borrowingPower({ salary: 35_000, existingEmis: 0, cardLimits: 0, years: 25 }).maxLoan - r.maxLoan)}.`, link: { href: '/calculators/dbr-borrowing-power', label: 'Run my own numbers' } };
+    return { from: 'bot', text: `If you hold AED 50,000 of card limits, the half-of-income rule leaves ${aed(r.available)} a month for the mortgage, which supports a loan of about ${aed(r.maxLoan)}. Cancelling those cards would add roughly ${aed(borrowingPower({ salary: 35_000, existingEmis: 0, cardLimits: 0, years: 25 }).maxLoan - r.maxLoan)}.`, link: { href: '/calculators/dbr-borrowing-power', label: 'Run my own numbers' } };
   } },
-  { chip: 'Is switching banks worth it?', answer: () => ({ from: 'bot', text: `CBUAE caps the exit fee at 1% or AED 10,000 + VAT (max ${aed(earlySettlementFee(1e9))}). On AED 1.5M, cutting 6.2% to 3.99% saves about ${aed(emi(1.5e6, 6.2, 20) - emi(1.5e6, 3.99, 20))}/mo before switching costs. Check valuation, registration, processing fees and any clawbacks before deciding.`, link: { href: '/calculators/buyout-refinance-savings', label: 'Check my buyout' } }) },
-  { chip: 'Golden Visa with a mortgage?', answer: () => ({ from: 'bot', text: 'A mortgage does not automatically qualify you for a Golden Visa. Property value, ownership evidence, lender documents and current authority requirements all matter. Confirm your case with DLD or the relevant immigration authority before buying.', link: { href: '/mortgages/golden-visa-mortgage', label: 'Golden Visa guide' } }) },
+  { chip: 'Is switching banks worth it?', answer: () => ({ from: 'bot', text: `Your current bank can charge at most 1% of the balance or AED 10,000 (whichever is lower) to let you go, and 5% VAT is added, so ${aed(earlySettlementFee(1e9))} at most. On AED 1.5M, cutting 6.2% to 3.99% saves about ${aed(emi(1.5e6, 6.2, 20) - emi(1.5e6, 3.99, 20))}/mo before switching costs. Count valuation, registration and arrangement fees, plus any clawback, before you decide.`, link: { href: '/calculators/buyout-refinance-savings', label: 'Check my buyout' } }) },
+  { chip: 'Golden Visa with a mortgage?', answer: () => ({ from: 'bot', text: 'Having a mortgage does not on its own make you eligible for a Golden Visa. The property’s value, proof of ownership, the lender’s documents and the authority’s current rules all count, so check your situation with DLD or the immigration authority before buying.', link: { href: '/mortgages/golden-visa-mortgage', label: 'Golden Visa guide' } }) },
 ];
 
 export default function CoPilot() {
   const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState<Msg[]>([{ from: 'bot', text: 'Choose a question for an illustrative calculation, or ask an advisor. This guide uses preset answers and does not assess eligibility.' }]);
+  const [msgs, setMsgs] = useState<Msg[]>([{ from: 'bot', text: 'Pick a question to see a worked example, or talk to an advisor. Answers here are preset and do not assess your eligibility.' }]);
   const ask = (i: (typeof INTENTS)[number]) => setMsgs((m) => [...m, { from: 'me', text: i.chip }, i.answer()]);
 
   return (

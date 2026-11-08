@@ -1,3 +1,5 @@
+import eiborSnap from './eibor-snapshot.json' with { type: 'json' };
+import { REG, LENDER, pctOf, EARLY_SETTLEMENT_TEXT } from './regulation';
 // Single source of truth for corporate facts, market benchmarks and contact details.
 // Values marked TODO must be confirmed by Betterway before going live.
 
@@ -35,9 +37,11 @@ export const waLink = (text = 'Hi Betterway, I would like a mortgage quote.') =>
 /** CBUAE / EIBOR benchmarks, November 2026 (Market Bible, Module 1.2). */
 export const BENCH = {
   baseRate: 3.9,
-  eibor1m: 4.09,
-  eibor3m: 4.45,
-  eibor6m: 4.41,
+  // Latest published CBUAE fixing (refreshed by scripts/refresh-eibor.mjs; the API route serves the live value).
+  eibor1m: eiborSnap.latest.oneMonth,
+  eibor3m: eiborSnap.latest.threeMonth,
+  eibor6m: eiborSnap.latest.sixMonth,
+  eiborDate: eiborSnap.latest.date,
   lowestFixed: 3.75,
   bankCount: 24,
   // Dubai market (Module 1.1)
@@ -47,40 +51,26 @@ export const BENCH = {
   offPlanShare: 71.6,
 } as const;
 
-/** EIBOR history for the live tracker (monthly fixings, % p.a.). Indicative series ending at the Nov 2026 fixing. */
-export const EIBOR_SERIES: { m: string; m1: number; m3: number; m6: number }[] = [
-  { m: 'Dec 25', m1: 4.31, m3: 4.6, m6: 4.66 },
-  { m: 'Jan 26', m1: 4.29, m3: 4.58, m6: 4.64 },
-  { m: 'Feb 26', m1: 4.27, m3: 4.57, m6: 4.62 },
-  { m: 'Mar 26', m1: 4.26, m3: 4.56, m6: 4.6 },
-  { m: 'Apr 26', m1: 4.24, m3: 4.55, m6: 4.59 },
-  { m: 'May 26', m1: 4.23, m3: 4.55, m6: 4.58 },
-  { m: 'Jun 26', m1: 4.22, m3: 4.54, m6: 4.57 },
-  { m: 'Jul 26', m1: 4.21, m3: 4.53, m6: 4.56 },
-  { m: 'Aug 26', m1: 4.2, m3: 4.52, m6: 4.55 },
-  { m: 'Sep 26', m1: 4.12, m3: 4.48, m6: 4.47 },
-  { m: 'Oct 26', m1: 4.1, m3: 4.46, m6: 4.43 },
-  { m: 'Nov 26', m1: 4.09, m3: 4.45, m6: 4.41 },
-];
 
-/** CBUAE LTV caps (Module 6 guardrails). */
+/** LTV table: CBUAE caps from src/data/regulation.ts; lender-practice rows are labelled as such. */
+const dp = (n: number) => `${100 - n}%`;
 export const LTV_RULES = [
-  { profile: 'UAE National — first home ≤ AED 5M', ltv: '85%', down: '15%' },
-  { profile: 'UAE National — first home > AED 5M', ltv: '75%', down: '25%' },
-  { profile: 'Expat resident — first home ≤ AED 5M', ltv: '80%', down: '20%' },
-  { profile: 'Expat resident — first home > AED 5M', ltv: '70%', down: '30%' },
-  { profile: 'Second / investment home', ltv: '60–65%', down: '35–40%' },
-  { profile: 'Non-resident', ltv: '50–65%', down: '35–50%' },
-  { profile: 'Off-plan under construction', ltv: '50%', down: '50%' },
+  { profile: 'UAE National — first home up to AED 5M', ltv: pctOf(REG.ltv.national.first), down: dp(REG.ltv.national.first), basis: 'CBUAE' },
+  { profile: 'UAE National — first home above AED 5M', ltv: pctOf(REG.ltv.national.firstAbove), down: dp(REG.ltv.national.firstAbove), basis: 'CBUAE' },
+  { profile: 'Expatriate — first home up to AED 5M', ltv: pctOf(REG.ltv.expat.first), down: dp(REG.ltv.expat.first), basis: 'CBUAE' },
+  { profile: 'Expatriate — first home above AED 5M', ltv: pctOf(REG.ltv.expat.firstAbove), down: dp(REG.ltv.expat.firstAbove), basis: 'CBUAE' },
+  { profile: 'UAE National — second or later home', ltv: pctOf(REG.ltv.national.subsequent), down: dp(REG.ltv.national.subsequent), basis: 'CBUAE' },
+  { profile: 'Expatriate — second or later home', ltv: pctOf(REG.ltv.expat.subsequent), down: dp(REG.ltv.expat.subsequent), basis: 'CBUAE' },
+  { profile: 'Non-resident (bank policy)', ltv: `${LENDER.nonResidentLtv.min}–${LENDER.nonResidentLtv.max}%`, down: `${100 - LENDER.nonResidentLtv.max}–${100 - LENDER.nonResidentLtv.min}%`, basis: 'Lender' },
+  { profile: 'Off-plan, under construction (bank policy)', ltv: `up to ${LENDER.offPlanLtv}%`, down: `from ${100 - LENDER.offPlanLtv}%`, basis: 'Lender' },
 ];
 
 export const RULES = [
-  { k: 'Maximum Debt Burden Ratio', v: '50% of gross monthly income' },
-  { k: 'Credit card limits counted as debt', v: 'Lender-specific assessment; calculator defaults to 5%' },
-  { k: 'Maximum tenure', v: '25 years' },
-  { k: 'Age at maturity', v: 'Set by the lender’s lending and retirement-income policy' },
-  { k: 'Early settlement cap', v: '1% of outstanding or AED 10,000, whichever is lower (+5% VAT)' },
-  { k: 'Down payment source', v: 'Cannot be funded by a UAE personal loan' },
+  { k: 'Maximum debt burden ratio (CBUAE)', v: `${REG.dbrMax}% of gross monthly income` },
+  { k: 'Maximum mortgage term (CBUAE)', v: `${REG.tenorMax} years` },
+  { k: 'Early settlement fee cap (CBUAE)', v: EARLY_SETTLEMENT_TEXT },
+  { k: 'Age at maturity', v: `Set by each bank; commonly ${LENDER.ageAtMaturity.salaried} salaried, ${LENDER.ageAtMaturity.selfEmployed} self-employed` },
+  { k: 'Credit card limits counted as debt', v: 'Bank-specific; calculator defaults to 5% of total limits' },
 ];
 
 export const DISCLOSURE_SHORT =

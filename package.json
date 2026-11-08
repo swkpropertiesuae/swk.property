@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "node --experimental-strip-types scripts/refresh-eibor.mjs",
     "dev": "node scripts/dev-preview.mjs",
     "build": "next build",
     "start": "next start",

@@ -9,7 +9,7 @@ import { SITE } from '@/data/site';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: 'Betterway Mortgages — Mortgage Broker in Dubai & UAE', template: '%s | Betterway Mortgages' },
-  description: 'Dubai mortgage advice for residents, non-residents and investors. Compare UAE mortgage rates, calculate payments and understand upfront costs.',
+  description: 'Mortgage guidance in Dubai for residents, overseas buyers and investors. Compare UAE rates, work out repayments and see the full upfront cost.',
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: '/favicon.ico' }], apple: '/apple-touch-icon.png' },
   manifest: '/site.webmanifest',
   openGraph: { type: 'website', siteName: SITE.name, images: ['/brand/materials/betterway-banner.png'], locale: 'en_AE' },
