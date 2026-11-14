@@ -128,7 +128,7 @@
 .iphone-back { width:205px; height:410px; z-index:3; left:24px; bottom:57px; --rotation:-10deg; transform:rotate(-10deg); animation-delay:-3.5s; }
 .phone-status { position:absolute; top:14px; left:17px; right:15px; display:flex; align-items:center; justify-content:space-between; font-size:9px; font-weight:600; }
 .phone-brand { display:flex; align-items:center; gap:5px; font-weight:600; font-size:17px; letter-spacing:-.7px; color:var(--color-navy); }
-.phone-brand img { width:19px; height:25px; }
+.phone-brand img { width:22px; height:22px; }
 .phone-kicker { color:var(--color-slate); font-size:8px; letter-spacing:1px; font-weight:600; margin-top:18px; margin-bottom:10px; }
 .phone-tabs { display:flex; gap:4px; background:var(--color-mist); padding:3px; border-radius:8px; }
 .phone-tabs button { flex:1; font-size:10px; padding:6px; border-radius:6px; color:var(--color-slate); cursor:pointer; }

@@ -83,7 +83,7 @@ export function MiniPhone() {
     <div className="float relative mx-auto hidden w-[250px] rounded-[2.6rem] bg-[#0b1220] p-[9px] shadow-[0_40px_80px_-30px_rgb(2_34_72/0.5),inset_0_0_0_2px_#2a3446] lg:block" aria-hidden="true">
       <div className="relative overflow-hidden rounded-[2.1rem] bg-white px-5 pb-6 pt-11">
         <span className="absolute start-1/2 top-2.5 h-[22px] w-[80px] -translate-x-1/2 rounded-full bg-[#0b1220] rtl:translate-x-1/2" />
-        <div className="flex items-center gap-2"><img src="/brand/symbol-teal.svg" alt="" width={20} height={20} className="h-5 w-5" /><span className="text-[13px] font-semibold text-navy">Betterway</span></div>
+        <div className="flex items-center gap-2"><img src="/brand/icon-gold.svg" alt="" width={22} height={22} className="h-[22px] w-[22px]" /><span className="text-[13px] font-semibold text-navy">Betterway</span></div>
         <div className="mt-4 rounded-2xl bg-navy p-4 text-white">
           <p className="text-[11px] text-white/60">Example fixed rate</p>
           <p className="num text-[26px] font-semibold">{BENCH.lowestFixed}%</p>
@@ -237,7 +237,7 @@ export function Footer() {
     <footer className="bw-footer">
       <div className="wrap bw-footer__top">
         <div className="bw-footer__brand">
-          <img src="/brand/logo-white-full.svg" alt="Betterway Mortgages" width={1591} height={444} />
+          <img src="/brand/logo-white-full.svg" alt="Betterway Mortgages" width={1618} height={276} />
           <p className="mt-7 max-w-sm text-[15px] leading-relaxed text-white/70">Mortgage advice for residents, overseas buyers and investors across the UAE. Compare the whole offer, not just the rate.</p>
           <p className="mt-6 flex gap-2 text-sm"><MapPin size={16} className="mt-0.5 shrink-0 text-brass" />{fullAddress}</p>
           <p className="mt-3 text-sm">{SITE.phone && <><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a> · </>}<a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></p>
@@ -254,7 +254,7 @@ export function Footer() {
           ))}
         </div>
       </div>
-      <div className="bw-footer__mark" data-reveal="mark" aria-hidden="true"><span>betterway</span></div>
+      <div className="bw-footer__mark" data-reveal="mark" aria-hidden="true"><span>Betterway</span></div>
       <div className="relative z-[1] bg-obsidian">
         <div className="wrap bw-footer__base">
           <p>{DISCLOSURE_FULL}</p>
@@ -277,7 +277,7 @@ export function orgSchema() {
     name: SITE.name,
     url: SITE.url,
     logo: `${SITE.url}/brand/logo-primary.svg`,
-    image: `${SITE.url}/brand/materials/betterway-banner.png`,
+    image: `${SITE.url}/og.png`,
     ...(SITE.phone ? { telephone: SITE.phone } : {}),
     email: SITE.email,
     address: { '@type': 'PostalAddress', streetAddress: `${SITE.address.building}, ${SITE.address.plot}, ${SITE.address.street}`, addressLocality: SITE.address.district, addressRegion: 'Dubai', addressCountry: 'AE' },

@@ -29,7 +29,7 @@ export default function Header() {
     <header ref={ref} className="bw-header">
       <div className="wrap bw-header__bar">
         <Link href="/" aria-label="Betterway Mortgages home" className="bw-header__logo shrink-0">
-          <img src="/brand/logo-primary.svg" alt="Betterway Mortgages" width={1591} height={444} fetchPriority="high" />
+          <img src="/brand/logo-primary.svg" alt="Betterway Mortgages" width={1618} height={276} fetchPriority="high" />
         </Link>
         <nav aria-label="Main" className="bw-nav">
           {NAV.map((n) => (
