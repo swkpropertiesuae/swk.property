@@ -17,7 +17,7 @@ const DESKS = [
 export default function Page() {
   return (
     <>
-      <PageHero crumbs={[{ name: 'Our underwriters', href: '/our-underwriters' }]} eyebrow="People" title="Mortgage support for your situation." aside={<Photo name="advisor-consultation" priority sizes="(min-width: 1024px) 300px, 100vw" alt="Concept image: an advisor reviewing a mortgage offer with a client" className="hidden aspect-[4/5] lg:block" />}
+      <PageHero crumbs={[{ name: 'Our underwriters', href: '/our-underwriters' }]} eyebrow="People" title="Mortgage support for your situation." aside={<Photo name="advisor-consultation" priority sizes="(min-width: 1024px) 540px, 100vw" alt="Concept image: an advisor reviewing a mortgage offer with a client" className="bw-window aspect-[16/10] w-full" />}
         capsule="Explore guidance for residents, overseas buyers, business owners, handover purchases, Islamic finance and high-value property. An advisor can help you prepare; the lender carries out underwriting and makes the lending decision." />
       <Section title="Six areas of mortgage support">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

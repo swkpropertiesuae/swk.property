@@ -36,7 +36,7 @@ export default function PhoneHero() {
     <div ref={ref} className={`hero-visual ${moving ? 'is-moving' : ''}`} aria-label="Illustrative mortgage planning on mobile">
       <div className="hero-photo">
         {scene === 'skyline' && <video ref={video} className="hero-skyline" muted loop playsInline preload="none" poster="/video/hero-dubai.jpg" aria-hidden="true" tabIndex={-1}><source src="/video/hero-dubai.webm" type="video/webm" /><source src="/video/hero-dubai.mp4" type="video/mp4" /></video>}
-        <img src="/images/dubai-waterfront-1280.webp" srcSet="/images/dubai-waterfront-720.webp 720w, /images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w" sizes="(min-width: 1024px) 52vw, 100vw" width={1672} height={941} alt="Conceptual Dubai waterfront home in warm morning light" fetchPriority="high" decoding="async" />
+        <img src="/images/dubai-waterfront-3344.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="(min-width: 1024px) 52vw, 100vw" width={3344} height={1882} alt="Conceptual Dubai waterfront home in warm morning light" fetchPriority="high" decoding="async" />
 
       </div>
       <div className="scene-controls" role="group" aria-label="Hero backdrop"><button type="button" aria-pressed={scene === 'home'} onClick={() => setScene('home')}>Residence</button><button type="button" aria-pressed={scene === 'skyline'} onClick={() => setScene('skyline')}>Skyline</button></div>

@@ -36,13 +36,13 @@ const PILLARS = [
 const ltv = (match: string) => LTV_RULES.find((r) => r.profile.startsWith(match))?.ltv ?? '—';
 
 const STAYS = [
-  { tag: 'Residents', name: 'Expat resident mortgages', body: 'Buying your first UAE home on a local salary. Start with your budget, deposit and purchase fees.', href: '/mortgages/uae-residents', img: '/images/dubai-interior-1280.webp', w: 1280, h: 720, alt: 'Concept image: a bright Dubai apartment interior with a waterfront view',
+  { tag: 'Residents', name: 'Expat resident mortgages', body: 'Buying your first UAE home on a local salary. Start with your budget, deposit and purchase fees.', href: '/mortgages/uae-residents', img: '/images/dubai-interior-2560.webp', srcSet: '/images/dubai-interior-1280.webp 1280w, /images/dubai-interior-2560.webp 2560w', w: 2560, h: 1440, alt: 'Concept image: a bright Dubai apartment interior with a waterfront view',
     facts: [['Max LTV', ltv('Expat resident — first home ≤')], ['DBR cap', '50%'], ['Tenure', '25 yrs']], more: ['UAE Nationals', '/mortgages/uae-nationals'] },
-  { tag: 'Overseas buyers', name: 'Non-resident mortgages', body: 'Financing a Dubai property on overseas salary or business income, with currency and document checks explained.', href: '/mortgages/non-resident-dubai', img: '/images/marina-evening.webp', w: 1376, h: 768, alt: 'Concept image: a Dubai marina at dusk seen from a terrace',
+  { tag: 'Overseas buyers', name: 'Non-resident mortgages', body: 'Financing a Dubai property on overseas salary or business income, with currency and document checks explained.', href: '/mortgages/non-resident-dubai', img: '/images/marina-evening-2752.webp', srcSet: '/images/marina-evening.webp 1376w, /images/marina-evening-2752.webp 2752w', w: 2752, h: 1536, alt: 'Concept image: a Dubai marina at dusk seen from a terrace',
     facts: [['Max LTV', ltv('Non-resident')], ['Countries', String(COUNTRIES.length)], ['Income', 'Overseas']], more: ['Golden Visa mortgages', '/mortgages/golden-visa-mortgage'] },
-  { tag: 'Handover', name: 'Off-plan & handover finance', body: 'Plan the final developer payment before your handover date, with project eligibility and valuation in view.', href: '/handover/dubai-off-plan-handover-mortgage-guide', img: '/images/offplan-dusk.webp', w: 1376, h: 768, alt: 'Concept image: a residential tower nearing completion at blue hour',
+  { tag: 'Handover', name: 'Off-plan & handover finance', body: 'Plan the final developer payment before your handover date, with project eligibility and valuation in view.', href: '/handover/dubai-off-plan-handover-mortgage-guide', img: '/images/offplan-dusk-2752.webp', srcSet: '/images/offplan-dusk.webp 1376w, /images/offplan-dusk-2752.webp 2752w', w: 2752, h: 1536, alt: 'Concept image: a residential tower nearing completion at blue hour',
     facts: [['Under construction', ltv('Off-plan')], ['Developers', String(DEVELOPERS.length)], ['Projects', String(PROJECTS.length)]], more: ['Off-plan mortgages', '/mortgages/under-construction-off-plan'] },
-  { tag: 'Homeowners', name: 'Switch bank (buyout)', body: 'Compare refinance savings after exit fees, valuation and switching costs, before your fixed period ends.', href: '/mortgages/mortgage-buyout-refinance', img: '/images/keys-handover.webp', w: 1376, h: 768, alt: 'Concept image: brass house keys passed across a travertine table',
+  { tag: 'Homeowners', name: 'Switch bank (buyout)', body: 'Compare refinance savings after exit fees, valuation and switching costs, before your fixed period ends.', href: '/mortgages/mortgage-buyout-refinance', img: '/images/keys-handover-2752.webp', srcSet: '/images/keys-handover.webp 1376w, /images/keys-handover-2752.webp 2752w', w: 2752, h: 1536, alt: 'Concept image: brass house keys passed across a travertine table',
     facts: [['Exit fee cap', '1% / 10k'], ['Compare', 'Revert'], ['Tool', 'Savings']], more: ['Equity release', '/mortgages/equity-release'] },
 ] as const;
 
@@ -59,7 +59,11 @@ const MARKETS = [
   { name: 'Overseas', chip: 'Non-resident', body: 'Guidance for buyers earning outside the UAE.', href: '/mortgages/non-resident-dubai', k1: 'Countries', v1: String(COUNTRIES.length), k2: 'Max LTV', v2: ltv('Non-resident') },
 ];
 
-const JOURNAL_IMG = ['/images/dubai-waterfront-1280.webp', '/img/advisor-consultation-1376.webp', '/images/marina-evening.webp'];
+const JOURNAL_IMG = [
+  { src: '/images/guide-valuation-2752.webp', srcSet: '/images/guide-valuation.webp 1376w, /images/guide-valuation-2752.webp 2752w', alt: 'Concept image: architectural drawings and a brass scale ruler in a waterfront Dubai villa' },
+  { src: '/images/guide-dbr-planning-2752.webp', srcSet: '/images/guide-dbr-planning.webp 1376w, /images/guide-dbr-planning-2752.webp 2752w', alt: 'Concept image: sunlit travertine desk overlooking the Dubai skyline' },
+  { src: '/images/guide-transfer-day-2752.webp', srcSet: '/images/guide-transfer-day.webp 1376w, /images/guide-transfer-day-2752.webp 2752w', alt: 'Concept image: modern Dubai boardroom with house keys and leather portfolio overlooking Palm Jumeirah' },
+] as const;
 
 const FAQS = [
   { q: 'How does a mortgage broker in Dubai help?', a: 'A broker helps you compare suitable lenders, prepare documents and understand the application process. The bank makes the lending decision and issues your final offer.' },
@@ -125,10 +129,10 @@ export default function Home() {
         <div className="wrap">
           <Head n="02" label="Mortgages" title="A mortgage for every *next move.*" lead="Four common starting points. Each one opens a full guide with lender criteria, costs and the documents you will need." action={{ label: 'All mortgage options', href: '/mortgages' }} />
           <div className="bw-stays">
-            {STAYS.map((s, i) => (
+            {STAYS.map((s) => (
               <article key={s.name} className="bw-stay">
-                <div className="bw-window" data-reveal="horizon"><img src={s.img} alt={s.alt} width={s.w} height={s.h} loading="lazy" decoding="async" /></div>
-                <div className="bw-stay__card bw-frost" data-reveal="frost" style={{ ['--from' as string]: i % 2 ? '-56px' : '56px' }}>
+                <div className="bw-window" data-reveal="horizon"><img src={s.img} srcSet={s.srcSet} sizes="(min-width: 960px) 60vw, 100vw" alt={s.alt} width={s.w} height={s.h} decoding="sync" /></div>
+                <div className="bw-stay__card bw-solid" data-reveal="frost">
                   <span className="bw-label"><i />{s.tag}</span>
                   <h3>{s.name}</h3>
                   <p>{s.body}</p>
@@ -161,13 +165,13 @@ export default function Home() {
           <Head dark n="04" label="What changes with us" title="Less friction. *More clarity.*" />
           <div className="bw-bento">
             <article className="bw-tile bw-tile--photo" data-reveal="rise">
-              <img src="/img/advisor-consultation-1376.webp" alt="Concept image: an advisor reviewing a mortgage offer with a client" width={1376} height={768} loading="lazy" />
+              <img src="/img/advisor-consultation-2752.webp" srcSet="/img/advisor-consultation-1376.webp 1376w, /img/advisor-consultation-2752.webp 2752w" sizes="(min-width: 1100px) 720px, 100vw" alt="Concept image: an advisor reviewing a mortgage offer with a client" width={2752} height={1536} />
               <div><h3>An advisor who reads the small print with you.</h3><p className="mt-2">Fixed period, revert margin, floor rate and fees, line by line.</p></div>
             </article>
-            <article className="bw-tile" data-reveal="rise" style={{ ['--i' as string]: 1 }}><span className="bw-tile__icon"><Layers3 size={20} /></span><h3>{BANKS.length} lenders, one directory</h3><p>Rates, revert formulas and criteria from UAE banks, compared on the same terms.</p></article>
-            <article className="bw-tile bw-tile--figure" data-reveal="rise" style={{ ['--i' as string]: 2 }}><span className="bw-label bw-label--light"><i />CBUAE debt cap</span><strong>50<small>%</small></strong><p>Maximum debt burden ratio. Our affordability maths applies it, including card limits.</p></article>
-            <article className="bw-tile" data-reveal="rise" style={{ ['--i' as string]: 3 }}><span className="bw-tile__icon"><ReceiptText size={20} /></span><h3>Every dirham, itemised</h3><p>Deposit, DLD fee, trustee, valuation and registration, shown before you commit.</p></article>
-            <article className="bw-tile" data-reveal="rise" style={{ ['--i' as string]: 4 }}><span className="bw-tile__icon"><Languages size={20} /></span><h3>English & العربية</h3><p>Guides and calculators in both languages, with a right-to-left Arabic site.</p></article>
+            <article className="bw-tile bw-tile--figure" data-reveal="rise" style={{ ['--i' as string]: 1 }}><span className="bw-label bw-label--light"><i />CBUAE debt cap</span><strong>50<small>%</small></strong><p>Maximum debt burden ratio. Our affordability maths applies it, including card limits.</p></article>
+            <article className="bw-tile" data-reveal="rise"><span className="bw-tile__icon"><Layers3 size={20} /></span><h3>{BANKS.length} lenders, one directory</h3><p>Rates, revert formulas and criteria from UAE banks, compared on the same terms.</p></article>
+            <article className="bw-tile" data-reveal="rise" style={{ ['--i' as string]: 1 }}><span className="bw-tile__icon"><ReceiptText size={20} /></span><h3>Every dirham, itemised</h3><p>Deposit, DLD fee, trustee, valuation and registration, shown before you commit.</p></article>
+            <article className="bw-tile" data-reveal="rise" style={{ ['--i' as string]: 2 }}><span className="bw-tile__icon"><Languages size={20} /></span><h3>English & العربية</h3><p>Guides and calculators in both languages, with a right-to-left Arabic site.</p></article>
             <article className="bw-tile bw-tile--wide" data-reveal="rise"><span className="bw-tile__icon"><FileCheck2 size={20} /></span><h3>Documents ready before the bank asks</h3><p>Identity, income, liabilities and property papers in one checklist, so pre-approval is not a guessing game.</p></article>
             <article className="bw-tile bw-tile--wide" data-reveal="rise" style={{ ['--i' as string]: 1 }}><span className="bw-tile__icon"><Scale size={20} /></span><h3>Teaser rate vs real cost</h3><p>See how two offers diverge once the fixed period ends and the variable rate takes over.</p><Link href="/rates/uae-mortgage-rates-eibor-revert-bible" className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-brass">Compare UAE rates <ArrowUpRight size={14} /></Link></article>
           </div>
@@ -205,7 +209,7 @@ export default function Home() {
       {/* Journey on a navy ground */}
       <section className="bw-section bw-journey">
         <div className="wrap bw-journey__grid">
-          <div className="bw-journey__media"><div className="bw-window" data-reveal="horizon"><img src="/images/abudhabi-corniche.webp" width={896} height={1200} loading="lazy" alt="Concept image: low-rise coastal villas and palms in soft morning light" /></div></div>
+          <div className="bw-journey__media"><div className="bw-window" data-reveal="horizon"><img src="/images/abudhabi-corniche-1792.webp" srcSet="/images/abudhabi-corniche.webp 896w, /images/abudhabi-corniche-1792.webp 1792w" sizes="(min-width: 1000px) 46vw, 100vw" width={1792} height={2400} decoding="sync" alt="Concept image: low-rise coastal villas and palms in soft morning light" /></div></div>
           <div className="bw-dark !bg-transparent !overflow-visible">
             <div className="bw-head__meta"><span className="bw-index">(07)</span><span className="bw-label bw-label--light"><i />Your journey</span></div>
             <h2 className="bw-h2" data-reveal="rise">Know what <em>comes next.</em></h2>
@@ -281,7 +285,7 @@ export default function Home() {
           <div className="bw-journal">
             {GUIDES.slice(0, 3).map((g, i) => (
               <Link key={g.slug} href={`/guides/${g.slug}`} className="bw-post" data-reveal="rise" style={{ ['--i' as string]: i }}>
-                <div className="bw-window"><img src={JOURNAL_IMG[i]} alt="" width={1280} height={960} loading="lazy" /></div>
+                <div className="bw-window"><img src={JOURNAL_IMG[i].src} srcSet={JOURNAL_IMG[i].srcSet} sizes="(min-width: 900px) 52vw, 100vw" alt={JOURNAL_IMG[i].alt} width={2752} height={1536} /></div>
                 <div className="bw-post__meta"><b>Guide</b><span>· {g.steps.length} steps</span></div>
                 <h3>{g.title}</h3>
               </Link>
@@ -323,7 +327,7 @@ export default function Home() {
               <Cta href="/calculators/mortgage-calculator" tone="light">Plan my budget</Cta>
             </div>
           </div>
-          <div className="bw-window" data-reveal="horizon"><img src="/images/villa-courtyard.webp" alt="Concept image: a calm villa courtyard with a reflecting pool at golden hour" width={896} height={1200} loading="lazy" /></div>
+          <div className="bw-window" data-reveal="horizon"><img src="/images/villa-courtyard-1792.webp" srcSet="/images/villa-courtyard.webp 896w, /images/villa-courtyard-1792.webp 1792w" sizes="(min-width: 1000px) 460px, 100vw" alt="Concept image: a calm villa courtyard with a reflecting pool at golden hour" width={1792} height={2400} decoding="sync" /></div>
         </div>
       </section>
     </>

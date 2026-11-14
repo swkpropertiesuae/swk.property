@@ -47,7 +47,7 @@ export default function HomeHero() {
 
       <div className="bw-hero__stage">
         <div className="bw-hero__media" aria-hidden="true">
-          <img className="bw-hero__drift" src="/images/dubai-waterfront-1672.webp" srcSet="/images/dubai-waterfront-720.webp 720w, /images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w" sizes="100vw" width={1672} height={941} alt="" fetchPriority="high" />
+          <img className="bw-hero__drift" src="/images/dubai-waterfront-3344.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="100vw" width={3344} height={1882} alt="" fetchPriority="high" decoding="sync" />
         </div>
         <div className="bw-hero__pin">
           <i aria-hidden="true" /><s aria-hidden="true" />

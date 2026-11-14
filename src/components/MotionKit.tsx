@@ -13,11 +13,11 @@ export default function MotionKit() {
     if (media.matches || !('IntersectionObserver' in window)) { root.classList.remove('bw-motion'); return; }
     const io = new IntersectionObserver((entries) => {
       for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    }, { rootMargin: '160px 0px 40px 0px', threshold: 0.01 });
     const scan = () => document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
-      // Anything already above the fold on arrival is shown at once so the first paint never flashes.
+      // Anything already in or near the initial viewport is shown immediately so the first paint never flashes.
       const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.9 && r.bottom > 0 && !root.classList.contains('bw-motion')) el.classList.add('is-in');
+      if (r.top < window.innerHeight * 1.08 && r.bottom > 0) el.classList.add('is-in');
       else io.observe(el);
     });
     scan();

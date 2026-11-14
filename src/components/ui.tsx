@@ -106,11 +106,12 @@ export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, upd
   const cut = title.indexOf(': ');
   const [head, sub] = cut > 0 ? [title.slice(0, cut), title.slice(cut + 2)] : [title, ''];
   const side = aside === undefined ? <MiniPhone /> : aside;
+  const sideCols = aside === undefined ? 'lg:grid-cols-[minmax(0,1fr)_250px]' : side ? 'lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)]' : '';
   return (
     <section className="bw-pagehero">
       <div className="wrap relative py-10 lg:py-16">
         <Crumbs items={crumbs} />
-        <div className={`mt-8 grid gap-10 ${side ? 'lg:grid-cols-[minmax(0,1fr)_250px] lg:items-center' : ''}`}>
+        <div className={`mt-8 grid gap-10 ${sideCols ? `${sideCols} lg:items-center` : ''}`}>
           <div>
             {eyebrow && <p className="bw-label mb-5"><i />{eyebrow}</p>}
             <h1 className="max-w-4xl">

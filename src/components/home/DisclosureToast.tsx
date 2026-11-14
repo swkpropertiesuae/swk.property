@@ -9,11 +9,18 @@ export default function DisclosureToast() {
     let dismissed = false;
     try { dismissed = sessionStorage.getItem('bw-toast') === '0'; } catch {}
     if (dismissed) return;
-    // Appears once the visitor starts reading, so it never covers the first screen's actions.
-    const onScroll = () => { if (window.scrollY > 480) { setShow(true); window.removeEventListener('scroll', onScroll); } };
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    // Appears once the visitor starts reading, then steps aside so it never sits over photos or charts.
+    const onScroll = () => {
+      if (window.scrollY > 480) {
+        setShow(true);
+        window.removeEventListener('scroll', onScroll);
+        timer = setTimeout(() => { setShow(false); try { sessionStorage.setItem('bw-toast', '0'); } catch {} }, 6500);
+      }
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); if (timer) clearTimeout(timer); };
   }, []);
   if (!show) return null;
   const dismiss = () => { setShow(false); try { sessionStorage.setItem('bw-toast', '0'); } catch {} };
