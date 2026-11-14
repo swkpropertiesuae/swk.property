@@ -1,3 +1,5 @@
+> **Master Brand recreation (14 Nov 2026):** The visual layer was rebuilt around the Betterway Mortgages Master Brand Kit (Sovereign Emerald `#08816C`, CBUAE Banking Navy `#022248`, Champagne Brass `#D5B27A`, Institutional Alabaster `#F8F9FA`), with composition drawn from the Caldren and Monara Framer templates and the 8B glamping template. See [docs/MASTER_BRAND_RECREATION.md](docs/MASTER_BRAND_RECREATION.md). Brand-token references below to teal `#007D78` / navy `#081D37` are superseded.
+
 > **Startup experience update (7 Nov 2026):** This project now uses the Next.js server runtime for the CBUAE public benchmark endpoint while retaining prerendered marketing pages. See [startup experience and integration status](docs/STARTUP_EXPERIENCE.md). The static-export commands described further below are historical.
 
 > **7 Nov 2026 visual/content refresh:** See [the refresh notes](docs/FINTECH_REFRESH.md) for current behavior, validation and remaining data/integration limits. This supersedes older marketing and live-feature descriptions below.

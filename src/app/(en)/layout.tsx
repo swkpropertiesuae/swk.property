@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
 import '../startup.css';
+import '../brand.css';
 import Header from '@/components/Header';
 import CoPilot from '@/components/CoPilot';
+import MotionKit from '@/components/MotionKit';
 import { UtilityBar, Footer, JsonLd, orgSchema } from '@/components/ui';
 import { SITE } from '@/data/site';
 
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { languages: { 'en-AE': '/', 'ar-AE': '/ar' } },
 };
 
-export const viewport: Viewport = { themeColor: '#007D78', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#022248', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -29,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <CoPilot />
+        <MotionKit />
         <JsonLd data={orgSchema()} />
       </body>
     </html>

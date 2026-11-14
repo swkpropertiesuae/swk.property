@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { ArrowRight, Info, MessageCircle, MapPin, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Info, MapPin, ShieldCheck } from 'lucide-react';
 import { SITE, BENCH, DISCLOSURE_SHORT, DISCLOSURE_FULL, fullAddress, waLink } from '@/data/site';
 import MotionReveal from '@/components/MotionReveal';
 import type { Faq as FaqT } from '@/data/products';
@@ -12,18 +12,35 @@ export function JsonLd({ data }: { data: object }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
 }
 
+/** Renders `*word*` in a heading as the serif italic accent used across the brand (Caldren-style). */
+export function Rich({ text }: { text: string }) {
+  const parts = text.split(/\*([^*]+)\*/g);
+  return <>{parts.map((p, i) => (i % 2 ? <em key={i}>{p}</em> : p))}</>;
+}
+export const plain = (text: string) => text.replace(/\*/g, '');
+
+/** Pill button with a rolling label and an accent disc (8B glamping button-primary). */
+export function Cta({ href, children, tone = 'dark', size, external, className = '' }: { href: string; children: string; tone?: 'dark' | 'light' | 'emerald' | 'brass' | 'ghost'; size?: 'sm'; external?: boolean; className?: string }) {
+  const cls = `bw-btn ${tone !== 'dark' ? `bw-btn--${tone}` : ''} ${size === 'sm' ? 'bw-btn--sm' : ''} ${className}`;
+  const inner = (
+    <>
+      <span className="bw-btn__label"><span>{children}</span><span aria-hidden="true">{children}</span></span>
+      <span className="bw-btn__disc" aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.8} /></span>
+    </>
+  );
+  return external || /^(https?:|mailto:|tel:)/.test(href)
+    ? <a href={href} className={cls} rel="noopener">{inner}</a>
+    : <Link href={href} className={cls}>{inner}</Link>;
+}
+
+/** Announcement bar (Monara): one line of genuinely useful, sourced information. */
 export function UtilityBar() {
   return (
-    <div className="bg-navy text-[13px] text-white/80">
-      <div className="wrap flex h-9 items-center justify-between gap-6 overflow-hidden whitespace-nowrap">
-        <p className="hidden truncate lg:block">
-          <ShieldCheck size={14} className="me-1.5 inline -translate-y-px text-mint" />
-          Mortgage advice in Dubai & UAE · Plan your next move with clarity
-        </p>
-        <p className="ms-auto flex shrink-0 gap-5 whitespace-nowrap text-xs">
-          <Link href="/rates" className="ulink">Compare UAE mortgage rates</Link>
-          <Link href="/calculators/mortgage-calculator" className="ulink hidden sm:inline">Plan your budget</Link>
-        </p>
+    <div className="bw-announce">
+      <div className="wrap">
+        <p className="truncate"><ShieldCheck size={14} className="me-1.5 inline -translate-y-px text-brass" /><b>CBUAE EIBOR fixings</b><span className="hidden sm:inline"> are published every business day. Compare your offer against the benchmark.</span></p>
+        <span className="bw-announce__sep" aria-hidden="true" />
+        <Link href="/rates/eibor-live-tracker">EIBOR tracker →</Link>
       </div>
     </div>
   );
@@ -63,7 +80,7 @@ export function Crumbs({ items }: { items: { name: string; href: string }[] }) {
 /** Small static phone shown beside inner-page headers: live benchmarks + primary action. */
 export function MiniPhone() {
   return (
-    <div className="float relative mx-auto hidden w-[250px] rounded-[2.6rem] bg-[#0b1220] p-[9px] shadow-[0_40px_80px_-30px_rgb(8_29_55/0.5),inset_0_0_0_2px_#2a3446] lg:block" aria-hidden="true">
+    <div className="float relative mx-auto hidden w-[250px] rounded-[2.6rem] bg-[#0b1220] p-[9px] shadow-[0_40px_80px_-30px_rgb(2_34_72/0.5),inset_0_0_0_2px_#2a3446] lg:block" aria-hidden="true">
       <div className="relative overflow-hidden rounded-[2.1rem] bg-white px-5 pb-6 pt-11">
         <span className="absolute start-1/2 top-2.5 h-[22px] w-[80px] -translate-x-1/2 rounded-full bg-[#0b1220] rtl:translate-x-1/2" />
         <div className="flex items-center gap-2"><img src="/brand/symbol-teal.svg" alt="" width={20} height={20} className="h-5 w-5" /><span className="text-[13px] font-semibold text-navy">Betterway</span></div>
@@ -90,19 +107,19 @@ export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, upd
   const [head, sub] = cut > 0 ? [title.slice(0, cut), title.slice(cut + 2)] : [title, ''];
   const side = aside === undefined ? <MiniPhone /> : aside;
   return (
-    <section className="relative overflow-hidden border-b border-line bg-mist">
-      <div className="pointer-events-none absolute -end-32 -top-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgb(0_125_120/0.14),transparent_65%)]" aria-hidden="true" />
-      <div className="wrap relative py-10 lg:py-14">
+    <section className="bw-pagehero">
+      <div className="wrap relative py-10 lg:py-16">
         <Crumbs items={crumbs} />
-        <div className={`mt-6 grid gap-10 ${side ? 'lg:grid-cols-[minmax(0,1fr)_250px] lg:items-center' : ''}`}>
+        <div className={`mt-8 grid gap-10 ${side ? 'lg:grid-cols-[minmax(0,1fr)_250px] lg:items-center' : ''}`}>
           <div>
-            <h1 className="max-w-3xl text-[2rem] font-semibold leading-[1.16] sm:text-[2.5rem] lg:text-[2.75rem]">
+            {eyebrow && <p className="bw-label mb-5"><i />{eyebrow}</p>}
+            <h1 className="max-w-4xl">
               {head}
-              {sub && <span className="mt-3 block font-sans text-lg font-medium leading-snug tracking-normal text-slate sm:text-xl">{sub}</span>}
+              {sub && <span className="mt-4 block font-sans text-lg font-normal leading-snug tracking-normal text-slate sm:text-xl">{sub}</span>}
             </h1>
             {capsule && (
-              <div className="mt-6 max-w-2xl border-s-2 border-teal ps-4" data-capsule>
-                <p className="text-[15px] leading-relaxed text-ink">{capsule}</p>
+              <div className="bw-capsule mt-7 max-w-2xl" data-capsule>
+                <p className="text-[15.5px] leading-relaxed text-ink">{capsule}</p>
                 {updated && <p className="mt-2 text-xs text-slate">Updated {SITE.asOf}</p>}
               </div>
             )}
@@ -117,15 +134,21 @@ export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, upd
 
 export function Section({ id, title, eyebrow, intro, children, tone = 'white', action }: { id?: string; title: string; eyebrow?: string; intro?: string; children: ReactNode; tone?: 'white' | 'mist' | 'navy'; action?: { label: string; href: string } }) {
   const bg = tone === 'mist' ? 'bg-mist' : tone === 'navy' ? 'bg-navy text-white' : 'bg-white';
+  const dark = tone === 'navy';
   return (
-    <section id={id} className={`${bg} py-16 lg:py-20`}>
+    <section id={id} className={`${bg} py-16 lg:py-24`}>
       <MotionReveal className="wrap">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-3xl">
-            <h2 className={`h2 ${tone === 'navy' ? '!text-white' : ''}`}>{title}</h2>
-            {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'navy' ? 'text-white/70' : 'text-slate'}`}>{intro}</p>}
+        <div className="mb-10 grid gap-6 lg:mb-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
+          <div>
+            {eyebrow && <p className={`bw-label mb-5 ${dark ? 'bw-label--light' : ''}`}><i />{eyebrow}</p>}
+            <h2 className={`h2 ${dark ? '!text-white' : ''} [&_em]:font-serif [&_em]:font-normal [&_em]:italic`}><Rich text={title} /></h2>
           </div>
-          {action && <Link href={action.href} className={`btn ${tone === 'navy' ? 'btn-light' : 'btn-ghost'}`}>{action.label} <ArrowRight size={15} /></Link>}
+          {(intro || action) && (
+            <div className="grid justify-items-start gap-6 lg:justify-self-end lg:max-w-[460px]">
+              {intro && <p className={`text-lg leading-relaxed ${dark ? 'text-white/70' : 'text-slate'}`}>{intro}</p>}
+              {action && <Cta href={action.href} tone={dark ? 'light' : 'ghost'} size="sm">{action.label}</Cta>}
+            </div>
+          )}
         </div>
         {children}
       </MotionReveal>
@@ -181,18 +204,19 @@ export function LinkGrid({ links, cols = 3 }: { links: { title: string; body?: s
   );
 }
 
-export function CtaBand({ title = 'Your next move starts here.', body = 'Understand your mortgage options, prepare your documents and plan your budget.' }: { title?: string; body?: string }) {
+export function CtaBand({ title = 'Your next move starts *here.*', body = 'Understand your mortgage options, prepare your documents and plan your budget.' }: { title?: string; body?: string }) {
   return (
-    <section className="bg-white py-16">
+    <section className="bw-invite py-16 lg:py-24">
       <div className="wrap">
-        <div className="grid items-center gap-8 rounded-[28px] bg-navy p-8 text-white sm:p-12 lg:grid-cols-[1.4fr_1fr]">
+        <div className="grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <h2 className="h2 !text-white">{title}</h2>
-            <p className="mt-4 max-w-2xl text-white/70">{body}</p>
+            <p className="bw-label mb-5"><i />Talk to an advisor</p>
+            <h2 className="bw-h2"><Rich text={title.includes('*') ? title : title.replace(/(\S+)\s*$/, '*$1*')} /></h2>
+            <p className="bw-lead mt-5 max-w-2xl">{body}</p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <Link href="/contact" className="btn btn-primary">Discuss my mortgage <ArrowRight size={15} /></Link>
-            <a href={waLink()} className="btn btn-light" rel="noopener"><MessageCircle size={16} /> Ask a question</a>
+            <Cta href="/contact">Discuss my mortgage</Cta>
+            <Cta href={waLink()} tone="light">Ask a question</Cta>
           </div>
         </div>
       </div>
@@ -209,30 +233,34 @@ const FOOT: { title: string; links: [string, string][] }[] = [
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-white/75">
-      <div className="wrap grid gap-10 py-14 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
-        <div>
-          <img src="/brand/logo-white-full.svg" alt="Betterway Mortgage" width={1295} height={358} className="h-auto w-[248px]" />
-          <p className="mt-5 flex gap-2 text-sm"><MapPin size={16} className="mt-0.5 shrink-0 text-mint" />{fullAddress}</p>
+    <footer className="bw-footer">
+      <div className="wrap bw-footer__top">
+        <div className="bw-footer__brand">
+          <img src="/brand/logo-white-full.svg" alt="Betterway Mortgages" width={1591} height={444} />
+          <p className="mt-7 max-w-sm text-[15px] leading-relaxed text-white/70">Mortgage advice for residents, overseas buyers and investors across the UAE. Compare the whole offer, not just the rate.</p>
+          <p className="mt-6 flex gap-2 text-sm"><MapPin size={16} className="mt-0.5 shrink-0 text-brass" />{fullAddress}</p>
           <p className="mt-3 text-sm">{SITE.phone && <><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a> · </>}<a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></p>
           <p className="mt-1 text-sm">{SITE.hours}</p>
           {SITE.licence && <p className="mt-4 text-xs text-white/50">{SITE.licence}</p>}
+          <div className="mt-8"><Cta href="/contact" tone="brass" size="sm">Talk to an advisor</Cta></div>
         </div>
-        {FOOT.map((g) => (
-          <div key={g.title}>
-            <p className="mb-4 text-sm font-semibold text-white">{g.title}</p>
-            <ul className="space-y-2.5 text-sm">
-              {g.links.map(([l, h]) => <li key={h}><Link href={h} className="ulink hover:text-white">{l}</Link></li>)}
-            </ul>
-          </div>
-        ))}
+        <div className="bw-footer__cols">
+          {FOOT.map((g) => (
+            <div key={g.title}>
+              <h3>{g.title}</h3>
+              <ul>{g.links.map(([l, h]) => <li key={h}><Link href={h} className="ulink">{l}</Link></li>)}</ul>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="wrap space-y-3 py-6 text-xs text-white/50">
-          <p>{DISCLOSURE_FULL}</p><p>Concept residence and advisor images are AI-generated. Named project renders are credited to their developers.</p>
+      <div className="bw-footer__mark" data-reveal="mark" aria-hidden="true"><span>betterway</span></div>
+      <div className="relative z-[1] bg-obsidian">
+        <div className="wrap bw-footer__base">
+          <p>{DISCLOSURE_FULL}</p>
+          <p>Betterway Mortgages is a mortgage adviser, not a bank. Lending decisions, rates and final offers are made by the lender. Concept residence and advisor images are AI-generated.</p>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p>© 2026 {SITE.legalName}. All rights reserved.</p>
-            <p className="flex gap-4"><Link href="/privacy-and-cbuae-disclosure" className="ulink">Privacy & CBUAE disclosure</Link><Link href="/ar" lang="ar" className="ulink">العربية</Link></p>
+            <nav aria-label="Legal"><Link href="/privacy-and-cbuae-disclosure" className="ulink">Privacy & CBUAE disclosure</Link><Link href="/sitemap" className="ulink">Sitemap</Link><Link href="/ar" lang="ar" className="ulink">العربية</Link></nav>
           </div>
         </div>
       </div>

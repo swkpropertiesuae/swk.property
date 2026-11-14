@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 import { AlertCenter } from '@/components/StartupExperience';
 import { NAV } from '@/data/nav';
+import { Cta } from '@/components/ui';
 
 export default function Header() {
   const [open, setOpen] = useState<string | null>(null);
@@ -25,36 +26,34 @@ export default function Header() {
   const active = NAV.find((n) => n.label === open);
 
   return (
-    <header ref={ref} className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
-      <div className="wrap flex h-[72px] items-center justify-between gap-4">
-        <Link href="/" aria-label="Betterway Mortgages home" className="shrink-0">
-          <img src="/brand/logo-wordmark.svg" alt="Betterway Mortgage" width={1295} height={358} className="h-9 w-auto sm:h-10" fetchPriority="high" />
+    <header ref={ref} className="bw-header">
+      <div className="wrap bw-header__bar">
+        <Link href="/" aria-label="Betterway Mortgages home" className="bw-header__logo shrink-0">
+          <img src="/brand/logo-primary.svg" alt="Betterway Mortgages" width={1591} height={444} fetchPriority="high" />
         </Link>
-        <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
+        <nav aria-label="Main" className="bw-nav">
           {NAV.map((n) => (
             <button key={n.label} type="button" aria-expanded={open === n.label} onClick={() => setOpen((c) => (c === n.label ? null : n.label))}
-              onMouseEnter={() => open && setOpen(n.label)}
-              className={`flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium transition ${open === n.label ? 'bg-mist text-navy' : 'text-slate hover:text-navy'}`}>
+              onMouseEnter={() => open && setOpen(n.label)}>
               {n.label}
-              <ChevronDown size={15} className={`transition-transform duration-300 ${open === n.label ? 'rotate-180' : ''}`} />
+              <ChevronDown size={14} className={`transition-transform duration-300 ${open === n.label ? 'rotate-180' : ''}`} />
             </button>
           ))}
         </nav>
-        <AlertCenter />
-        <div className="hidden items-center gap-2 lg:flex">
-          <Link href="/ar" className="hidden rounded-full px-3 py-2 xl:inline text-sm font-medium text-slate hover:text-navy" lang="ar">العربية</Link>
-
-          <Link href="/contact" className="btn btn-primary !py-2.5">Talk to an advisor</Link>
+        <div className="flex items-center gap-2">
+          <AlertCenter />
+          <Link href="/ar" className="hidden rounded-full px-3 py-2 text-sm font-medium text-slate hover:text-navy xl:inline" lang="ar">العربية</Link>
+          <span className="hidden min-[1100px]:inline-flex"><Cta href="/contact" size="sm">Talk to an advisor</Cta></span>
+          <button type="button" className="grid h-11 w-11 place-items-center rounded-full bg-mist text-navy min-[1100px]:hidden" aria-label={mobile ? 'Close menu' : 'Open menu'} aria-expanded={mobile} onClick={() => setMobile((m) => !m)}>
+            {mobile ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-        <button type="button" className="rounded-full p-2 text-navy lg:hidden" aria-label={mobile ? 'Close menu' : 'Open menu'} aria-expanded={mobile} onClick={() => setMobile((m) => !m)}>
-          {mobile ? <X /> : <Menu />}
-        </button>
       </div>
 
       <AnimatePresence initial={false}>
         {active?.cols && (
           <motion.div key={active.label} initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }} className="hidden overflow-hidden border-t border-line bg-white lg:block">
+            transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }} className="hidden overflow-hidden border-t border-line bg-white min-[1100px]:block">
             <div className="wrap grid grid-cols-[1fr_1fr_1fr_240px] gap-6 py-8">
               {active.cols.map((c, ci) => (
                 <div key={ci}>
@@ -72,7 +71,7 @@ export default function Header() {
                 </div>
               ))}
               {active.cols.length < 3 && <div />}
-              <div className="rounded-card bg-navy p-6 text-white">
+              <div className="rounded-card bg-obsidian p-6 text-white">
                 <p className="font-display text-lg font-semibold">{active.feature?.title ?? 'Plan your next move'}</p>
                 <p className="mt-2 text-sm text-white/70">{active.feature?.body ?? 'Every calculator is free to use, with no sign-up.'}</p>
                 <Link href={active.feature?.href ?? active.href} className="btn btn-light mt-5 !py-2">{active.feature?.cta ?? `All ${active.label.toLowerCase()}`} <ArrowRight size={15} /></Link>
@@ -84,7 +83,7 @@ export default function Header() {
 
       <AnimatePresence initial={false}>
         {mobile && (
-          <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} transition={{ duration: reduce ? 0 : 0.25 }} className="overflow-hidden border-t border-line lg:hidden">
+          <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} transition={{ duration: reduce ? 0 : 0.25 }} className="overflow-hidden border-t border-line bg-white min-[1100px]:hidden">
             <nav aria-label="Mobile" className="wrap max-h-[calc(100dvh-72px)] overflow-y-auto pb-8 pt-2">
               {NAV.map((n) => (
                 <details key={n.label} className="group border-b border-line">

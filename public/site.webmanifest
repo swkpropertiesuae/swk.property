@@ -1,9 +1,9 @@
 {
-  "name": "Betterway Mortgage",
+  "name": "Betterway Mortgages",
   "short_name": "Betterway",
   "display": "standalone",
-  "theme_color": "#007D78",
-  "background_color": "#FFFFFF",
+  "theme_color": "#022248",
+  "background_color": "#F8F9FA",
   "icons": [
     {
       "src": "favicon-192.png",
